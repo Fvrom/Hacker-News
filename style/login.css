@@ -1,0 +1,42 @@
+.form-container {
+  background: rgb(156, 156, 156);
+  width: 35rem;
+  align-self: center;
+}
+form {
+  display: flex;
+  justify-content: center;
+  background: chocolate;
+}
+
+.wrap {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 100vh;
+  background: rgb(171, 171, 171);
+}
+
+.section-wrap {
+  width: 100%;
+}
+
+.submit-button {
+  width: 7rem;
+  align-self: center;
+  margin-top: 1rem;
+}
+
+.title-login {
+  font-size: 2rem;
+  align-self: center;
+}
+
+label {
+  margin-right: 2rem;
+}
+
+input {
+  margin: 2rem;
+  width: 22rem;
+}

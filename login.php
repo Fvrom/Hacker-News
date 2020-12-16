@@ -1,12 +1,14 @@
 <?php require __DIR__ . '/header.php'; ?>
 
-<section>
-    <h1> Login here </h1>
 
-    <form action="users/login.php" method="post">
+<section class="section-wrap">
+    <div class="wrap">
+        <h1 class="title-login"> Login here </h1>
         <div class="form-container">
-            <label for="email">Email</label>
-            <input type="email" name="email" id="email" placeholder="test@email.com" required>
+            <form action="users/login.php" method="post">
+
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" placeholder="test@email.com" required>
         </div>
 
         <div class="form-container">
@@ -16,8 +18,8 @@
 
 
         <button type="submit" class="submit-button"> Login </button>
-    </form>
-
+        </form>
+    </div>
 
 </section>
 

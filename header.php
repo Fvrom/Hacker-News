@@ -8,6 +8,7 @@
 
     <link rel="stylesheet" href="/style/global.css">
     <link rel="stylesheet" href="/style/navigation.css">
+    <link rel="stylesheet" href="/style/login.css">
 
 
     <title>Hacker news</title>
