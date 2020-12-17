@@ -5,7 +5,7 @@
     <div class="wrap">
         <h1 class="title-login"> Login here </h1>
         <div class="form-container">
-            <form action="users/login.php" method="post">
+            <form action="/users/login.php" method="post">
 
                 <label for="email">Email</label>
                 <input type="email" name="email" id="email" placeholder="test@email.com" required>

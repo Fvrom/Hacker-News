@@ -10,11 +10,24 @@
         <li>
             <a href="update.php">submit</a>
         </li>
-        <li>
-            <a href="login.php">login</a>
-        </li>
-        <li>
-            <a href="logout.php">logout</a>
-        </li>
+
+        <?php if (isset($_SESSION['user'])) : ?>
+
+            <li>
+                <a href="/users/logout.php">logout</a>
+            </li>
+
+        <?php else : ?>
+            <li>
+                <a href="login.php">login</a>
+            </li>
+
+            <li>
+                <a href="signup.php">Sign up</a>
+            </li>
+
+        <?php endif; ?>
+
+
     </ul>
 </nav>

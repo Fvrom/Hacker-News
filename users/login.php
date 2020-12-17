@@ -8,8 +8,11 @@ if (isset($_POST['email'], $_POST['password'])) {
     $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
 
 
-    $pdo = new PDO('sqlite:../database/newsdatabase.db');
+    $pdo = new PDO($dBPath);
     //die(var_dump($pdo->errorInfo()));
+    if (!$pdo) {
+        die("Connection failed: " . (var_dump($pdo_errorInfo())));
+    }
 
     $statement = $pdo->prepare('SELECT * FROM Users WHERE email = :email');
     $statement->BindParam(':email', $email);

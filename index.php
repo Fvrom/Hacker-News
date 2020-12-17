@@ -5,7 +5,8 @@
     <p>Home page</p>
 
     <?php if (isset($_SESSION['user'])) : ?>
-        <p> You are logged in, <?= $_SESSION['user']['username']; ?> ! </p>
+        <p> You are logged in,
+            <? echo $_SESSION['user']['first_name']; ?> ! </p>
 
     <?php endif; ?>
 
