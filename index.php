@@ -1,15 +1,15 @@
-<?php require __DIR__ . '/app/autoload.php'; ?>
-<?php require __DIR__ . '/header.php'; ?>
+ <?php require __DIR__ . '/app/autoload.php'; ?>
+ <?php require __DIR__ . '/header.php'; ?>
 
-<section>
-    <p>Home page</p>
+ <section>
+     <p>Home page</p>
 
-    <?php if (isset($_SESSION['user'])) : ?>
-        <p> You are logged in,
-            <? echo $_SESSION['user']['first_name']; ?> ! </p>
+     <?php if (isset($_SESSION['user'])) : ?>
+         <p> You are logged in,
+             <? echo $_SESSION['user']['first_name']; ?> ! </p>
 
-    <?php endif; ?>
+     <?php endif; ?>
 
-</section>
+ </section>
 
-<?php require __DIR__ . '/footer.php'; ?>
+ <?php require __DIR__ . '/footer.php'; ?>

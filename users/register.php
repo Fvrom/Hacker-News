@@ -1,25 +1,41 @@
 <?php
 
+require __DIR__ . '/../app/autoload.php';
+
 if (isset($_POST['submit'])) {
 
-    $first_name = $_POST['first_name'];
-    $last_name = $_POST['last_name'];
-    $email = $_POST['email'];
-    $username = $_POST['username'];
+    $first_name = filter_var($_POST['first_name'], FILTER_SANITIZE_STRING);
+    $last_name = filter_Var($_POST['last_name'], FILTER_SANITIZE_STRING);
+    $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+    $username = filter_var($_POST['username'], FILTER_SANITIZE_STRING);
     $password = $_POST['password'];
     $pwdRepeat = $_POST['pwdrepeat'];
 
 
 
-    require __DIR__ . '../database/newsdatabase.db';
-    require __DIR__ . '../app/functions.php';
 
+
+
+
+    if ($password != $pwdRepeat) {
+        $_SESSION['error'] = "Pasword did not match";
+        redirect("../signup.php");
+    } else redirect("../index.php");
+}
+
+/* 
     // if there's anything other than false, then throw error. 
 
     if (invalidUserName($username) !== false) {
-        header("location: ../signup.php?error=invalidusername");
-        exit(); // stopping the script from running
+        redirect("../signup.php?error=invalidusername");
+        exit; // stopping the script from running
     }
+    createUser($pdo, $username, $first_name, $last_name, $email, $password);
+} else {
+    redirect("/index.php");
+}
+
+    /*
     if (invalidEmail($email) !== false) {
         header("location: ../signup.php?error=invalidemail");
         exit(); // stopping the script from running
@@ -33,12 +49,12 @@ if (isset($_POST['submit'])) {
 
 
 
-    /* Need to fix this one, connect to database */
+    /* Need to fix this one, connect to database */ /*
     if (usernameExists($pdo, $username) !== false) {
         header("location: ../signup.php?error=usernametaken");
         exit(); // stopping the script from running
     }
-    /* Need to fix this one, connect to database */
+    /* Need to fix this one, connect to database 
     if (emailExists($pdo, $email) !== false) {
         header("location: ../signup.php?error=emailtaken");
         exit(); // stopping the script from running
@@ -49,3 +65,4 @@ if (isset($_POST['submit'])) {
     header("location: ../signup.php");
     exit(); // stopping the script from running
 }
+*/

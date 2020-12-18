@@ -24,7 +24,7 @@ if (isset($_POST['email'], $_POST['password'])) {
     $user = $statement->fetch(PDO::FETCH_ASSOC);
 
     if (!$user) {
-        redirect('/login.php');
+        //redirect('/login.php');
     }
 
     if (password_verify($_POST['password'], $user['password'])) {
@@ -37,4 +37,5 @@ if (isset($_POST['email'], $_POST['password'])) {
     }
 }
 
-redirect('/');
+
+//redirect('/');

@@ -1,5 +1,5 @@
-<?php
-require __DIR__ . '/header.php'; ?>
+<?php require __DIR__ . '/app/autoload.php'; ?>
+<?php require __DIR__ . '/header.php'; ?>
 
 <section class="sign-up-form">
     <h2> Sign Up </h2>
