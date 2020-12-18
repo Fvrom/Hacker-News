@@ -34,7 +34,7 @@ if (isset($_POST['submit'])) {
 
 
     /* Need to fix this one, connect to database */
-    if (usernameExists($dbPath, $username) !== false) {
+    if (usernameExists($dbPath, $username, $email) !== false) {
         header("location: ../signup.php?error=usernametaken");
         exit(); // stopping the script from running
     }

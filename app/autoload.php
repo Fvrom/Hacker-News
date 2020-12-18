@@ -15,7 +15,7 @@ mb_internal_encoding('UTF-8');
 require __DIR__ . '/functions.php';
 
 
-$dBPath = 'sqlite:../database/newsdatabase.db'; 
+$dBPath = 'sqlite:../database/newsdatabase.db';
 
 /* // Fetch the global configuration array.
 $config = require __DIR__ . '/config.php';
@@ -23,3 +23,5 @@ $config = require __DIR__ . '/config.php';
 // Setup the database connection.
 $pdo = new PDO($config['database_path']);
  */
+
+$pdo = new PDO($dbPath);

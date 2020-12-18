@@ -8,11 +8,13 @@ if (isset($_POST['email'], $_POST['password'])) {
     $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
 
 
-    $pdo = new PDO($dBPath);
+    /* $pdo = new PDO($dBPath);
     //die(var_dump($pdo->errorInfo()));
     if (!$pdo) {
         die("Connection failed: " . (var_dump($pdo_errorInfo())));
-    }
+    } */  // New Pdo fixed in autoload
+
+    // print_R($statement->errorInfo()) -> run error details
 
     $statement = $pdo->prepare('SELECT * FROM Users WHERE email = :email');
     $statement->BindParam(':email', $email);
