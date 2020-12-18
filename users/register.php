@@ -34,12 +34,17 @@ if (isset($_POST['submit'])) {
 
 
     /* Need to fix this one, connect to database */
-    if (usernameExists($dbPath, $username, $email) !== false) {
+    if (usernameExists($pdo, $username) !== false) {
         header("location: ../signup.php?error=usernametaken");
         exit(); // stopping the script from running
     }
+    /* Need to fix this one, connect to database */
+    if (emailExists($pdo, $email) !== false) {
+        header("location: ../signup.php?error=emailtaken");
+        exit(); // stopping the script from running
+    }
 
-    createUser($databaseconenction, $username, $first_name, $last_name, $email, $password);
+    createUser($pdo, $username, $first_name, $last_name, $email, $password);
 } else {
     header("location: ../signup.php");
     exit(); // stopping the script from running

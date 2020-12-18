@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-// Start the session engines.
+// Start the session
 session_start();
 
 // Set the default timezone to coordinated universal time.
@@ -11,17 +11,12 @@ date_default_timezone_set('UTC');
 // Set the default character encoding to UTF-8.
 mb_internal_encoding('UTF-8');
 
-// Include the helper functions.
+// functions 
 require __DIR__ . '/functions.php';
 
 
-$dBPath = 'sqlite:../database/newsdatabase.db';
+$dBPath = "../database/newsdatabase.db";
 
-/* // Fetch the global configuration array.
-$config = require __DIR__ . '/config.php';
 
-// Setup the database connection.
-$pdo = new PDO($config['database_path']);
- */
 
-$pdo = new PDO($dbPath);
+$pdo = new PDO("sqlite:$dbPath");

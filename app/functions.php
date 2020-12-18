@@ -57,7 +57,7 @@ function usernameExists($pdo, $username)
     $statement->execute();
 
     // check if user exists 
-    //  Do i need this ? $row = $statement->fetch(PDO::FETCH_ASSOC); 
+    $row = $statement->fetch(PDO::FETCH_ASSOC);
 
     if ($row['num'] > 0) {
         die('That username already exists!');
@@ -75,7 +75,7 @@ function emailExists($pdo, $email)
     $statement->execute();
 
     // check if user exists 
-    //  Do i need this ? $row = $statement->fetch(PDO::FETCH_ASSOC); 
+    $row = $statement->fetch(PDO::FETCH_ASSOC);
 
     if ($row['num'] > 0) {
         die('Email already exists!');
@@ -92,3 +92,18 @@ function emailExists($pdo, $email)
     else {
         return true;
     } */ // By documentation this does not seem to be the best way because its behaviour may not be relied upon. 
+
+function createUser($pdo, $username, $first_name, $last_name, $email, $password)
+{
+    require __DIR__ . '/autoload.php';
+
+    $sql = "INSERT INTO Users (username, first_name, last_name, email, password) VALUES (:username, :first_name, :last_name, :email, :password);";
+    $statement = $pdo->prepare($sql);
+    $statement->BindParam(':username', $username);
+    $statement->BindParam(':first_name', $first_name);
+    $statement->BindParam(':last_name', $last_name);
+    $statement->BindParam(':email', $email);
+    $statement->BindParam(':password', $password);
+
+    $statement->execute();
+}
