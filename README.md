@@ -1,5 +1,6 @@
 # Jul-Projekt
-Assignment in web development
+Assignment in web development. </br>
+
 Create a clone of the site Hacker news. 
 
 Deadline: 13th January.
@@ -34,3 +35,20 @@ Deadline: 13th January.
 
 * As a user I'm able to edit my comments.
 
+## Checklist
+- [ ] Log in
+- [ ] Log out
+- [ ] Sign up
+- [ ] Dummy posts, ranked latest
+- [ ] Create posts, Delete posts, Edit posts
+- [ ] Profile page, able to see posts user has posted
+- [ ] Upload profile photo
+- [ ] Edit profile
+- [ ] Comments, edit, delete
+- [ ] Upvotes
+- [ ] 
+- [ ] 
+### Extra features
+- [ ] Report offensive comments
+- [ ] Delete user
+- [ ] API hacker news posts
