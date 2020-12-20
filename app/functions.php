@@ -39,15 +39,15 @@ function invalidEmail($email)
 
 /* Validating password */
 
-function pwdMatch($password, $pwdRepeat)
+/* function pwdMatch($password, $pwdRepeat)
 {
     if ($password !== $pwdRepeat) {
-        $result = true; /* True means it is not a match  */
+        $result = true; /* True means it is not a match  
     } else {
-        $result = false; /* False means it is a match */
+        $result = false; /* False means it is a match 
     }
     return $result;
-}
+} */
 
 function usernameExists($pdo, $username)
 {
@@ -96,6 +96,9 @@ function createUser($pdo, $username, $first_name, $last_name, $email, $password)
 
     $sql = "INSERT INTO Users (username, first_name, last_name, email, password) VALUES (:username, :first_name, :last_name, :email, :password);";
     $statement = $pdo->prepare($sql);
+    if (!$statement) {
+        die(var_dump($pdo->errorInfo()));
+    }
 
     $hashedPwd = password_hash($password, PASSWORD_DEFAULT);
 

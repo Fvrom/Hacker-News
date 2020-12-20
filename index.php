@@ -6,7 +6,7 @@
 
      <?php if (isset($_SESSION['user'])) : ?>
          <p> You are logged in,
-             <? echo $_SESSION['user']; ?> ! </p>
+             <?php echo $_SESSION['user']['first_name']; ?> ! </p>
 
      <?php endif; ?>
 

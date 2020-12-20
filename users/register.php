@@ -8,7 +8,7 @@ if (isset($_POST['submit'])) {
     $last_name = filter_Var($_POST['last_name'], FILTER_SANITIZE_STRING);
     $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
     $username = filter_var($_POST['username'], FILTER_SANITIZE_STRING);
-    $createpPassword = $_POST['createPassword'];
+    $createPassword = $_POST['createPassword'];
     $pwdRepeat = $_POST['pwdrepeat'];
 
 
@@ -17,10 +17,13 @@ if (isset($_POST['submit'])) {
 
 
 
-    if ($password != $pwdRepeat) {
-        $_SESSION['error'] = "Pasword did not match";
-        redirect("../signup.php");
-    } else redirect("../index.php");
+
+    if ($createPassword !== $pwdRepeat) {
+        // $_SESSION['error'] = "Pasword did not match";
+        print_r($_POST['submit']);
+        die($_POST['submit']);
+        // redirect("../signup.php?error=invalidpwd");
+    }
 
 
 
@@ -43,15 +46,15 @@ if (isset($_POST['submit'])) {
     }
 
 
-    if (pwdMatch($password, $pwdRepeat) !== false) {
+    /*  if (pwdMatch($password, $pwdRepeat) !== false) {
         header("location: ../signup.php?error=passworddontmatch");
         exit(); // stopping the script from running
-    }
+    } */
 
 
 
 
-    if (usernameExists($pdo, $username) !== false) {
+    /* if (usernameExists($pdo, $username) !== false) {
         header("location: ../signup.php?error=usernametaken");
         exit(); // stopping the script from running
     }
@@ -60,11 +63,12 @@ if (isset($_POST['submit'])) {
     if (emailExists($pdo, $email) !== false) {
         header("location: ../signup.php?error=emailtaken");
         exit(); // stopping the script from running
-    }
+    } */
 
-    createUser($pdo, $username, $first_name, $last_name, $email, $password);
-} else {
+    createUser($pdo, $username, $first_name, $last_name, $email, $createPassword);
+} /*else {
     header("location: ../signup.php");
     echo "Did not work, try again";
-    exit(); // stopping the script from running
+    exit(); // stopping the script from running 
 }
+*/

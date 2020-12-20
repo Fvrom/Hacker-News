@@ -9,8 +9,8 @@
             <input type="text" name="last_name" id="last_name" placeholder="Last name..." required>
             <input type="email" name="email" id="email" placeholder="Email..." required>
             <input type="text" name="username" id="username" placeholder="Username..." required>
-            <input type="password" name="createPassword" id="createPassword" placeholder="Password..." required>
-            <input type="password" name="pwdrepeat" id="pwdrepeat" placeholder="Repeat password..." required>
+            <input type="text" name="createPassword" id="createPassword" placeholder="Password..." required>
+            <input type="text" name="pwdrepeat" id="pwdrepeat" placeholder="Repeat password..." required>
             <button type="submit" name="submit">Sign Up</button>
 
         </form>
