@@ -7,44 +7,44 @@ function redirect(string $path)
 {
     header("Location: ${path}");
     exit;
-} 
+}
 
 /* Functions for signing up */
 
-/* Function validates username 
+/* Function validates username */
 function invalidUsername($username)
 {
     $result = true;
-    /* search parameter to see if username uses any other characters than approved
+    /* search parameter to see if username uses any other characters than approved */
     if (!preg_match("/^[a-zA-Z0-9]*$/", $username)) {
-        $result = true; /* True actually means it is not approved 
+        $result = true; // True actually means it is not approved 
     } else {
-        $result = false;  /* False is good 
+        $result = false;  // False is good 
     }
     return $result;
 }
 
 
 /* Validating email */
-/* TO DO  Go further and see if email aldready exists 
+/* TO DO  Go further and see if email aldready exists */
 function invalidEmail($email)
 {
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $result = true; /* return true if it did not pass filter 
+        $result = true; /* return true if it did not pass filter */
     } else {
         $result = false;
     }
     return $result;
 }
 
-/* Validating password
+/* Validating password */
 
 function pwdMatch($password, $pwdRepeat)
 {
     if ($password !== $pwdRepeat) {
-        $result = true; /* True means it is not a match  
+        $result = true; /* True means it is not a match  */
     } else {
-        $result = false; /* False means it is a match 
+        $result = false; /* False means it is a match */
     }
     return $result;
 }
@@ -80,15 +80,16 @@ function emailExists($pdo, $email)
     }
 }
 
-/* 
-    if ($statement->rowCount() == 1) {
-        return false;
-        die('Email already registred!');
-    }
-    else {
-        return true;
-    } */ // By documentation this does not seem to be the best way because its behaviour may not be relied upon. 
-/*
+
+/* if ($statement->rowCount() == 1) {
+    return false;
+    die('Email already registred!');
+} else {
+    return true;
+}  // By documentation this does not seem to be the best way because its behaviour may not be relied upon. 
+*/
+
+
 function createUser($pdo, $username, $first_name, $last_name, $email, $password)
 {
 
@@ -108,6 +109,6 @@ function createUser($pdo, $username, $first_name, $last_name, $email, $password)
 
     $statement->execute();
 
-    //redirect("/index.php");
+    redirect("/index.php");
     exit();
-} */
+}

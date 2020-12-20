@@ -13,7 +13,7 @@
         </div>
 
         <div class="form-container">
-            <label for="Password">Password</label>
+            <label for="password">Password</label>
             <input type="password" name="password" id="password" placeholder="Enter password" required>
         </div>
 

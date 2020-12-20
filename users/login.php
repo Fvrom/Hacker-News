@@ -16,26 +16,29 @@ if (isset($_POST['email'], $_POST['password'])) {
 
     // print_R($statement->errorInfo()) -> run error details
 
-    $statement = $pdo->prepare('SELECT * FROM Users WHERE email = :email');
+    $statement = $pdo->prepare("SELECT * FROM users WHERE email = :email");
     $statement->BindParam(':email', $email);
     $statement->execute();
 
     //Fetching user as an array
-    $user = $statement->fetch(PDO::FETCH_ASSOC);
-
+    $user = $statement->fetch(PDO::FETCH_ASSOC); // Get the user in an array. 
+    print_r($user);
     if (!$user) {
-        //redirect('/login.php');
+        redirect('/login.php');
     }
 
     if (password_verify($_POST['password'], $user['password'])) {
 
-        unset($user['password']);
+        // unset($user['password']);
 
-        $_SESSION['user'] = $user;
+        $_SESSION['user'] = $user; // Set a session variable for the user. 
+
+        echo "Hello";
         // If password is correct we save the user in the session. 
         // we do not store password in session. 
     }
 }
 
-
-//redirect('/');
+echo $_SESSION['user'];
+echo "hello"; 
+//redirect('/index.php');
