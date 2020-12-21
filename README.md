@@ -36,9 +36,9 @@ Deadline: 13th January.
 * As a user I'm able to edit my comments.
 
 ## Checklist
-- [ ] Log in
-- [ ] Log out
-- [ ] Sign up
+- [x] Log in
+- [x] Log out
+- [x] Sign up
 - [ ] Dummy posts, ranked latest
 - [ ] Create posts, Delete posts, Edit posts
 - [ ] Profile page, able to see posts user has posted
