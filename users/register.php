@@ -13,59 +13,60 @@ if (isset($_POST['submit'])) {
 
 
 
+    $checkUsernamePattern = preg_match('/^[a-zA-Z0-9]{5,15}$/', $username);
+
+    $_SESSION['errors'] = [];
+
+
+
+    // if there's anything other than false, then throw error. 
+    usernameExists($pdo, $username);
+    if ($_SESSION['checkuser']['username'] === $username) {
+
+        $_SESSION['errors'][] = "The username is already taken, please try again!";
+        redirect("../signup.php");
+    }
+
+    emailExists($pdo, $email);
+    if ($_SESSION['checkEmail'] === $email) {
+        $_SESSION['errors'][] = "Email already in use";
+        redirect("../signup.php");
+    }
+
+    /* search parameter to see if username uses any other characters than approved, 
+    also checks characters length*/
+    if ($checkUsernamePattern === 0) {
+        $_SESSION['errors'][] = "Obs! Something when wrong with the username. Either it is too short, too long or you have used characters that are not allowed.
+        Username can only contain characters from a-z, numbers and underscores. The username should be at least 5 characters long and max 15 characters long.";
+        redirect("../signup.php");
+    }
+
+
+
+
+
+    /* this is just to be extra sure, there is a safety in user input email in the form */
+    if (invalidEmail($email) !== false) {
+        $_SESSION['errors'][] = "Invalid Email, please try again.";
+        redirect("../signup.php");
+        exit(); // stopping the script from running
+    }
 
 
 
 
 
     if ($createPassword !== $pwdRepeat) {
-        // $_SESSION['error'] = "Pasword did not match";
-        print_r($_POST['submit']);
-        die($_POST['submit']);
-        // redirect("../signup.php?error=invalidpwd");
+        $_SESSION['errors'][] = "Paswords did not match";
+
+        redirect("../signup.php");
     }
 
 
 
-    // if there's anything other than false, then throw error. 
-
-    if (invalidUserName($username) !== false) {
-        redirect("../signup.php?error=invalidusername");
-        exit; // stopping the script from running
-    }
-
-    /* createUser($pdo, $username, $first_name, $last_name, $email, $password);
-} else {
-    redirect("/index.php");
-} */
 
 
-    if (invalidEmail($email) !== false) {
-        header("location: ../signup.php?error=invalidemail");
-        exit(); // stopping the script from running
-    }
-
-
-    /*  if (pwdMatch($password, $pwdRepeat) !== false) {
-        header("location: ../signup.php?error=passworddontmatch");
-        exit(); // stopping the script from running
-    } */
-
-
-
-
-    /* if (usernameExists($pdo, $username) !== false) {
-        header("location: ../signup.php?error=usernametaken");
-        exit(); // stopping the script from running
-    }
-
-
-    if (emailExists($pdo, $email) !== false) {
-        header("location: ../signup.php?error=emailtaken");
-        exit(); // stopping the script from running
-    } */
-
-    createUser($pdo, $username, $first_name, $last_name, $email, $createPassword);
+    // createUser($pdo, $username, $first_name, $last_name, $email, $createPassword);
 } /*else {
     header("location: ../signup.php");
     echo "Did not work, try again";

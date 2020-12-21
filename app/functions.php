@@ -9,20 +9,21 @@ function redirect(string $path)
     exit;
 }
 
+/* throws error message */
+function errorMessage()
+{
+    if (isset($_SESSION['errors'])) {
+        foreach ($_SESSION['errors'] as $error) {
+            echo $error;
+        }
+    }
+}
+
 /* Functions for signing up */
 
-/* Function validates username */
-function invalidUsername($username)
-{
-    $result = true;
-    /* search parameter to see if username uses any other characters than approved */
-    if (!preg_match("/^[a-zA-Z0-9]*$/", $username)) {
-        $result = true; // True actually means it is not approved 
-    } else {
-        $result = false;  // False is good 
-    }
-    return $result;
-}
+
+
+
 
 
 /* Validating email */
@@ -37,57 +38,49 @@ function invalidEmail($email)
     return $result;
 }
 
-/* Validating password */
 
-/* function pwdMatch($password, $pwdRepeat)
-{
-    if ($password !== $pwdRepeat) {
-        $result = true; /* True means it is not a match  
-    } else {
-        $result = false; /* False means it is a match 
-    }
-    return $result;
-} */
-
+/* Check database for existing username */
 function usernameExists($pdo, $username)
 {
 
-    $statement = $pdo->prepare('SELECT COUNT(username) AS num FROM Users WHERE username = :username;');
-    $statement->BindParam(':username', $username);
+    $statement = $pdo->prepare('SELECT * FROM Users WHERE username = :username;');
+    $statement->BindParam(':username', $username, PDO::PARAM_STR);
     $statement->execute();
 
     // check if user exists 
-    $row = $statement->fetch(PDO::FETCH_ASSOC);
+    $checkUser = $statement->fetch(PDO::FETCH_ASSOC);
 
-    if ($row['num'] > 0) {
-        die('That username already exists!');
+    $_SESSION['checkuser'] = $checkUser;
+
+    if (!$statement) {
+        die(var_dump($pdo->errorInfo()));
     }
+
+    /* unset($_SESSION['password']);
+    unset($_SESSION['email']);
+    unset($_SESSION['first_name']);
+    unset($_SESSION['last_name']);
+    unset($_SESSION['avatar']);
+    unset($_SESSION['biography']); */ // don't need? vi plockar bara ut username. 
+
+
 }
 
+/* check database for existing email */
 function emailExists($pdo, $email)
 {
 
-
-    $statement = $pdo->prepare('SELECT COUNT(email) AS num FROM Users WHERE email = :email;');
+    $statement = $pdo->prepare('SELECT * FROM Users WHERE email = :email;');
     $statement->BindParam(':email', $email);
     $statement->execute();
 
     // check if user exists 
-    $row = $statement->fetch(PDO::FETCH_ASSOC);
+    $checkEmail = $statement->fetch(PDO::FETCH_ASSOC);
 
-    if ($row['num'] > 0) {
-        die('Email already exists!');
-    }
+    $_SESSION['checkEmail'] = $checkEmail;
 }
 
 
-/* if ($statement->rowCount() == 1) {
-    return false;
-    die('Email already registred!');
-} else {
-    return true;
-}  // By documentation this does not seem to be the best way because its behaviour may not be relied upon. 
-*/
 
 
 function createUser($pdo, $username, $first_name, $last_name, $email, $password)
