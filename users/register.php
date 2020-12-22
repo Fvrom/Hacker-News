@@ -37,7 +37,7 @@ if (isset($_POST['submit'])) {
     also checks characters length*/
     if ($checkUsernamePattern === 0) {
         $_SESSION['errors'][] = "Obs! Something when wrong with the username. Either it is too short, too long or you have used characters that are not allowed.
-        Username can only contain characters from a-z, numbers and underscores. The username should be at least 5 characters long and max 15 characters long.";
+        Username can only contain characters from a-z and numbers. The username should be at least 5 characters long and max 15 characters long.";
         redirect("../signup.php");
     }
 
@@ -63,10 +63,7 @@ if (isset($_POST['submit'])) {
     }
 
 
-
-
-
-    // createUser($pdo, $username, $first_name, $last_name, $email, $createPassword);
+    createUser($pdo, $username, $first_name, $last_name, $email, $createPassword, $message);
 } /*else {
     header("location: ../signup.php");
     echo "Did not work, try again";

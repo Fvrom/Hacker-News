@@ -19,6 +19,16 @@ function errorMessage()
     }
 }
 
+/* throws successful message */
+function successfulMessage()
+{
+    if (isset($_SESSION['successful'])) {
+        foreach ($_SESSION['successful'] as $success) {
+            echo $success;
+        }
+    }
+}
+
 /* Functions for signing up */
 
 
@@ -83,9 +93,9 @@ function emailExists($pdo, $email)
 
 
 
-function createUser($pdo, $username, $first_name, $last_name, $email, $password)
+function createUser($pdo, $username, $first_name, $last_name, $email, $password, $message)
 {
-
+    $_SESSION['successful'] = [];
 
     $sql = "INSERT INTO Users (username, first_name, last_name, email, password) VALUES (:username, :first_name, :last_name, :email, :password);";
     $statement = $pdo->prepare($sql);
@@ -105,6 +115,9 @@ function createUser($pdo, $username, $first_name, $last_name, $email, $password)
 
     $statement->execute();
 
+    $_SESSION['successful'][] = "Your account has been created! You can now log in.";
+    /* $_SESSION['successful'] = $message;
+ 
+    echo $message; */
     redirect("/index.php");
-    exit();
 }

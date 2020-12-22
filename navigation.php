@@ -14,8 +14,17 @@
         <?php if (isset($_SESSION['user'])) : ?>
 
             <li>
-                <a href="/users/logout.php">logout</a>
+                <a href="/profile.php"> <?php echo $_SESSION['username']; ?> </a>
             </li>
+
+            <?php if (isset($_SESSION['user'])) : ?>
+
+                <li>
+                    <a href="/users/logout.php">logout</a>
+                </li>
+            <?php endif; ?>
+
+
 
         <?php else : ?>
             <li>

@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 require __DIR__ . '/../app/autoload.php';
 
+
 if (isset($_POST['email'], $_POST['password'])) {
     $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
 
-
+    $_SESSION['errors'] = [];
     /* $pdo = new PDO($dBPath);
     //die(var_dump($pdo->errorInfo()));
     if (!$pdo) {
@@ -24,6 +25,7 @@ if (isset($_POST['email'], $_POST['password'])) {
     $user = $statement->fetch(PDO::FETCH_ASSOC); // Get the user in an array. 
 
     if (!$user) {
+        $_SESSION['errors'][] = "User not found";
         redirect('/login.php');
     }
 
@@ -33,11 +35,11 @@ if (isset($_POST['email'], $_POST['password'])) {
 
         $_SESSION['user'] = $user; // Set a session variable for the user. 
 
-
         // If password is correct we save the user in the session. 
         // we do not store password in session. 
+        redirect('/index.php');
+    } else {
+        $_SESSION['errors'][] = "Incorrect password";
+        redirect('/login.php');
     }
 }
-
-
-redirect('/index.php');
