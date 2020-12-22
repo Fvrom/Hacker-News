@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="/style/navigation.css">
     <link rel="stylesheet" href="/style/signup.css">
     <link rel="stylesheet" href="/style/login.css">
-    <link rel="stylesheet" href="/style/hamburger.css">
+    <link rel="stylesheet" href="/style/home-page.css">
 
 
     <title>Hacker news</title>
@@ -18,7 +18,7 @@
 
 <body>
     <header>
-        <!-- <h1 class="title"> Hacker News</h1> -->
+        <h1 class="title"> Hacker News</h1>
         <?php
         require __DIR__ . '/navigation.php';
         ?>

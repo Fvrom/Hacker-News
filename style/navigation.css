@@ -1,14 +1,16 @@
 header {
-  /* display: flex;
-  justify-content: center;
- align-items: center; */
+  display: flex;
+
   width: 100%;
   height: 5rem;
-  background: grey;
+  background: var(--color-header);
 }
 
 .title {
-  margin: 0;
+  font-size: 2rem;
+  margin-left: 1rem;
+  padding: 0;
+  align-self: center;
 }
 
 /* header nav ul {
@@ -34,7 +36,6 @@ header input {
   visibility: hidden;
   position: absolute;
   right: 0;
-
   z-index: 0;
 }
 
@@ -54,6 +55,7 @@ header label {
   z-index: 2;
   position: absolute;
   right: 0;
+  background: var(--color-medium-shade-grey);
 }
 
 .hamburger-nav {
@@ -76,6 +78,10 @@ header input[type="checkbox"]:checked + label .hamburger-nav {
   transform: translateX(0);
 }
 
+header input[type="checkbox"]:checked + label .hamburger {
+  background: var(--color-darkermedium-shade-grey);
+}
+
 .nav-list {
   width: 100%;
   height: 60vh;
@@ -83,7 +89,7 @@ header input[type="checkbox"]:checked + label .hamburger-nav {
   flex-direction: column;
   list-style: none;
   padding: 30px;
-  background-color: rgba(17, 17, 16, 0.7);
+  background-color: var(--color-dark-shade-grey);
 }
 
 .nav-item {
@@ -96,10 +102,11 @@ header input[type="checkbox"]:checked + label .hamburger-nav {
 }
 
 .nav-item a {
-  font-size: 2rem;
+  font-size: 1.6rem;
   color: rgb(185, 184, 184);
   font-weight: 400;
   text-decoration: none;
+  text-transform: uppercase;
   text-shadow: 1px 1px 1px rgb(68, 68, 68);
 }
 

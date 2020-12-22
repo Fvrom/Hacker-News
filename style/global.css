@@ -1,3 +1,11 @@
+:root {
+  --color-light-shade-grey: #929292;
+  --color-header: #797979;
+  --color-medium-shade-grey: #494949;
+  --color-darkermedium-shade-grey: #242424;
+  --color-dark-shade-grey: #111110b3;
+}
+
 * {
   box-sizing: border-box;
   font-size: 10px;

@@ -4,26 +4,29 @@
 
         <ul class="nav-list">
             <li class="nav-item">
-                <a href="newest.php">new</a>
+                <a href="index.php">Home</a>
             </li>
             <li class="nav-item">
-                <a href="newestcomments.php">comments</a>
+                <a href="newest.php">Trending</a>
             </li>
             <li class="nav-item">
-                <a href="update.php">submit</a>
+                <a href="newestcomments.php">Comments</a>
+            </li>
+            <li class="nav-item">
+                <a href="submit.php">Submit post</a>
             </li>
 
             <?php if (isset($_SESSION['user'])) : ?>
 
                 <div class="rightNav">
                     <li class="nav-item">
-                        <a href="profile.php"> <?php echo $_SESSION['user']['username']; ?> </a>
+                        <a href="profile.php?username=<?php echo $_SESSION['user']['username']; ?>"> <?php echo $_SESSION['user']['username']; ?> </a>
                     </li>
 
                     <?php if (isset($_SESSION['user'])) : ?>
 
                         <li class="nav-item">
-                            <a href="/users/logout.php">logout</a>
+                            <a href="/users/logout.php">Sign out</a>
                         </li>
                     <?php endif; ?>
 

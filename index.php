@@ -1,7 +1,7 @@
  <?php require __DIR__ . '/app/autoload.php'; ?>
  <?php require __DIR__ . '/header.php'; ?>
 
- <section>
+ <section class="home-page">
      <p>Home page</p>
 
      <div class="successful-container">

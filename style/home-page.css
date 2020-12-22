@@ -1,0 +1,6 @@
+.home-page {
+  display: grid;
+  place-content: center;
+  background: var(--color-light-shade-grey);
+  margin: 1rem;
+}
