@@ -121,3 +121,36 @@ function createUser($pdo, $username, $first_name, $last_name, $email, $password,
     echo $message; */
     redirect("/index.php");
 }
+
+
+/** Function for Profile page */
+
+function getUser($pdo, $username)
+{
+
+    $_SESSION['errors'] = [];
+
+    $statement = $pdo->prepare("SELECT id, username, avatar, biography FROM users WHERE Users = :username");
+    $statement->BindParam(':username', $username, PDO::PARAM_STR);
+    $statement->execute();
+
+    $userProfile =  $statement->fetch(PDO::FETCH_ASSOC);
+
+    if (!$userProfile) {
+
+        return $_SESSION['errors'][] = "Something went wrong with this profile!";
+    }
+
+    return $userProfile;
+}
+
+
+
+/***** Posts  *****/
+
+/*
+SELECT users.id FROM users
+INNER JOIN posts
+ON users.id = posts.author
+WHERE users.id = 1;
+*/

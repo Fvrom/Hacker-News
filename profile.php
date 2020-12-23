@@ -2,6 +2,18 @@
 <?php require __DIR__ . '/header.php'; ?>
 
 <?php
+
+if (isset($_GET['username'])) {
+    $username = filter_var($_GET['username'], FILTER_SANITIZE_STRING);
+
+    getUser($pdo, $username);
+}
+
+?>
+
+
+
+<?php
 if (isset($_GET['username'])) : ?>
 
     <section class="home-page">
