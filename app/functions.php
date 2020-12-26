@@ -130,7 +130,7 @@ function getUser($pdo, $username)
 
     $_SESSION['errors'] = [];
 
-    $statement = $pdo->prepare("SELECT id, username, avatar, biography FROM users WHERE Users = :username");
+    $statement = $pdo->prepare("SELECT id, username, avatar, biography FROM Users WHERE username = :username");
     $statement->BindParam(':username', $username, PDO::PARAM_STR);
     $statement->execute();
 
@@ -148,6 +148,27 @@ function getUser($pdo, $username)
 
 /***** Posts  *****/
 
+function getUserPosts($pdo, int $profileId)
+{
+    $_SESSION['errors'] = [];
+
+    $statement = $pdo->prepare("SELECT Posts.id, title, description, post_url, post_date, user_id FROM Posts
+    INNER JOIN Users
+    ON Posts.user_id = Users.id
+    WHERE Users.id = :id
+    ORDER BY Posts.id DESC");
+
+    $statement->BindParam(':id', $profileId, PDO::PARAM_INT);
+    $statement->execute();
+
+    $userPosts = $statement->fetch(PDO::FETCH_ASSOC);
+
+    if (!$userPosts) {
+        return $_SESSION['errors'][] = "No posts yet.";
+    }
+
+    return $userPosts;
+}
 /*
 SELECT users.id FROM users
 INNER JOIN posts

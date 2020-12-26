@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="/style/signup.css">
     <link rel="stylesheet" href="/style/login.css">
     <link rel="stylesheet" href="/style/home-page.css">
+    <link rel="stylesheet" href="/style/profile.css">
 
 
     <title>Hacker news</title>
