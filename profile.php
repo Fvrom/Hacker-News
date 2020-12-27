@@ -35,26 +35,30 @@
 
         <h2 class="u-posts"> Posts </h2>
 
-        <article class="user-posts">
-            <div class="posts-wrapper">
-                <div class="post-item">
-                    <h3 class="post-title"> <?php echo $userPosts['title']; ?> </h3>
-                </div>
-                <div class="post-item">
-                    <p class="post-description"> <?php echo $userPosts['description']; ?> </p>
-                </div>
-                <div class="post-item">
-                    <a href="<?php echo $userPosts['post_url'] ?> "> <?php echo $userPosts['post_url']; ?> </a>
-                </div>
-                <div class="post-item-author">
-                    <p> Posted by: <?php echo $userPosts['user_id']; ?> </p>
+        <?php foreach ($userPosts as $userPost) : ?>
 
+            <article class="user-posts">
+                <div class="posts-wrapper">
+                    <div class="post-item">
+                        <h3 class="post-title"> <?php echo $userPost['title']; ?> </h3>
+                    </div>
+                    <div class="post-item">
+                        <p class="post-description"> <?php echo $userPost['description']; ?> </p>
+                    </div>
+                    <div class="post-item">
+                        <a href="<?php echo $userPost['post_url'] ?> "> <?php echo $userPost['post_url']; ?> </a>
+                    </div>
+                    <div class="post-item-author">
+                        <p> Posted by: <?php echo $userPost['user_id']; ?> </p>
+
+                    </div>
+                    <div class="post-item-date">
+                        <p> <?php echo $userPost['post_date']; ?> </p>
+                    </div>
                 </div>
-                <div class="post-item-date">
-                    <p> <?php echo $userPosts['post_date']; ?> </p>
-                </div>
-            </div>
-        </article>
+            </article>
+
+        <?php endforeach; ?>
         <!-- TO DO: 
         Get user from database. 
         Display 

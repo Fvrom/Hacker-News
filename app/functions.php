@@ -161,7 +161,7 @@ function getUserPosts($pdo, int $profileId)
     $statement->BindParam(':id', $profileId, PDO::PARAM_INT);
     $statement->execute();
 
-    $userPosts = $statement->fetch(PDO::FETCH_ASSOC);
+    $userPosts = $statement->fetchAll(PDO::FETCH_ASSOC);
 
     if (!$userPosts) {
         return $_SESSION['errors'][] = "No posts yet.";
@@ -175,3 +175,24 @@ INNER JOIN posts
 ON users.id = posts.author
 WHERE users.id = 1;
 */
+
+/** All posts  **/
+
+function getAllPosts($pdo, $allPosts)
+{
+
+    $_SESSION['errors'] = [];
+
+    $statement = $pdo->prepare("SELECT * FROM Posts
+    ORDER BY Posts.post_date DESC");
+
+    $statement->execute();
+
+    $allPosts = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    if (!$allPosts) {
+        return  $_SESSION['errors'][] = "Ops, could not find posts";
+    }
+
+    return $allPosts;
+}

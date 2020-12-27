@@ -1,22 +1,57 @@
  <?php require __DIR__ . '/app/autoload.php'; ?>
  <?php require __DIR__ . '/header.php'; ?>
 
- <section class="home-page">
-     <p>Home page</p>
+ <section>
 
-     <div class="successful-container">
-         <?php if (isset($_SESSION['successful'])) {  ?>
-             <p class="successful-message"> <?php successfulMessage();
-                                            unset($_SESSION['successful']); //delete error message after displayed
-                                        } ?> </p>
-     </div>
+     <artcile class="home-page">
+         <p>Home page</p>
 
-     <?php if (isset($_SESSION['user'])) : ?>
-         <p> You are logged in,
-             <?php echo $_SESSION['user']['first_name']; ?> ! </p>
+         <div class="successful-container">
+             <?php if (isset($_SESSION['successful'])) {  ?>
+                 <p class="successful-message"> <?php successfulMessage();
+                                                unset($_SESSION['successful']); //delete error message after displayed
+                                            } ?> </p>
+         </div>
 
-     <?php endif; ?>
+         <?php if (isset($_SESSION['user'])) : ?>
+             <p> You are logged in,
+                 <?php echo $_SESSION['user']['first_name']; ?> ! </p>
+
+         <?php endif; ?>
+     </artcile>
+
+     <?php
+        $allPosts = getAllPosts($pdo, $allPosts);
+
+        foreach ($allPosts as $post) : ?>
+
+         <article class="home-page">
+
+             <div class="posts-wrapper">
+                 <div class="post-item">
+                     <h3 class="post-title"> <?php echo $post['title']; ?> </h3>
+                 </div>
+                 <div class="post-item">
+                     <p class="post-description"> <?php echo $post['description']; ?> </p>
+                 </div>
+                 <div class="post-item">
+                     <a href="<?php echo $post['post_url'] ?> "> <?php echo $post['post_url']; ?> </a>
+                 </div>
+                 <div class="post-item-author">
+                     <p> Posted by: <?php echo $post['user_id']; ?> </p>
+
+                 </div>
+                 <div class="post-item-date">
+                     <p> <?php echo $post['post_date']; ?> </p>
+                 </div>
+             </div>
+
+
+         </article>
+     <?php endforeach; ?>
 
  </section>
+
+
 
  <?php require __DIR__ . '/footer.php'; ?>
