@@ -25,13 +25,34 @@
 
     <section>
 
-        <article class="profile-page">
-            <div class="profile-img-container">
-                <!-- <img src="<?php $userProfile['avatar']; ?>" class="profile-img" alt="User profile"> -->
+        <article class="profile-container">
+            <div class="profile-page">
+                <div class="profile-img-container">
+                    <!-- <img src="<?php $userProfile['avatar']; ?>" class="profile-img" alt="User profile"> -->
+                </div>
+                <h1 class="profile-title"><?php echo $userProfile['username']; ?> </h1>
+                <p class="biography"> <?php echo $userProfile['biography']; ?> </p>
             </div>
-            <h1 class="profile-title"><?php echo $userProfile['username']; ?> </h1>
-            <p class="biography"> <?php echo $userProfile['biography']; ?> </p>
+
+            <?php // Check if user logged in is the owner of this profile page. 
+            // If it is, show button for settings. 
+
+            if ($profileId === $_SESSION['user']['id']) : ?>
+
+                <button class="edit-profile">Edit profile</button>
+
+            <?php endif; ?>
         </article>
+
+        <!-- TO DO: 
+        Javascript eventlistener for button. Redirect to settings page. 
+        Settings page: upload profle photo
+        Edit bio, username . 
+            -->
+
+
+
+
 
         <h2 class="u-posts"> Posts </h2>
 
@@ -56,16 +77,17 @@
                         <p> <?php echo $userPost['post_date']; ?> </p>
                     </div>
                 </div>
+                <?php if ($profileId === $_SESSION['user']['id']) : ?>
+
+                    <button class="edit-post">Edit post</button>
+
+                <?php endif; ?>
+
             </article>
 
+
         <?php endforeach; ?>
-        <!-- TO DO: 
-        Get user from database. 
-        Display 
-        - profile picture
-         - bio
-         - posts made by the user
--->
+
 
 
     </section>
