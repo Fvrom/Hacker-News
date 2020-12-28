@@ -16,3 +16,12 @@ function validateForm() {
 }
 
 /* Script doesnt seem to be affected */
+
+/* 
+const editProfile = document.querySelector(".edit-profile");
+
+editProfile.addEventListener("click", function () {
+  window.location.href = "settings.php";
+});
+doesnt work with session. 
+ */

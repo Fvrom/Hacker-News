@@ -39,7 +39,7 @@
 
             if ($profileId === $_SESSION['user']['id']) : ?>
 
-                <button class="edit-profile">Edit profile</button>
+                <a href="settings.php?username=<?php echo $_SESSION['user']['username']; ?> "> <button class="edit-profile">Edit profile</button> </a>
 
             <?php endif; ?>
         </article>

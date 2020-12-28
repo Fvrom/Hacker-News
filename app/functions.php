@@ -196,3 +196,15 @@ function getAllPosts($pdo, $allPosts)
 
     return $allPosts;
 }
+
+
+/*** Upload photo  ***/
+
+function uploadImage($pdo, $avatar, $id)
+{
+
+    $statement = $pdo->prepare("UPDATE Users SET avatar = :avatar WHERE id = :id");
+    $statement->BindParam(':avatar', $avatar['name'], PDO::PARAM_STR);
+    $statement->BindParam(':id', $id, PDO::PARAM_INT);
+    $statement->execute();
+}
