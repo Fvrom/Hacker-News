@@ -5,7 +5,7 @@ require __DIR__ . '/../app/autoload.php';
 if (isset($_POST['submit'])) {
 
     $first_name = filter_var($_POST['first_name'], FILTER_SANITIZE_STRING);
-    $last_name = filter_Var($_POST['last_name'], FILTER_SANITIZE_STRING);
+    $last_name = filter_var($_POST['last_name'], FILTER_SANITIZE_STRING);
     $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
     $username = filter_var($_POST['username'], FILTER_SANITIZE_STRING);
     $createPassword = $_POST['createPassword'];

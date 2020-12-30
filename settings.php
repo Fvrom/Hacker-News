@@ -2,7 +2,6 @@
 <?php require __DIR__ . '/header.php'; ?>
 
 <?php
-$_SESSION['errors'] = [];
 
 
 if (isset($_GET['username'])) {
@@ -13,42 +12,6 @@ if (isset($_GET['username'])) {
     $profileId = $userProfile['id'];
 }
 
-
-if (isset($_FILES['avatar'])) {
-    $avatar = $_FILES['avatar'];
-
-    $uploadPath = __DIR__ . '/assets/images' . $avatar['name'];
-
-    $id = $_SESSION['user']['id'];
-
-    if (!in_array($avatar['type'], ['image/jpeg', 'image/jpg', 'image/png'])) {
-        $_SESSION['errors'][] = "The uploaded file type is not allowed.";
-        redirect('/settings.php');
-    }
-
-    if ($avatar['size'] > 2000000) {
-        $_SESSION['errors'][] = "The image is too big. Maximum size 2MB.";
-    }
-
-    if (count($_SESSION['errors']) === 0) {
-
-
-        move_uploaded_file($avatar['tmp_name'], $uploadPath);
-
-        /* Upload it in the database */
-
-        uploadImage($pdo,  $avatar, $id);
-
-
-        /*fetch the users photo */
-        $statement = $pdo->prepare("SELECT avatar FROM Users WHERE id = :id");
-        $statement->bindParam(':id', $id, PDO::PARAM_INT);
-        $statement->execute();
-
-        $userImage = $statement->fetch(PDO::FETCH_ASSOC);
-    }
-}
-
 ?>
 
 <?php if (isset($_SESSION['errors'])) {  ?>
@@ -57,19 +20,56 @@ if (isset($_FILES['avatar'])) {
                             } ?> </p>
 
 
-    <?php
-    if ($profileId === $_SESSION['user']['id']) : ?>
-
-        <form action="/" method="post" enctype="multipart/form/data">
-
-            <div>
-                <label for="avatar"> Choose profile image to upload </label>
-                <input type="file" accept=".jpg, .jpeg, .png" name="avatar" id="avatar">
-                <button type="submit" class="submit-button"> Update </button>
-            </div>
-
-        </form>
+    <?php if (isset($_SESSION['successful'])) {  ?>
+        <p class="error-message"> <?php successfulMessage();
+                                    unset($_SESSION['successful']);
+                                } ?> </p>
 
 
+        <?php
+        if ($profileId === $_SESSION['user']['id']) : ?>
 
-    <?php endif; ?>
+            <!-- check this, do i have to take out everything in the function for the email ? -->
+            <?php
+            echo $_SESSION['checkEmail'];
+            ?>
+
+            <form action="/users/settings.php" method="post">
+                <div>
+                    <label for="username"> Change username </label>
+                    <input type="text" name="username" id="username" placeholder=" <?php echo $userProfile['username']; ?>">
+
+                    <label for="biography"> Biography </label>
+                    <input type="text" name="biography" id="biography" placeholder=" <?php echo $userProfile['biography']; ?>">
+                    <button type="submit"> Update profile</button>
+
+
+                </div>
+            </form>
+
+            <form action="/users/settings.php" method="post" enctype="multipart/form/data">
+
+                <div>
+                    <label for="avatar"> Choose profile image to upload </label>
+                    <input type="file" accept=".jpg, .jpeg, .png" name="avatar" id="avatar">
+                    <button type="submit" class="submit-button"> Update image </button>
+                </div>
+
+            </form>
+
+            <form action="/users/settings.php" method="post">
+
+                <label for="email"> Change email </label>
+                <input type="email" name="changeEmail" id="changeEmail" placeholder="<?php echo $userProfile['email']; ?>">
+
+                <label for="password"> Current password </label>
+                <input type="password" name="currentPwd" id="currentPwd" required>
+
+                <label for="password"> Change password </label>
+                <input type="password" name="changePwd" id="changePwd">
+
+                <label for="password"> Repeat new password </label>
+                <input type="password" name="repeatPwd" id="repeatPwd">
+
+            </form>
+        <?php endif; ?>
