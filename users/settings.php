@@ -78,15 +78,45 @@ if (isset($_POST['username'], $_POST['biography'])) {
     redirect('/settings.php');
 }
 
-
-if (isset($_POST['changeEmail'], $_POST['currentPwd'], $_POST['changePwd'], $_POST['repeatPwd'])) {
-
+if (isset($_POST['changeEmail'])) {
     $changeEmail = $_POST['changeEmail'];
+
+    // $email = $_SESSION['user']['email'];
+
+    /* this is just to be extra sure, there is a safety in user input email in the form */
+    if (invalidEmail($email) !== false) {
+        $_SESSION['errors'][] = "Invalid Email, please try again.";
+        redirect('/settings.php');
+    }
+
+
+    emailExists($pdo, $changeEmail);
+
+    if ($_SESSION['checkEmail'] === $changeEmail) {
+        return $_SESSION['errors'][] = "Email already in use";
+        redirect('/settings.php');
+    }
+
+    $statement = $pdo->prepare('UPDATE Users SET email = :changeEmail WHERE id = :id;');
+    $statement->BindParam(':id', $id, PDO::PARAM_INT);
+    $statement->BindParam(':changeEmail', $changeEmail, PDO::PARAM_STR);
+    $statement->execute();
+}
+
+
+if (isset($_POST['currentPwd'], $_POST['changePwd'], $_POST['repeatPwd'])) {
+
+
     $currentPwd = $_POST['currentPwd'];
     $changePwd = $_POST['changePwd'];
     $repeatPwd = $_POST['repeatPwd'];
 
-    $email = $_SESSION['user']['email'];
+
+    if ($changePwd !== $repeatPwd) {
+        $_SESSION['errors'][] = "Paswords did not match";
+
+        redirect('/settings.php');
+    }
 
     getUserPwd($pdo, $id);
 
@@ -94,13 +124,13 @@ if (isset($_POST['changeEmail'], $_POST['currentPwd'], $_POST['changePwd'], $_PO
 
         unset($_SESSION['pwd']);
 
+        $hashedNewPwd = password_hash($changePwd, PASSWORD_DEFAULT);
 
-        emailExists($pdo, $changeEmail);
-
-        if ($_SESSION['checkEmail'] === $changeEmail) {
-            return $_SESSION['errors'][] = "Email already in use";
-            redirect('/settings.php');
-        }
+        $statement = $pdo->prepare('UPDATE Users SET password = :hashedNewPwd WHERE id = :id;');
+        $statement->BindParam(':id', $id, PDO::PARAM_INT);
+        $statement->BindParam(':hashedNewPwd', $hashedNedPwd, PDO::PARAM_STR);
+        $statement->execute();
     }
 }
-/* Lägg till statements för ny mail, nytt lösen. Bör jag göra dessa separat? */
+
+/* Lägg till successful messages när koden går igenom. */

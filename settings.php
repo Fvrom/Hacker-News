@@ -62,6 +62,9 @@ if (isset($_GET['username'])) {
                     <div class="sign-up">
                         <label for="email"> Change email </label>
                         <input type="email" name="changeEmail" id="changeEmail" placeholder="<?php echo $_SESSION['user']['email']; ?>">
+                        <button type="submit" class="submit-button"> Change Email</button>
+                    </div>
+                    <div class="sign-up">
 
                         <label for="password"> Current password </label>
                         <input type="password" name="currentPwd" id="currentPwd" required>
@@ -71,7 +74,7 @@ if (isset($_GET['username'])) {
 
                         <label for="password"> Repeat new password </label>
                         <input type="password" name="repeatPwd" id="repeatPwd">
-                        <button type="submit" class="submit-button"> Update information</button>
+                        <button type="submit" class="submit-button"> Change password </button>
                     </div>
                 </form>
             <?php endif; ?>
