@@ -76,6 +76,10 @@ if (isset($_GET['username'])) {
                         <input type="password" name="repeatPwd" id="repeatPwd">
                         <button type="submit" class="submit-button"> Change password </button>
                     </div>
+
+                    <div class="sign-up">
+                        <a href="profile.php?username=<?php echo $_SESSION['user']['username']; ?>"> <?php echo $_SESSION['user']['username']; ?> "><button class="submit-button"> Back to your profile </button> </a>
+                    </div>
                 </form>
             <?php endif; ?>
             </section>

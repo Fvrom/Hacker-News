@@ -1,5 +1,10 @@
-<?php require __DIR__ . '/app/autoload.php';
+<?php
 
+declare(strict_types=1);
+
+require __DIR__ . '/../app/autoload.php'; ?>
+
+<?php
 // Backend for the settings part. 
 
 /* For updating profile iamge */
@@ -27,7 +32,7 @@ if (isset($_FILES['avatar'])) {
 
     if ($avatar['size'] > 2000000) {
         $_SESSION['errors'][] = "The image is too big. Maximum size 2MB.";
-        redirect('/settings.php');
+        redirect('/../settings.php');
     }
 
     if (count($_SESSION['errors']) === 0) {
@@ -49,8 +54,9 @@ if (isset($_FILES['avatar'])) {
         $userImage = $statement->fetch(PDO::FETCH_ASSOC);
 
         $_SESSION['successful'][] = "Image successfully updated.";
+        updateUserSession($pdo, $statement, $updatedUser, $id);
 
-        redirect('/settings.php');
+        redirect('/../settings.php');
     }
 }
 
@@ -68,14 +74,15 @@ if (isset($_POST['username'], $_POST['biography'])) {
         redirect("../settings.php");
     }
 
-    $statement = $pdo->prepare('UPDATE Users SET username = :changeUsername, biography = :updateBiograpghy, WHERE id = :id;');
+    $statement = $pdo->prepare('UPDATE Users SET username = :changeUsername, biography = :updateBiography WHERE id = :id');
     $statement->BindParam(':id', $id, PDO::PARAM_INT);
     $statement->BindParam(':changeUsername', $changeUsername, PDO::PARAM_STR);
     $statement->BindParam(':updateBiography', $updateBiography, PDO::PARAM_STR);
     $statement->execute();
 
     $_SESSION['successful'][] = "Updated profile!";
-    redirect('/settings.php');
+    updateUserSession($pdo, $statement, $updatedUser, $id);
+    redirect('../settings.php');
 }
 
 if (isset($_POST['changeEmail'])) {
@@ -86,7 +93,7 @@ if (isset($_POST['changeEmail'])) {
     /* this is just to be extra sure, there is a safety in user input email in the form */
     if (invalidEmail($email) !== false) {
         $_SESSION['errors'][] = "Invalid Email, please try again.";
-        redirect('/settings.php');
+        redirect('../settings.php');
     }
 
 
@@ -94,13 +101,17 @@ if (isset($_POST['changeEmail'])) {
 
     if ($_SESSION['checkEmail'] === $changeEmail) {
         return $_SESSION['errors'][] = "Email already in use";
-        redirect('/settings.php');
+        redirect('../settings.php');
     }
 
     $statement = $pdo->prepare('UPDATE Users SET email = :changeEmail WHERE id = :id;');
     $statement->BindParam(':id', $id, PDO::PARAM_INT);
     $statement->BindParam(':changeEmail', $changeEmail, PDO::PARAM_STR);
     $statement->execute();
+
+    $_SESSION['successful'][] = "Email updated!";
+    updateUserSession($pdo, $statement, $updatedUser, $id);
+    redirect('../settings.php');
 }
 
 
@@ -115,7 +126,7 @@ if (isset($_POST['currentPwd'], $_POST['changePwd'], $_POST['repeatPwd'])) {
     if ($changePwd !== $repeatPwd) {
         $_SESSION['errors'][] = "Paswords did not match";
 
-        redirect('/settings.php');
+        redirect('../settings.php');
     }
 
     getUserPwd($pdo, $id);
@@ -130,7 +141,12 @@ if (isset($_POST['currentPwd'], $_POST['changePwd'], $_POST['repeatPwd'])) {
         $statement->BindParam(':id', $id, PDO::PARAM_INT);
         $statement->BindParam(':hashedNewPwd', $hashedNedPwd, PDO::PARAM_STR);
         $statement->execute();
+
+        $_SESSION['successful'][] = "Password updated!";
+
+        updateUserSession($pdo, $statement, $updatedUser, $id);
+        redirect('../settings.php');
     }
 }
 
-/* Lägg till successful messages när koden går igenom. */
+/* Lägg till ny session för users när de ändrar info */

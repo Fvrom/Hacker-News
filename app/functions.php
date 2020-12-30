@@ -166,7 +166,16 @@ function getUserPwd($pdo, $id)
 }
 
 
+function updateUserSession($pdo, $statement, $updatedUser, $id)
+{
+    $statement = $pdo->prepare("SELECT * FROM users WHERE id = :id");
+    $statement->BindParam(':id', $id);
+    $statement->execute();
 
+    $updatedUser = $statement->fetch(PDO::FETCH_ASSOC);
+    unset($updatedUser['password']);
+    $_SESSION['user'] = $updatedUser;
+}
 
 /***** Posts  *****/
 
