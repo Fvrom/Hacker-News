@@ -165,7 +165,7 @@ function getUserPwd($pdo, $id)
     return $_SESSION['pwd'];
 }
 
-
+/* Delete this?!
 function updateUserSession($pdo, $statement, $updatedUser, $id)
 {
     $statement = $pdo->prepare("SELECT * FROM users WHERE id = :id");
@@ -175,7 +175,7 @@ function updateUserSession($pdo, $statement, $updatedUser, $id)
     $updatedUser = $statement->fetch(PDO::FETCH_ASSOC);
     unset($updatedUser['password']);
     $_SESSION['user'] = $updatedUser;
-}
+} */
 
 /***** Posts  *****/
 
@@ -220,6 +220,7 @@ function getAllPosts($pdo, $allPosts)
     $statement->execute();
 
     $allPosts = $statement->fetchAll(PDO::FETCH_ASSOC);
+
 
     if (!$allPosts) {
         return  $_SESSION['errors'][] = "Ops, could not find posts";

@@ -51,10 +51,15 @@ if (isset($_FILES['avatar'])) {
         $statement->bindParam(':id', $id, PDO::PARAM_INT);
         $statement->execute();
 
+        if (!$statement) {
+            die(var_dump($pdo->errorInfo()));
+        }
+
         $userImage = $statement->fetch(PDO::FETCH_ASSOC);
 
         $_SESSION['successful'][] = "Image successfully updated.";
-        updateUserSession($pdo, $statement, $updatedUser, $id);
+
+        $_SESSION['user']['avatar'] = $userImage;
 
         redirect('/../settings.php');
     }
@@ -80,8 +85,15 @@ if (isset($_POST['username'], $_POST['biography'])) {
     $statement->BindParam(':updateBiography', $updateBiography, PDO::PARAM_STR);
     $statement->execute();
 
+    if (!$statement) {
+        die(var_dump($pdo->errorInfo()));
+    }
+
     $_SESSION['successful'][] = "Updated profile!";
-    updateUserSession($pdo, $statement, $updatedUser, $id);
+
+    $_SESSION['user']['username'] = $changeUsername;
+    $_SESSION['user']['biography'] = $updateBiography;
+
     redirect('../settings.php');
 }
 
@@ -109,8 +121,13 @@ if (isset($_POST['changeEmail'])) {
     $statement->BindParam(':changeEmail', $changeEmail, PDO::PARAM_STR);
     $statement->execute();
 
+    if (!$statement) {
+        die(var_dump($pdo->errorInfo()));
+    }
+
     $_SESSION['successful'][] = "Email updated!";
-    updateUserSession($pdo, $statement, $updatedUser, $id);
+    $_SESSION['user']['email'] = $changeEmail;
+
     redirect('../settings.php');
 }
 
@@ -142,9 +159,13 @@ if (isset($_POST['currentPwd'], $_POST['changePwd'], $_POST['repeatPwd'])) {
         $statement->BindParam(':hashedNewPwd', $hashedNedPwd, PDO::PARAM_STR);
         $statement->execute();
 
+        if (!$statement) {
+            die(var_dump($pdo->errorInfo()));
+        }
+
         $_SESSION['successful'][] = "Password updated!";
 
-        updateUserSession($pdo, $statement, $updatedUser, $id);
+
         redirect('../settings.php');
     }
 }

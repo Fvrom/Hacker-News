@@ -1,6 +1,9 @@
  <?php require __DIR__ . '/app/autoload.php'; ?>
  <?php require __DIR__ . '/header.php'; ?>
 
+ <?php $allPost = getAllPosts($pdo, $allPosts); ?>
+
+
  <section>
 
      <artcile class="home-page">
@@ -21,9 +24,10 @@
      </artcile>
 
      <?php
-        $allPosts = getAllPosts($pdo, $allPosts);
 
-        foreach ($allPosts as $post) : ?>
+
+
+        foreach ($allPost as $post) : ?>
 
          <article class="home-page">
 
