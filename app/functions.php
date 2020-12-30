@@ -146,6 +146,24 @@ function getUser($pdo, $username)
     return $userProfile;
 }
 
+function getUserPwd($pdo, $id)
+{
+
+    $statement = $pdo->prepare("SELECT password FROM Users WHERE id = :id");
+    $statement->BindParam(':id', $id, PDO::PARAM_STR);
+    $statement->execute();
+
+    $userPwd = $statement->fetch(PDO::FETCH_ASSOC);
+
+    if (!$userPwd) {
+
+        return $_SESSION['errors'][] = "Something went wrong with finding password!";
+    }
+
+    $_SESSION['pwd'] = $userPwd;
+
+    return $_SESSION['pwd'];
+}
 
 
 

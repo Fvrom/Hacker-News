@@ -5,6 +5,7 @@
 /* For updating profile iamge */
 
 $id = $_SESSION['user']['id'];
+$username = $_SESSION['user']['username'];
 $_SESSION['successful'] = [];
 $_SESSION['errors'] = [];
 
@@ -87,9 +88,19 @@ if (isset($_POST['changeEmail'], $_POST['currentPwd'], $_POST['changePwd'], $_PO
 
     $email = $_SESSION['user']['email'];
 
-    emailExists($pdo, $changeEmail);
+    getUserPwd($pdo, $id);
 
-    if ($_SESSION['checkEmail'] === $changeEmail) {
-        return $_SESSION['errors'][] = "Email already in use";
+    if (password_verify($currentPwd, $_SESSION['pwd'])) {
+
+        unset($_SESSION['pwd']);
+
+
+        emailExists($pdo, $changeEmail);
+
+        if ($_SESSION['checkEmail'] === $changeEmail) {
+            return $_SESSION['errors'][] = "Email already in use";
+            redirect('/settings.php');
+        }
     }
 }
+/* Lägg till statements för ny mail, nytt lösen. Bör jag göra dessa separat? */

@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="/style/login.css">
     <link rel="stylesheet" href="/style/home-page.css">
     <link rel="stylesheet" href="/style/profile.css">
-
+    <link rel="stylesheet" href="/style/settings.css">
 
     <title>Hacker news</title>
 </head>

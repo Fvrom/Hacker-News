@@ -30,46 +30,49 @@ if (isset($_GET['username'])) {
         if ($profileId === $_SESSION['user']['id']) : ?>
 
             <!-- check this, do i have to take out everything in the function for the email ? -->
-            <?php
-            echo $_SESSION['checkEmail'];
-            ?>
+            <section class="sign-up-form">
+                <?php
+                echo $_SESSION['checkEmail'];
+                ?>
 
-            <form action="/users/settings.php" method="post">
-                <div>
-                    <label for="username"> Change username </label>
-                    <input type="text" name="username" id="username" placeholder=" <?php echo $userProfile['username']; ?>">
+                <form action="/users/settings.php" method="post">
+                    <div class="sign-up">
+                        <label for="username"> Change username </label>
+                        <input type="text" name="username" id="username" placeholder=" <?php echo $userProfile['username']; ?>">
 
-                    <label for="biography"> Biography </label>
-                    <input type="text" name="biography" id="biography" placeholder=" <?php echo $userProfile['biography']; ?>">
-                    <button type="submit"> Update profile</button>
+                        <label for="biography"> Biography </label>
+                        <input type="text" name="biography" id="biography" placeholder=" <?php echo $userProfile['biography']; ?>">
+                        <button type="submit"> Update profile</button>
 
 
-                </div>
-            </form>
+                    </div>
+                </form>
 
-            <form action="/users/settings.php" method="post" enctype="multipart/form/data">
+                <form action="/users/settings.php" method="post" enctype="multipart/form/data">
 
-                <div>
-                    <label for="avatar"> Choose profile image to upload </label>
-                    <input type="file" accept=".jpg, .jpeg, .png" name="avatar" id="avatar">
-                    <button type="submit" class="submit-button"> Update image </button>
-                </div>
+                    <div class="sign-up">
+                        <label for="avatar"> Choose profile image to upload. (Max 2MB) </label>
+                        <input type="file" accept=".jpg, .jpeg, .png" name="avatar" id="avatar">
+                        <button type="submit" class="submit-button"> Update image </button>
+                    </div>
 
-            </form>
+                </form>
 
-            <form action="/users/settings.php" method="post">
+                <form action="/users/settings.php" method="post">
+                    <div class="sign-up">
+                        <label for="email"> Change email </label>
+                        <input type="email" name="changeEmail" id="changeEmail" placeholder="<?php echo $_SESSION['user']['email']; ?>">
 
-                <label for="email"> Change email </label>
-                <input type="email" name="changeEmail" id="changeEmail" placeholder="<?php echo $userProfile['email']; ?>">
+                        <label for="password"> Current password </label>
+                        <input type="password" name="currentPwd" id="currentPwd" required>
 
-                <label for="password"> Current password </label>
-                <input type="password" name="currentPwd" id="currentPwd" required>
+                        <label for="password"> Change password </label>
+                        <input type="password" name="changePwd" id="changePwd">
 
-                <label for="password"> Change password </label>
-                <input type="password" name="changePwd" id="changePwd">
-
-                <label for="password"> Repeat new password </label>
-                <input type="password" name="repeatPwd" id="repeatPwd">
-
-            </form>
-        <?php endif; ?>
+                        <label for="password"> Repeat new password </label>
+                        <input type="password" name="repeatPwd" id="repeatPwd">
+                        <button type="submit" class="submit-button"> Update information</button>
+                    </div>
+                </form>
+            <?php endif; ?>
+            </section>
