@@ -1,7 +1,6 @@
  <?php require __DIR__ . '/app/autoload.php'; ?>
  <?php require __DIR__ . '/header.php'; ?>
 
- <?php $allPost = getAllPosts($pdo, $allPosts); ?>
 
 
  <section>
@@ -23,12 +22,14 @@
          <?php endif; ?>
      </artcile>
 
-     <?php
 
 
+     <?php $allPost = getAllPosts($pdo, $allPosts);
 
         foreach ($allPost as $post) : ?>
+         <?php $postId = $post['id'];  ?>
 
+         <?php $countComments = countComments($pdo, $postId); ?>
          <article class="home-page">
 
              <div class="posts-wrapper">
@@ -48,11 +49,16 @@
                  <div class="post-item-date">
                      <p> <?php echo $post['post_date']; ?> </p>
                  </div>
+                 <div class="post-item-date">
+                     <a href="comments.php?id=<?php echo $post['id']; ?> "> Comments </a>
+                     <?php echo $countComments; ?>
+                 </div>
              </div>
 
 
          </article>
      <?php endforeach; ?>
+
 
  </section>
 

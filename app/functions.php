@@ -200,6 +200,46 @@ function getUserPosts($pdo, int $profileId)
 
     return $userPosts;
 }
+
+
+/** Get comments from Posts  **/
+// WORK IN PROGRESS 
+function getPostsComments($pdo, int $postId)
+{
+    $_SESSION['errors'] = [];
+
+    $statement = $pdo->prepare("SELECT Comments.post_id, comment, user_id, comment_date FROM Comments
+    INNER JOIN Posts
+    ON Posts.id = Comments.post_id
+    WHERE Posts.id = :postsId
+    ORDER BY Comments.post_id DESC");
+
+    $statement->BindParam(':postsId', $postId, PDO::PARAM_INT);
+    $statement->execute();
+
+    $userComments = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    if (!$userComments) {
+        return $_SESSION['errors'][] = "No posts yet.";
+    }
+
+    return $userComments;
+}
+
+/** Count comments **/
+
+function countComments($pdo, $postId)
+{
+    $statement = $pdo->prepare('SELECT COUNT(*) FROM Comments WHERE post_id = :postId');
+
+    $statement->bindParam(':postId', $postId, PDO::PARAM_INT);
+    $statement->execute();
+
+    $comments = $statement->fetch(PDO::FETCH_ASSOC);
+
+    return $comments['COUNT(*)'];
+}
+
 /*
 SELECT users.id FROM users
 INNER JOIN posts
@@ -229,6 +269,22 @@ function getAllPosts($pdo, $allPosts)
     return $allPosts;
 }
 
+function getPostbyId($pdo, $postId)
+{
+    $_SESSION['errors'] = [];
+
+    $statement = $pdo->prepare("SELECT * FROM Posts WHERE id = :postId");
+    $statement->bindParam(':postId', $postId);
+    $statement->execute();
+
+    $post = $statement->fetch(PDO::FETCH_ASSOC);
+
+    if (!$post) {
+        return  $_SESSION['errors'][] = "Ops, could not find any post";
+    }
+
+    return $post;
+}
 
 /*** Upload photo  ***/
 
