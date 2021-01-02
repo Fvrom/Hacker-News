@@ -4,8 +4,8 @@
 <?php
 
 
-if (isset($_GET['username'])) {
-    $username = filter_var($_GET['username'], FILTER_SANITIZE_STRING);
+if (isset($_SESSION['user']['username'])) {
+    $username = filter_var($_SESSION['user']['username'], FILTER_SANITIZE_STRING);
 
     $userProfile = getUser($pdo, $username);
 
@@ -26,27 +26,30 @@ if (isset($_GET['username'])) {
                                 } ?> </p>
 
 
-        <?php
-        if ($profileId === $_SESSION['user']['id']) : ?>
+        <?php if (isset($_SESSION['user'])) : ?>
 
             <!-- check this, do i have to take out everything in the function for the email ? -->
             <section class="sign-up-form">
-                <?php
-                echo $_SESSION['checkEmail'];
-                ?>
+
 
                 <form action="/users/settings.php" method="post">
                     <div class="sign-up">
                         <label for="username"> Change username </label>
                         <input type="text" name="username" id="username" placeholder=" <?php echo $userProfile['username']; ?>">
-
-                        <label for="biography"> Biography </label>
-                        <input type="text" name="biography" id="biography" placeholder=" <?php echo $userProfile['biography']; ?>">
-                        <button type="submit"> Update profile</button>
-
+                        <button type="submit" class="submit-button"> Change username </button>
 
                     </div>
                 </form>
+
+                <form action="/users/settings.php" method="post">
+                    <div class="sign-up">
+                        <label for="biography"> Biography </label>
+                        <input type="text" name="biography" id="biography" placeholder=" <?php echo $userProfile['biography']; ?>">
+                        <button type="submit"> Update bio </button>
+
+                    </div>
+                </form>
+
 
                 <form action="/users/settings.php" method="post" enctype="multipart/form/data">
 
@@ -65,7 +68,10 @@ if (isset($_GET['username'])) {
                         <button type="submit" class="submit-button"> Change Email</button>
                     </div>
                     <div class="sign-up">
+                </form>
 
+                <form action="/users/settings.php" method="post">
+                    <div class="sign-up">
                         <label for="password"> Current password </label>
                         <input type="password" name="currentPwd" id="currentPwd" required>
 
@@ -77,9 +83,10 @@ if (isset($_GET['username'])) {
                         <button type="submit" class="submit-button"> Change password </button>
                     </div>
 
-                    <div class="sign-up">
-                        <a href="profile.php?username=<?php echo $_SESSION['user']['username']; ?>"> <?php echo $_SESSION['user']['username']; ?> "><button class="submit-button"> Back to your profile </button> </a>
-                    </div>
+
                 </form>
+                <div class="sign-up">
+                    <a href="profile.php?username=<?php echo $_SESSION['user']['username']; ?>"><button> Back to your profile </button> </a>
+                </div>
             <?php endif; ?>
             </section>

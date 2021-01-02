@@ -14,6 +14,7 @@ $username = $_SESSION['user']['username'];
 $_SESSION['successful'] = [];
 $_SESSION['errors'] = [];
 
+
 if (isset($_FILES['avatar'])) {
 
 
@@ -30,7 +31,7 @@ if (isset($_FILES['avatar'])) {
         redirect('/settings.php');
     }
 
-    if ($avatar['size'] > 2000000) {
+    if ($avatar['size'] > 2097152) {
         $_SESSION['errors'][] = "The image is too big. Maximum size 2MB.";
         redirect('/../settings.php');
     }
@@ -66,11 +67,11 @@ if (isset($_FILES['avatar'])) {
 }
 
 
-if (isset($_POST['username'], $_POST['biography'])) {
+if (isset($_POST['username'])) {
 
     $changeUsername = filter_var($_POST['username'], FILTER_SANITIZE_STRING);
 
-    $updateBiography = filter_var($_POST['biography'], FILTER_SANITIZE_STRING);
+    $checkUsernamePattern = preg_match('/^[a-zA-Z0-9]{5,15}$/', $changeUsername);
 
     usernameExists($pdo, $changeUsername);
     if ($_SESSION['checkuser']['username'] === $changeUsername) {
@@ -79,10 +80,15 @@ if (isset($_POST['username'], $_POST['biography'])) {
         redirect("../settings.php");
     }
 
-    $statement = $pdo->prepare('UPDATE Users SET username = :changeUsername, biography = :updateBiography WHERE id = :id');
+    if ($checkUsernamePattern === 0) {
+        $_SESSION['errors'][] = "Obs! Something when wrong with the username. Either it is too short, too long or you have used characters that are not allowed.
+        Username can only contain characters from a-z and numbers. The username should be at least 5 characters long and max 15 characters long.";
+        redirect("../signup.php");
+    }
+
+    $statement = $pdo->prepare('UPDATE Users SET username = :changeUsername WHERE id = :id');
     $statement->BindParam(':id', $id, PDO::PARAM_INT);
     $statement->BindParam(':changeUsername', $changeUsername, PDO::PARAM_STR);
-    $statement->BindParam(':updateBiography', $updateBiography, PDO::PARAM_STR);
     $statement->execute();
 
     if (!$statement) {
@@ -92,10 +98,31 @@ if (isset($_POST['username'], $_POST['biography'])) {
     $_SESSION['successful'][] = "Updated profile!";
 
     $_SESSION['user']['username'] = $changeUsername;
+
+
+    redirect('../settings.php');
+}
+
+if (isset($_POST['biography'])) {
+
+    $updateBiography = filter_var($_POST['biography'], FILTER_SANITIZE_STRING);
+
+    $statement = $pdo->prepare('UPDATE Users SET biography = :updateBiography WHERE id = :id');
+    $statement->BindParam(':id', $id, PDO::PARAM_INT);
+    $statement->BindParam(':updateBiography', $updateBiography, PDO::PARAM_STR);
+    $statement->execute();
+
+    if (!$statement) {
+        die(var_dump($pdo->errorInfo()));
+    }
+
+    $_SESSION['successful'][] = "Updated biography!";
+
     $_SESSION['user']['biography'] = $updateBiography;
 
     redirect('../settings.php');
 }
+
 
 if (isset($_POST['changeEmail'])) {
     $changeEmail = $_POST['changeEmail'];
@@ -103,7 +130,7 @@ if (isset($_POST['changeEmail'])) {
     // $email = $_SESSION['user']['email'];
 
     /* this is just to be extra sure, there is a safety in user input email in the form */
-    if (invalidEmail($email) !== false) {
+    if (invalidEmail($changeEmail) !== false) {
         $_SESSION['errors'][] = "Invalid Email, please try again.";
         redirect('../settings.php');
     }
