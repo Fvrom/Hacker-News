@@ -16,6 +16,8 @@ if (isset($_GET['id'])) {
 ?>
 
 
+
+
 <article class="home-page">
 
     <div class="posts-wrapper">
@@ -63,14 +65,23 @@ if (isset($_GET['id'])) {
 
 <article class="home-page">
 
-    <?php foreach ($userComments as $userComment) : ?>
-        <div class="posts-wrapper">
-            <div class="post-item">
+
+    <?php if (isset($_SESSION['errors'])) {  ?>
+        <p class="error-message"> <?php errorMessage();
+                                    unset($_SESSION['errors']); //delete error message after displayed
+                                } ?> </p>
 
 
-                <p> Commented by: <?php echo $userComment['username']; ?> </p>
-                <p> <?php echo $userComment['comment']; ?> </p>
-                <p> <?php echo $userComment['comment_date']; ?> </p>
-            </div>
-        </div>
-    <?php endforeach; ?>
+
+        <?php if (is_array($userComments)) : ?>
+            <?php foreach ($userComments as $userComment) : ?>
+                <div class="posts-wrapper">
+                    <div class="post-item">
+                        <p> Commented by: <?php echo $userComment['username']; ?> </p>
+                        <p> <?php echo $userComment['comment']; ?> </p>
+                        <p> <?php echo $userComment['comment_date']; ?> </p>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        <?php endif;
+        ?>

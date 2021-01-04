@@ -219,11 +219,15 @@ function getPostsComments($pdo, $postId)
 
     $userComments = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-    if (!$userComments) {
-        return $_SESSION['errors'][] = "No posts yet.";
-    }
 
-    return $userComments;
+
+    if (!$userComments) {
+        return $_SESSION['errors'][] = "No comments yet.";
+    } else {
+
+
+        return $userComments;
+    }
 }
 
 /** Count comments **/
