@@ -4,14 +4,13 @@
 
 if (isset($_GET['id'])) {
     $postId = $_GET['id'];
+    $postIdComment = $postId;
 
     $post = getPostbyId($pdo, $postId);
 
     $countComments = countComments($pdo, $postId);
 
     $userComments = getPostsComments($pdo, $postId);
-
-    // $userComments = getPostsComments($pdo, $postId);
 }
 
 ?>
@@ -40,28 +39,38 @@ if (isset($_GET['id'])) {
             <p> Comments <?php echo $countComments; ?> </p>
 
         </div>
+
+    </div>
 </article>
 
-</div>
+
+<?php if (isset($_SESSION['user'])) : ?>
+
+    <form action="/app/posts/commentStore.php" method="post">
+
+        <?php $_SESSION['postid'] = $postIdComment; ?>
+
+        <div class="posts-wrapper">
+            <label for="comment"> Comment </label>
+            <input type="text" name="comment" id="comment">
+            <button type="submit" class="submit-button"> Post comment </button>
+
+        </div>
+
+    </form>
+
+<?php endif; ?>
+
 <article class="home-page">
-    <div class="posts-wrapper">
-        <div class="post-item">
-            <?php foreach ($userComments as $userComment) : ?>
+
+    <?php foreach ($userComments as $userComment) : ?>
+        <div class="posts-wrapper">
+            <div class="post-item">
+
 
                 <p> Commented by: <?php echo $userComment['username']; ?> </p>
                 <p> <?php echo $userComment['comment']; ?> </p>
                 <p> <?php echo $userComment['comment_date']; ?> </p>
+            </div>
         </div>
-    </div>
-<?php endforeach; ?>
-
-
-
-
-<article>
-    <?php //foreach ($userComments as $userComment) : 
-    ?>
-
-</article>
-<?php //endforeach; 
-?>
+    <?php endforeach; ?>

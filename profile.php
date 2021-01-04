@@ -66,7 +66,7 @@
                     <div class="post-item">
                         <p class="post-description"> <?php echo $userPost['description']; ?> </p>
                     </div>
-                    <div class="post-item">
+                    ¢¢ <div class="post-item">
                         <a href="<?php echo $userPost['post_url'] ?> "> <?php echo $userPost['post_url']; ?> </a>
                     </div>
                     <div class="post-item-author">

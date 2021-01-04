@@ -204,7 +204,7 @@ function getUserPosts($pdo, int $profileId)
 
 /** Get comments from Posts  **/
 // WORK IN PROGRESS 
-function getPostsComments($pdo, int $postId)
+function getPostsComments($pdo, $postId)
 {
     $_SESSION['errors'] = [];
 
@@ -228,7 +228,7 @@ function getPostsComments($pdo, int $postId)
 
 /** Count comments **/
 
-function countComments($pdo, int $postId)
+function countComments($pdo, $postId)
 {
     $statement = $pdo->prepare('SELECT COUNT(*) FROM Comments WHERE post_id = :postId');
 

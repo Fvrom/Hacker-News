@@ -38,4 +38,5 @@ if (isset($_POST['title'], $_POST['description'], $_POST['url'])) {
     redirect("/index.php");
 } else {
     $_SESSION['errors'][] = "Ops, something went wrong! Try again.";
+    redirect("/submit,php");
 }
