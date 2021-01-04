@@ -208,13 +208,13 @@ function getPostsComments($pdo, int $postId)
 {
     $_SESSION['errors'] = [];
 
-    $statement = $pdo->prepare("SELECT Comments.post_id, comment, user_id, comment_date FROM Comments
-    INNER JOIN Posts
-    ON Posts.id = Comments.post_id
-    WHERE Posts.id = :postsId
+    $statement = $pdo->prepare("SELECT Comments.*, Users.username FROM Comments 
+    INNER JOIN Users 
+    ON Comments.user_id = Users.id
+    WHERE post_id = :postId
     ORDER BY Comments.post_id DESC");
 
-    $statement->BindParam(':postsId', $postId, PDO::PARAM_INT);
+    $statement->BindParam(':postId', $postId, PDO::PARAM_INT);
     $statement->execute();
 
     $userComments = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -228,7 +228,7 @@ function getPostsComments($pdo, int $postId)
 
 /** Count comments **/
 
-function countComments($pdo, $postId)
+function countComments($pdo, int $postId)
 {
     $statement = $pdo->prepare('SELECT COUNT(*) FROM Comments WHERE post_id = :postId');
 

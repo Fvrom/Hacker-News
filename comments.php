@@ -9,6 +9,8 @@ if (isset($_GET['id'])) {
 
     $countComments = countComments($pdo, $postId);
 
+    $userComments = getPostsComments($pdo, $postId);
+
     // $userComments = getPostsComments($pdo, $postId);
 }
 
@@ -38,10 +40,23 @@ if (isset($_GET['id'])) {
             <p> Comments <?php echo $countComments; ?> </p>
 
         </div>
-    </div>
-
-
 </article>
+
+</div>
+<article class="home-page">
+    <div class="posts-wrapper">
+        <div class="post-item">
+            <?php foreach ($userComments as $userComment) : ?>
+
+                <p> Commented by: <?php echo $userComment['username']; ?> </p>
+                <p> <?php echo $userComment['comment']; ?> </p>
+                <p> <?php echo $userComment['comment_date']; ?> </p>
+        </div>
+    </div>
+<?php endforeach; ?>
+
+
+
 
 <article>
     <?php //foreach ($userComments as $userComment) : 
