@@ -9,6 +9,7 @@ if (isset($_GET['id'])) {
     $post = getPostbyId($pdo, $postId);
 
     $countComments = countComments($pdo, $postId);
+    $countLikes = countLikes($pdo, $postId);
 
     $userComments = getPostsComments($pdo, $postId);
 }
@@ -41,6 +42,15 @@ if (isset($_GET['id'])) {
             <p> Comments <?php echo $countComments; ?> </p>
 
         </div>
+        <div>
+            <p> Likes
+                <?php echo $countLikes; ?> </p>
+            <form action="/app/posts/likes.php" method="post">
+
+                <input type="hidden" name="post-id" id="post-id" value="<?php echo $post['id'] ?>">
+                <button type="submit"> Like </button>
+            </form>
+        </div>
 
     </div>
 </article>
@@ -50,11 +60,13 @@ if (isset($_GET['id'])) {
 
     <form action="/app/posts/commentStore.php" method="post">
 
-        <?php $_SESSION['postid'] = $postIdComment; ?>
 
         <div class="posts-wrapper">
+            <input type="hidden" name="post-id" id="post-id" value="<?php echo $postId ?>">
             <label for="comment"> Comment </label>
+
             <input type="text" name="comment" id="comment">
+
             <button type="submit" class="submit-button"> Post comment </button>
 
         </div>

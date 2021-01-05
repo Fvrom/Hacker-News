@@ -30,6 +30,14 @@ if (isset($_POST['post-id'])) {
 
         redirect("/index");
     } else {
+        /* If user has liked and press like again it deletes the like */
+        $statement = $pdo->prepare("DELETE FROM Likes WHERE post_id = :postId AND user_id = :userId;");
+
+        $statement->BindParam(':postId', $postId);
+        $statement->BindParam(':userId', $userId);
+
+
+        $statement->execute();
         redirect("/index");
     }
 }

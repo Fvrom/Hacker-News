@@ -5,12 +5,12 @@ declare(strict_types=1);
 
 require __DIR__ . '/../autoload.php';
 
-if (isset($_POST['comment'])) {
+if (isset($_POST['comment'], $_POST['post-id'])) {
     $comment = $_POST['comment'];
 
     $userId = $_SESSION['user']['id'];
     $commentDate = date("Y/m/d");
-    $postId = $_SESSION['postid'];
+    $postId = $_POST['post-id'];
 
     $_SESSION['successful'] = [];
     $_SESSION['errors'] = [];
@@ -32,7 +32,7 @@ if (isset($_POST['comment'])) {
     $statement->execute();
 
     $_SESSION['successful'][] = "Your comment has successfully been posted!";
-    unset($_SESSION['postid']);
+
 
     redirect("/index");
 } else {

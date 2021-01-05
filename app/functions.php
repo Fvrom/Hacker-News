@@ -212,7 +212,7 @@ function getPostsComments($pdo, $postId)
     INNER JOIN Users 
     ON Comments.user_id = Users.id
     WHERE post_id = :postId
-    ORDER BY Comments.post_id DESC");
+    ORDER BY Comments.comment_date DESC");
 
     $statement->BindParam(':postId', $postId, PDO::PARAM_INT);
     $statement->execute();

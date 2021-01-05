@@ -59,9 +59,9 @@
                  <div>
                      <p> Likes
                          <?php echo $countLikes; ?> </p>
-                     <?php isLikedByUser($pdo, $postId, $userId); ?>
+
                      <form action="/app/posts/likes.php" method="post">
-                         <?php $_SESSION['postid'] = $post['id']; ?>
+
                          <input type="hidden" name="post-id" id="post-id" value="<?php echo $post['id'] ?>">
                          <button type="submit"> Like </button>
                      </form>
