@@ -203,7 +203,7 @@ function getUserPosts($pdo, int $profileId)
 
 
 /** Get comments from Posts  **/
-// WORK IN PROGRESS 
+
 function getPostsComments($pdo, $postId)
 {
     $_SESSION['errors'] = [];
@@ -328,5 +328,43 @@ function uploadImage($pdo, $avatar, $id)
     $statement = $pdo->prepare("UPDATE Users SET avatar = :avatar WHERE id = :id");
     $statement->BindParam(':avatar', $avatar['name'], PDO::PARAM_STR);
     $statement->BindParam(':id', $id, PDO::PARAM_INT);
+    $statement->execute();
+}
+
+
+
+/***** Update functions *****/
+
+/* update comments*/
+
+function updateComment($pdo, int $postId, int $userId, string $comment)
+{
+
+    $sql = "UPDATE Comments SET comment = :comment WHERE post_id = :postId AND user_id = :userId;";
+    $statement = $pdo->prepare($sql);
+    $statement->bindParam(':comment', $comment);
+    $statement->bindParam(':postId', $postId);
+    $statement->bindParam(':userId', $userId);
+
+    $statement->execute();
+}
+
+
+/* Update posts */
+
+
+
+
+/***** Delete functions *****/
+
+function deleteComment($pdo, int $postId, int $userId)
+{
+    /* If user has liked and press like again it deletes the like */
+    $statement = $pdo->prepare("DELETE FROM Comments WHERE post_id = :postId AND user_id = :userId;");
+
+    $statement->BindParam(':postId', $postId);
+    $statement->BindParam(':userId', $userId);
+
+
     $statement->execute();
 }

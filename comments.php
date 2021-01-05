@@ -62,7 +62,7 @@ if (isset($_GET['id'])) {
 
 
         <div class="posts-wrapper">
-            <input type="hidden" name="post-id" id="post-id" value="<?php echo $postId ?>">
+            <input type="hidden" name="post_id" id="post_id" value="<?php echo $postId ?>">
             <label for="comment"> Comment </label>
 
             <input type="text" name="comment" id="comment">
@@ -93,6 +93,18 @@ if (isset($_GET['id'])) {
                         <p> <?php echo $userComment['comment']; ?> </p>
                         <p> <?php echo $userComment['comment_date']; ?> </p>
                     </div>
+                </div>
+                <div>
+                    <?php if ($userComment['user_id'] === $_SESSION['user']['id']) : ?>
+                        <form action="/app/posts/update.php" method="post">
+                            <input type="hidden" name="edit_comment_id" id="edit_comment_id" value="<?php echo $userComment['user_id'] ?>">
+                            <button type="submit"> Edit comment </button>
+                        </form>
+                        <form action="/app/posts/update.php" method="post">
+                            <input type="hidden" name="delete_comment_id" id="delete_comment_id" value="<?php echo $userComment['user_id'] ?>">
+                            <button type="submit"> Delete comment </button>
+                        </form>
+                    <?php endif; ?>
                 </div>
             <?php endforeach; ?>
         <?php endif;
