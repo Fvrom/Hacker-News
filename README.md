@@ -41,11 +41,11 @@ Deadline: 13th January.
 - [x] Sign up
 - [ ] Dummy posts, ranked latest
 - [ ] Create posts, Delete posts, Edit posts
-- [ ] Profile page, able to see posts user has posted
+- [x] Profile page, able to see posts user has posted
 - [ ] Upload profile photo
-- [ ] Edit profile
+- [x] Edit profile
 - [ ] Comments, edit, delete
-- [ ] Upvotes
+- [x] Upvotes
 - [ ] 
 - [ ] 
 ### Extra features
