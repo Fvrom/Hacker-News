@@ -30,6 +30,8 @@
          <?php $postId = $post['id'];  ?>
 
          <?php $countComments = countComments($pdo, $postId); ?>
+         <?php $countLikes = countLikes($pdo, $postId); ?>
+
          <article class="home-page">
 
              <div class="posts-wrapper">
@@ -52,6 +54,17 @@
                  <div class="post-item-date">
                      <a href="comments.php?id=<?php echo $post['id']; ?> "> Comments </a>
                      <?php echo $countComments; ?>
+                 </div>
+
+                 <div>
+                     <p> Likes
+                         <?php echo $countLikes; ?> </p>
+                     <?php isLikedByUser($pdo, $postId, $userId); ?>
+                     <form action="/app/posts/likes.php" method="post">
+                         <?php $_SESSION['postid'] = $post['id']; ?>
+                         <input type="hidden" name="post-id" id="post-id" value="<?php echo $post['id'] ?>">
+                         <button type="submit"> Like </button>
+                     </form>
                  </div>
              </div>
 

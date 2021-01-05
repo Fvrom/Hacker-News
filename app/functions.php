@@ -244,6 +244,36 @@ function countComments($pdo, $postId)
     return $comments['COUNT(*)'];
 }
 
+
+/** Likes **/
+
+function countLikes($pdo, $postId)
+{
+    $statement = $pdo->prepare('SELECT COUNT(*) FROM Likes WHERE post_id = :postId');
+    $statement->bindParam(':postId', $postId, PDO::PARAM_INT);
+    $statement->execute();
+
+    $likes = $statement->fetch(PDO::FETCH_ASSOC);
+
+    return $likes['COUNT(*)'];
+}
+
+function isLikedByUser($pdo, $postId, $userId)
+{
+
+    $statement = $pdo->prepare('SELECT * FROM Likes WHERE post_id = :postId
+    AND user_id = :userId;');
+
+    $statement->bindParam(':postId', $postId);
+    $statement->bindParam(':userId', $userId);
+
+    $statement->execute();
+
+    $isLikedByUser = $statement->fetch(PDO::FETCH_ASSOC);
+
+    return $isLikedByUser;
+}
+
 /*
 SELECT users.id FROM users
 INNER JOIN posts
