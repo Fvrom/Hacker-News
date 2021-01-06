@@ -55,38 +55,39 @@
 
 
         <h2 class="u-posts"> Posts </h2>
+        <?php if (is_array($userPosts)) : ?>
+            <?php foreach ($userPosts as $userPost) : ?>
 
-        <?php foreach ($userPosts as $userPost) : ?>
+                <article class="user-posts">
+                    <div class="posts-wrapper">
+                        <div class="post-item">
+                            <h3 class="post-title"> <?php echo $userPost['title']; ?> </h3>
+                        </div>
+                        <div class="post-item">
+                            <p class="post-description"> <?php echo $userPost['description']; ?> </p>
+                        </div>
+                        <div class="post-item">
+                            <a href="<?php echo $userPost['post_url'] ?> "> <?php echo $userPost['post_url']; ?> </a>
+                        </div>
+                        <div class="post-item-author">
+                            <p> Posted by: <?php echo $userPost['user_id']; ?> </p>
 
-            <article class="user-posts">
-                <div class="posts-wrapper">
-                    <div class="post-item">
-                        <h3 class="post-title"> <?php echo $userPost['title']; ?> </h3>
+                        </div>
+                        <div class="post-item-date">
+                            <p> <?php echo $userPost['post_date']; ?> </p>
+                        </div>
                     </div>
-                    <div class="post-item">
-                        <p class="post-description"> <?php echo $userPost['description']; ?> </p>
-                    </div>
-                    ¢¢ <div class="post-item">
-                        <a href="<?php echo $userPost['post_url'] ?> "> <?php echo $userPost['post_url']; ?> </a>
-                    </div>
-                    <div class="post-item-author">
-                        <p> Posted by: <?php echo $userPost['user_id']; ?> </p>
+                    <?php if ($profileId === $_SESSION['user']['id']) : ?>
 
-                    </div>
-                    <div class="post-item-date">
-                        <p> <?php echo $userPost['post_date']; ?> </p>
-                    </div>
-                </div>
-                <?php if ($profileId === $_SESSION['user']['id']) : ?>
+                        <button class="edit-post">Edit post</button>
 
-                    <button class="edit-post">Edit post</button>
+                    <?php endif; ?>
 
-                <?php endif; ?>
-
-            </article>
+                </article>
 
 
-        <?php endforeach; ?>
+            <?php endforeach; ?>
+        <?php endif; ?>
 
 
 

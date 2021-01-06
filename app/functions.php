@@ -337,12 +337,13 @@ function uploadImage($pdo, $avatar, $id)
 
 /* update comments*/
 
-function updateComment($pdo, int $postId, int $userId, string $comment)
+function updateComment($pdo, int $postId, int $userId, int $commentId, string $comment)
 {
 
-    $sql = "UPDATE Comments SET comment = :comment WHERE post_id = :postId AND user_id = :userId;";
+    $sql = "UPDATE Comments SET comment = :comment WHERE comment_id = :commentId AND post_id = :postId AND user_id = :userId;";
     $statement = $pdo->prepare($sql);
     $statement->bindParam(':comment', $comment);
+    $statement->bindParam(':commentId', $commentId);
     $statement->bindParam(':postId', $postId);
     $statement->bindParam(':userId', $userId);
 
@@ -357,13 +358,15 @@ function updateComment($pdo, int $postId, int $userId, string $comment)
 
 /***** Delete functions *****/
 
-function deleteComment($pdo, int $postId, int $userId)
+function deleteComment($pdo, int $postId, int $userId, int $commentId)
 {
     /* If user has liked and press like again it deletes the like */
-    $statement = $pdo->prepare("DELETE FROM Comments WHERE post_id = :postId AND user_id = :userId;");
+    $statement = $pdo->prepare("DELETE FROM Comments WHERE post_id = :postId AND comment_id = :commentId AND user_id = :userId;");
 
     $statement->BindParam(':postId', $postId);
+    $statement->bindParam(':commentId', $commentId);
     $statement->BindParam(':userId', $userId);
+
 
 
     $statement->execute();

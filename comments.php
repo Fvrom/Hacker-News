@@ -43,6 +43,7 @@ if (isset($_GET['id'])) {
 
         </div>
         <div>
+
             <p> Likes
                 <?php echo $countLikes; ?> </p>
             <form action="/app/posts/likes.php" method="post">
@@ -92,16 +93,31 @@ if (isset($_GET['id'])) {
                         <p> Commented by: <?php echo $userComment['username']; ?> </p>
                         <p> <?php echo $userComment['comment']; ?> </p>
                         <p> <?php echo $userComment['comment_date']; ?> </p>
+
                     </div>
                 </div>
                 <div>
                     <?php if ($userComment['user_id'] === $_SESSION['user']['id']) : ?>
+
+                        <button> Edit Comment </button>
+
                         <form action="/app/posts/update.php" method="post">
-                            <input type="hidden" name="edit_comment_id" id="edit_comment_id" value="<?php echo $userComment['user_id'] ?>">
-                            <button type="submit"> Edit comment </button>
+                            <!-- This is to be hidden. Gets visable when user clicks on Edit comment -->
+                            <input type="text" name="comment" id="comment" placeholder=" <?php echo $userComment['comment']; ?>">
+
+                            <input type="hidden" name="comment_id" id="comment_id" value="<?php echo $userComment['comment_id'] ?>">
+                            <input type="hidden" name="user_comment_id" id="user_comment_id" value="<?php echo $userComment['user_id'] ?>">
+                            <input type="hidden" name="post_id" id="post_id" value="<?php echo $post['id']; ?>">
+                            <button type="submit"> Update comment </button>
+                            <!-- end of hidden -->
+
                         </form>
-                        <form action="/app/posts/update.php" method="post">
-                            <input type="hidden" name="delete_comment_id" id="delete_comment_id" value="<?php echo $userComment['user_id'] ?>">
+                        <form action="/app/posts/delete.php" method="post">
+                            <input type="hidden" name="user_id_delete_comment" id="user_id_delete_comment" value="<?php echo $userComment['user_id'] ?>">
+                            <input type="hidden" name="comment_id" id="comment_id" value="<?php echo $userComment['comment_id'] ?>">
+                            <input type="hidden" name="post_id" id="post_id" value="<?php echo $post['id']; ?>">
+
+
                             <button type="submit"> Delete comment </button>
                         </form>
                     <?php endif; ?>

@@ -14,12 +14,17 @@
                                                 unset($_SESSION['successful']); //delete error message after displayed
                                             } ?> </p>
          </div>
+         <?php if (isset($_SESSION['errors'])) {  ?>
+             <p class="error-message"> <?php errorMessage();
+                                        unset($_SESSION['errors']); //delete error message after displayed
+                                    } ?> </p>
 
-         <?php if (isset($_SESSION['user'])) : ?>
-             <p> You are logged in,
-                 <?php echo $_SESSION['user']['first_name']; ?> ! </p>
 
-         <?php endif; ?>
+             <?php if (isset($_SESSION['user'])) : ?>
+                 <p> You are logged in,
+                     <?php echo $_SESSION['user']['first_name']; ?> ! </p>
+
+             <?php endif; ?>
      </artcile>
 
 
