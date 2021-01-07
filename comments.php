@@ -106,7 +106,7 @@ if (isset($_GET['id'])) {
                             <input type="text" name="comment" id="comment" placeholder=" <?php echo $userComment['comment']; ?>">
 
                             <input type="hidden" name="comment_id" id="comment_id" value="<?php echo $userComment['comment_id'] ?>">
-                            <input type="hidden" name="user_comment_id" id="user_comment_id" value="<?php echo $userComment['user_id'] ?>">
+
                             <input type="hidden" name="post_id" id="post_id" value="<?php echo $post['id']; ?>">
                             <button type="submit"> Update comment </button>
                             <!-- end of hidden -->

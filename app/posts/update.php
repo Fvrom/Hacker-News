@@ -13,10 +13,10 @@ $_SESSION['errors'] = [];
 
 /* Update comments */
 
-if (isset($_POST['comment'], $_POST['post_id'], $_POST['comment_id'], $_POST['user_comment_id'])) {
+if (isset($_POST['comment'], $_POST['post_id'], $_POST['comment_id'])) {
     $postId = (int)$_POST['post_id'];
     $commentId = (int)$_POST['comment_id'];
-    $userId =  (int)$_POST['user_comment_id'];
+    $userId =  (int)$_SESSION['user']['id'];
     $comment = $_POST['comment'];
 
 

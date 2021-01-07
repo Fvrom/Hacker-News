@@ -111,7 +111,7 @@
                         <form class="form-hidden" action="/app/posts/update.php" method="post">
 
                             <input type="hidden" name="post_id_edit" id="post_id_edit" value="<?php echo $postId ?>">
-                            <input type="hidden" name="user_id" id="user_id" value="<?php echo $profileId ?>">
+
                             <label for="title"> Title </label>
                             <input type="text" name="title" id="title" placeholder="<?php echo $userPost['title']; ?> " required>
 
@@ -122,6 +122,14 @@
                             <input type="url" name="url" id="url" placeholder=" <?php echo $userPost['post_url']; ?>"" required>
 
                             <button type=" submit"> Update post </button>
+                        </form>
+
+                        <form class="form-hidden" action="/app/posts/delete.php" method="post">
+
+                            <input type="hidden" name="post_id_delete" id="post_id_delete" value="<?php echo $postId ?>">
+
+
+                            <button type="submit"> Delete post </button>
                         </form>
 
 

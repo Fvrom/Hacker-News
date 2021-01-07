@@ -375,15 +375,32 @@ function updatePost($pdo, int $postId, int $userId, string $title, string $descr
 
 /***** Delete functions *****/
 
+/* Delete comment */
+
 function deleteComment($pdo, int $postId, int $userId, int $commentId)
 {
-    /* If user has liked and press like again it deletes the like */
+
     $statement = $pdo->prepare("DELETE FROM Comments WHERE post_id = :postId AND comment_id = :commentId AND user_id = :userId;");
 
     $statement->BindParam(':postId', $postId);
     $statement->bindParam(':commentId', $commentId);
     $statement->BindParam(':userId', $userId);
 
+
+
+    $statement->execute();
+}
+
+
+/* Delete post */
+
+function deletePost($pdo, int $postId, int $userId)
+{
+
+    $statement = $pdo->prepare("DELETE FROM Posts WHERE post_id = :postId AND user_id = :userId;");
+
+    $statement->BindParam(':postId', $postId);
+    $statement->BindParam(':userId', $userId);
 
 
     $statement->execute();
