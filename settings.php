@@ -86,7 +86,7 @@ if (isset($_SESSION['user']['username'])) {
 
                 </form>
                 <div class="sign-up">
-                    <a href="profile.php?username=<?php echo $_SESSION['user']['username']; ?>"><button> Back to your profile </button> </a>
+                    <button> <a href="profile.php?username=<?php echo $_SESSION['user']['username']; ?>"> Back to your profile </a> </button>
                 </div>
             <?php endif; ?>
             </section>

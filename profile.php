@@ -57,8 +57,16 @@
         <h2 class="u-posts"> Posts </h2>
         <?php if (is_array($userPosts)) : ?>
             <?php foreach ($userPosts as $userPost) : ?>
+                <?php $postId = $userPost['id'];
+
+                $countLikes = countLikes($pdo, $postId);
+                $countComments = countComments($pdo, $postId);
+                $userComments = getPostsComments($pdo, $postId);
+                ?>
+
 
                 <article class="user-posts">
+
                     <div class="posts-wrapper">
                         <div class="post-item">
                             <h3 class="post-title"> <?php echo $userPost['title']; ?> </h3>
@@ -77,9 +85,45 @@
                             <p> <?php echo $userPost['post_date']; ?> </p>
                         </div>
                     </div>
+                    <div class="post-item-date">
+                        <a href="comments.php?id=<?php echo $postId; ?> "> Comments </a>
+                        <?php echo $countComments; ?>
+                    </div>
+
+                    <div>
+
+                        <p> Likes
+                            <?php echo $countLikes; ?> </p>
+                        <form action="/app/posts/likes.php" method="post">
+
+                            <input type="hidden" name="post-id" id="post-id" value="<?php echo $postId ?>">
+                            <button type="submit"> Like </button>
+                        </form>
+                    </div>
+
+
+
                     <?php if ($profileId === $_SESSION['user']['id']) : ?>
 
                         <button class="edit-post">Edit post</button>
+
+                        <!-- This is gonna be hidden until button clicked -->
+                        <form class="form-hidden" action="/app/posts/update.php" method="post">
+
+                            <input type="hidden" name="post_id_edit" id="post_id_edit" value="<?php echo $postId ?>">
+                            <input type="hidden" name="user_id" id="user_id" value="<?php echo $profileId ?>">
+                            <label for="title"> Title </label>
+                            <input type="text" name="title" id="title" placeholder="<?php echo $userPost['title']; ?> " required>
+
+                            <label for="description"> Description </label>
+                            <input type="text" name="description" id="description" placeholder="<?php echo $userPost['description']; ?>" required>
+
+                            <label for="url"> Url to the post </label>
+                            <input type="url" name="url" id="url" placeholder=" <?php echo $userPost['post_url']; ?>"" required>
+
+                            <button type=" submit"> Update post </button>
+                        </form>
+
 
                     <?php endif; ?>
 

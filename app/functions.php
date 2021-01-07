@@ -353,6 +353,23 @@ function updateComment($pdo, int $postId, int $userId, int $commentId, string $c
 
 /* Update posts */
 
+function updatePost($pdo, int $postId, int $userId, string $title, string $description, string $url)
+{
+
+    $sql = "UPDATE Posts SET title = :title,
+    description = :description, 
+    post_url = :url
+    WHERE id = :postId AND user_id = :userId;";
+    $statement = $pdo->prepare($sql);
+    $statement->bindParam(':title', $title);
+    $statement->bindParam(':description', $description);
+    $statement->bindParam(':url', $url);
+    $statement->bindParam(':postId', $postId);
+    $statement->bindParam(':userId', $userId);
+
+    $statement->execute();
+}
+
 
 
 
