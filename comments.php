@@ -20,6 +20,13 @@ if (isset($_GET['id'])) {
 
 
 <article class="home-page">
+    <div class="successful-container">
+        <?php if (isset($_SESSION['successful'])) {  ?>
+            <p class="successful-message"> <?php successfulMessage();
+                                            unset($_SESSION['successful']); //delete error message after displayed
+                                        } ?> </p>
+    </div>
+
 
     <div class="posts-wrapper">
         <div class="post-item">

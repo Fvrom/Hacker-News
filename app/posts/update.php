@@ -24,10 +24,10 @@ if (isset($_POST['comment'], $_POST['post_id'], $_POST['comment_id'])) {
 
     $_SESSION['successful'][] = "Your comment has been updated";
 
-    redirect('/index.php');
+    redirect("/../comments.php?id=$postId");
 } else {
     $_SESSION['errors'][] = "Something went wrong trying to update your comment!";
-    redirect('/index.php');
+    redirect("/../comments.php?id=$postId");
 }
 
 
@@ -45,8 +45,8 @@ if (isset($_POST['post_id_edit'], $_POST['user_id'], $_POST['title'], $_POST['de
 
     $_SESSION['successful'][] = "Your post has been updated";
 
-    redirect('/index.php');
+    redirect("/../comments.php?id=$postId");
 } else {
     $_SESSION['errors'][] = "Something went wrong trying to update your post!";
-    redirect('/index.php');
+    redirect("/../comments.php?id=$postId");
 }

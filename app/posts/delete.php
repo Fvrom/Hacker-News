@@ -21,23 +21,24 @@ if (isset($_POST['post_id'], $_POST['comment_id'], $_POST['user_id_delete_commen
 
     $_SESSION['successful'][] = "Your comment has been deleted";
 
-    redirect('/index.php');
-} else {
+    redirect("/../comments.php?id=$postId");
+} /* else {
     $_SESSION['errors'][] = "Something went wrong trying to delete your comment!";
-    redirect('/index.php');
+    redirect("/../comments.php?id=$postId");
 }
-
+*/
 
 if (isset($_POST['post_id_delete'])) {
     $userId = (int)$_SESSION['user']['id'];
-    $postId = (int)$_POST['post_id-delete'];
+    $postId = (int)$_POST['post_id_delete'];
 
     deletePost($pdo, $postId, $userId);
 
+
     $_SESSION['successful'][] = "Your post has been deleted";
 
-    redirect('/index.php');
+    redirect("/index.php");
 } else {
     $_SESSION['errors'][] = "Something went wrong trying to delete your post!";
-    redirect('/index.php');
+    redirect("/index.php");
 }

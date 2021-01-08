@@ -396,12 +396,34 @@ function deleteComment($pdo, int $postId, int $userId, int $commentId)
 
 function deletePost($pdo, int $postId, int $userId)
 {
+    $statement = $pdo->prepare("DELETE FROM Posts WHERE id = :postId AND user_id = :userId;
+    DELETE FROM Comments WHERE post_id = :postId;
+    DELETE FROM Likes WHERE post_id = :postId; 
+    ");
 
-    $statement = $pdo->prepare("DELETE FROM Posts WHERE post_id = :postId AND user_id = :userId;");
-
-    $statement->BindParam(':postId', $postId);
-    $statement->BindParam(':userId', $userId);
+    $statement->bindParam(':postId', $postId, PDO::PARAM_INT);
+    $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
 
 
     $statement->execute();
+    if (!$statement) {
+        die(var_dump($pdo->errorInfo()));
+    }
+    /* 
+    $statement = $pdo->prepare("DELETE FROM Comments WHERE post_id = :postId;");
+    $statement->BindParam(':postId', $postId, PDO::PARAM_INT);
+
+    $statement->execute();
+    if (!$statement) {
+        die(var_dump($pdo->errorInfo()));
+    }
+
+    $statement = $pdo->prepare("DELETE FROM Likes WHERE post_id = :postId;");
+    $statement->BindParam(':postId', $postId, PDO::PARAM_INT);
+
+    $statement->execute();
+
+    if (!$statement) {
+        die(var_dump($pdo->errorInfo()));
+    } */
 }

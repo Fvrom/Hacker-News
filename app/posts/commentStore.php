@@ -9,7 +9,7 @@ if (isset($_POST['comment'], $_POST['post_id'])) {
     $comment = $_POST['comment'];
 
     $userId = $_SESSION['user']['id'];
-    $commentDate = date("Y/m/d");
+    $commentDate = date("Y-M-D H:M");  //("Y-m-d H:i");
     $postId = $_POST['post_id'];
 
     $_SESSION['successful'] = [];
@@ -34,7 +34,7 @@ if (isset($_POST['comment'], $_POST['post_id'])) {
     $_SESSION['successful'][] = "Your comment has successfully been posted!";
 
 
-    redirect("/index");
+    redirect("/../comments.php?id=$postId");
 } else {
     $_SESSION['errors'][] = "Ops, something went wrong! Try again.";
     redirect("/index.php");
