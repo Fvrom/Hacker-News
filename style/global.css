@@ -1,17 +1,25 @@
 :root {
+  --color-background: #121212;
   --color-light-shade-grey: #929292;
-  --color-header: #797979;
+  --color-header: #2a2a2a;
   --color-medium-shade-grey: #494949;
   --color-darkermedium-shade-grey: #242424;
   --color-dark-shade-grey: #111110b3;
 }
 
 * {
+  font-family: "IBM Plex Sans", sans-serif;
   box-sizing: border-box;
   font-size: 10px;
+  color: whitesmoke;
 }
 
 body {
   margin: 0;
   padding: 0;
+  background: var(--color-background);
+}
+
+button {
+  color: var(--color-medium-shade-grey);
 }

@@ -7,7 +7,7 @@
                 <a href="index.php">Home</a>
             </li>
             <li class="nav-item">
-                <a href="newest.php">Trending</a>
+                <a href="trending.php">Trending</a>
             </li>
             <li class="nav-item">
                 <a href="newestcomments.php">Comments</a>

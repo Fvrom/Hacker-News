@@ -11,144 +11,151 @@
                                             unset($_SESSION['successful']); //delete error message after displayed
                                         } ?> </p>
 
-            <?php
+    </div>
+    <?php
+    if (isset($_GET['username'])) {
+        $username = filter_var($_GET['username'], FILTER_SANITIZE_STRING);
+
+        $userProfile = getUser($pdo, $username);
+
+        $profileId = $userProfile['id'];
+        $userPosts = getUserPosts($pdo, $profileId);
+    }
+
+    ?>
 
 
-            if (isset($_GET['username'])) {
-                $username = filter_var($_GET['username'], FILTER_SANITIZE_STRING);
-
-                $userProfile = getUser($pdo, $username);
-
-                $profileId = $userProfile['id'];
-                $userPosts = getUserPosts($pdo, $profileId);
-            }
-
-            ?>
 
 
+    <section>
 
+        <article class="profile-container">
+            <div class="profile-page">
+                <div class="profile-img-container">
+                    <!-- <img src="<?php $userProfile['avatar']; ?>" class="profile-img" alt="User profile"> -->
+                </div>
+                <h1 class="profile-title"><?php echo $userProfile['username']; ?> </h1>
+                <p class="biography"> <?php echo $userProfile['biography']; ?> </p>
+            </div>
 
-            <section>
+            <?php // Check if user logged in is the owner of this profile page. 
+            // If it is, show button for settings. 
 
-                <article class="profile-container">
-                    <div class="profile-page">
-                        <div class="profile-img-container">
-                            <!-- <img src="<?php $userProfile['avatar']; ?>" class="profile-img" alt="User profile"> -->
-                        </div>
-                        <h1 class="profile-title"><?php echo $userProfile['username']; ?> </h1>
-                        <p class="biography"> <?php echo $userProfile['biography']; ?> </p>
-                    </div>
+            if ($profileId === $_SESSION['user']['id']) : ?>
 
-                    <?php // Check if user logged in is the owner of this profile page. 
-                    // If it is, show button for settings. 
+                <a href="settings.php?username=<?php echo $_SESSION['user']['username']; ?> "> <button class="edit-profile">Edit profile</button> </a>
 
-                    if ($profileId === $_SESSION['user']['id']) : ?>
+            <?php endif; ?>
+        </article>
 
-                        <a href="settings.php?username=<?php echo $_SESSION['user']['username']; ?> "> <button class="edit-profile">Edit profile</button> </a>
-
-                    <?php endif; ?>
-                </article>
-
-                <!-- TO DO: 
+        <!-- TO DO: 
         Javascript eventlistener for button. Redirect to settings page. 
         Settings page: upload profle photo
         Edit bio, username . 
             -->
 
+        <h2 class="u-posts"> Posts </h2>
+        <?php if (is_array($userPosts)) : ?>
+            <?php foreach ($userPosts as $userPost) : ?>
+                <?php $postId = $userPost['id'];
+
+                $countLikes = countLikes($pdo, $postId);
+                $countComments = countComments($pdo, $postId);
+                $userComments = getPostsComments($pdo, $postId);
+                ?>
+
+                <article class="home-page">
+
+                    <div class="posts-wrapper">
+                        <div class="post-item-author">
+                            <p> By: <?php echo $userPost['user_id']; ?> ,
+
+                                <?php echo $userPost['post_date']; ?> </p>
 
 
+                        </div>
+                        <div class="post-item">
+                            <h3 class="post-title"> <?php echo $userPost['title']; ?> </h3>
+                        </div>
+                        <div class="post-item">
+                            <p class="post-description"> <?php echo $userPost['description']; ?> </p>
+                        </div>
+                        <div class="post-item-url">
+                            <p> ( <a href="<?php echo $post['post_url'] ?> "> <?php echo $userPost['post_url']; ?> </a> )
+                            <p>
+                        </div>
 
 
-                <h2 class="u-posts"> Posts </h2>
-                <?php if (is_array($userPosts)) : ?>
-                    <?php foreach ($userPosts as $userPost) : ?>
-                        <?php $postId = $userPost['id'];
+                        <div class="info-wrapper">
 
-                        $countLikes = countLikes($pdo, $postId);
-                        $countComments = countComments($pdo, $postId);
-                        $userComments = getPostsComments($pdo, $postId);
-                        ?>
+                            <div class="post-item-comment">
+                                <a href="comments.php?id=<?php echo $post['id']; ?> "> <?php echo $countComments; ?> Comments </a>
 
-
-                        <article class="user-posts">
-
-                            <div class="posts-wrapper">
-                                <div class="post-item">
-                                    <h3 class="post-title"> <?php echo $userPost['title']; ?> </h3>
-                                </div>
-                                <div class="post-item">
-                                    <p class="post-description"> <?php echo $userPost['description']; ?> </p>
-                                </div>
-                                <div class="post-item">
-                                    <a href="<?php echo $userPost['post_url'] ?> "> <?php echo $userPost['post_url']; ?> </a>
-                                </div>
-                                <div class="post-item-author">
-                                    <p> Posted by: <?php echo $userPost['user_id']; ?> </p>
-
-                                </div>
-                                <div class="post-item-date">
-                                    <p> <?php echo $userPost['post_date']; ?> </p>
-                                </div>
                             </div>
-                            <div class="post-item-date">
-                                <a href="comments.php?id=<?php echo $postId; ?> "> Comments </a>
-                                <?php echo $countComments; ?>
-                            </div>
 
-                            <div>
 
-                                <p> Likes
-                                    <?php echo $countLikes; ?> </p>
+
+
+                            <div class="post-item-like">
                                 <form action="/app/posts/likes.php" method="post">
+                                    <p> <?php echo $countLikes; ?> Likes
 
-                                    <input type="hidden" name="post-id" id="post-id" value="<?php echo $postId ?>">
-                                    <button type="submit"> Like </button>
+
+
+                                        <input type="hidden" name="post-id" id="post-id" value="<?php echo $post['id'] ?>">
+                                        <button type="submit"> Like </button>
+                                    </p>
                                 </form>
                             </div>
+                        </div>
 
 
 
-                            <?php if ($profileId === $_SESSION['user']['id']) : ?>
 
+                        <?php if ($profileId === $_SESSION['user']['id']) : ?>
+                            <div class="edit-wrapper">
                                 <button class="edit-post">Edit post</button>
 
                                 <!-- This is gonna be hidden until button clicked -->
                                 <form class="form-hidden" action="/app/posts/update.php" method="post">
 
                                     <input type="hidden" name="post_id_edit" id="post_id_edit" value="<?php echo $postId ?>">
-
-                                    <label for="title"> Title </label>
-                                    <input type="text" name="title" id="title" placeholder="<?php echo $userPost['title']; ?> " required>
-
-                                    <label for="description"> Description </label>
-                                    <input type="text" name="description" id="description" placeholder="<?php echo $userPost['description']; ?>" required>
-
-                                    <label for="url"> Url to the post </label>
-                                    <input type="url" name="url" id="url" placeholder=" <?php echo $userPost['post_url']; ?>"" required>
-
+                                    <div>
+                                        <label for="title"> Title </label>
+                                        <input type="text" name="title" id="title" placeholder="<?php echo $userPost['title']; ?> " required>
+                                    </div>
+                                    <div>
+                                        <label for="description"> Description </label>
+                                        <input type="text" name="description" id="description" placeholder="<?php echo $userPost['description']; ?>" required>
+                                    </div>
+                                    <div>
+                                        <label for="url"> Url to the post </label>
+                                        <input type="url" name="url" id="url" placeholder=" <?php echo $userPost['post_url']; ?>"" required>
+                                    </div>
                             <button type=" submit"> Update post </button>
                                 </form>
 
                                 <form class="form-hidden" action="/app/posts/delete.php" method="post">
-                                    <?php echo $postId; ?>
+
                                     <input type="hidden" name="post_id_delete" id="post_id_delete" value="<?php echo $postId ?>">
 
 
                                     <button type="submit"> Delete post </button>
                                 </form>
-
-
-                            <?php endif; ?>
-
-                        </article>
-
-
-                    <?php endforeach; ?>
+                            </div>
+                    </div>
+                    </div>
                 <?php endif; ?>
 
+                </article>
 
 
-            </section>
+            <?php endforeach; ?>
+        <?php endif; ?>
 
 
-            <?php require __DIR__ . '/footer.php'; ?>
+
+    </section>
+
+
+    <?php require __DIR__ . '/footer.php'; ?>

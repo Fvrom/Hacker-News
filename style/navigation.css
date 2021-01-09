@@ -8,6 +8,7 @@ header {
 
 .title {
   font-size: 2rem;
+  color: var(--color-light-shade-grey);
   margin-left: 1rem;
   padding: 0;
   align-self: center;

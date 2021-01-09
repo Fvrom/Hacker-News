@@ -5,8 +5,8 @@
 
  <section>
 
-     <artcile class="home-page">
-         <p>Home page</p>
+     <article class="home-page">
+
 
          <div class="successful-container">
              <?php if (isset($_SESSION['successful'])) {  ?>
@@ -22,10 +22,10 @@
 
              <?php if (isset($_SESSION['user'])) : ?>
                  <p> You are logged in,
-                     <?php echo $_SESSION['user']['first_name']; ?> ! </p>
+                     <?php echo $_SESSION['user']['username']; ?> ! </p>
 
              <?php endif; ?>
-     </artcile>
+     </article>
 
 
 
@@ -40,36 +40,46 @@
          <article class="home-page">
 
              <div class="posts-wrapper">
+                 <div class="post-item-author">
+                     <p> By: <?php echo $post['user_id']; ?> ,
+
+                         <?php echo $post['post_date']; ?> </p>
+
+
+                 </div>
                  <div class="post-item">
                      <h3 class="post-title"> <?php echo $post['title']; ?> </h3>
                  </div>
                  <div class="post-item">
                      <p class="post-description"> <?php echo $post['description']; ?> </p>
                  </div>
-                 <div class="post-item">
-                     <a href="<?php echo $post['post_url'] ?> "> <?php echo $post['post_url']; ?> </a>
-                 </div>
-                 <div class="post-item-author">
-                     <p> Posted by: <?php echo $post['user_id']; ?> </p>
-
-                 </div>
-                 <div class="post-item-date">
-                     <p> <?php echo $post['post_date']; ?> </p>
-                 </div>
-                 <div class="post-item-date">
-                     <a href="comments.php?id=<?php echo $post['id']; ?> "> Comments </a>
-                     <?php echo $countComments; ?>
+                 <div class="post-item-url">
+                     <p> ( <a href="<?php echo $post['post_url'] ?> "> <?php echo $post['post_url']; ?> </a> )
+                     <p>
                  </div>
 
-                 <div>
-                     <p> Likes
-                         <?php echo $countLikes; ?> </p>
 
-                     <form action="/app/posts/likes.php" method="post">
+                 <div class="info-wrapper">
 
-                         <input type="hidden" name="post-id" id="post-id" value="<?php echo $post['id'] ?>">
-                         <button type="submit"> Like </button>
-                     </form>
+                     <div class="post-item-comment">
+                         <a href="comments.php?id=<?php echo $post['id']; ?> "> <?php echo $countComments; ?> Comments </a>
+
+                     </div>
+
+
+
+
+                     <div class="post-item-like">
+                         <form action="/app/posts/likes.php" method="post">
+                             <p> <?php echo $countLikes; ?> Likes
+
+
+
+                                 <input type="hidden" name="post-id" id="post-id" value="<?php echo $post['id'] ?>">
+                                 <button type="submit"> Like </button>
+                             </p>
+                         </form>
+                     </div>
                  </div>
              </div>
 

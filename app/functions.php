@@ -258,6 +258,21 @@ function countLikes($pdo, $postId)
     return $likes['COUNT(*)'];
 }
 
+function topLikes($pdo)
+{
+    $statement = $pdo->query('SELECT Posts.*, Likes.post_id FROM Posts
+    INNER JOIN Likes
+    ON Posts.id = Likes.post_id
+   ORDER BY Posts.id');
+
+    $statement->execute();
+
+    $topLikes = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    return $topLikes;
+}
+
+
 function isLikedByUser($pdo, $postId, $userId)
 {
 
