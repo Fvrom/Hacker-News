@@ -54,7 +54,7 @@
         Edit bio, username . 
             -->
 
-        <h2 class="u-posts"> Posts </h2>
+        <h2 class="user-posts-title"> Posts </h2>
         <?php if (is_array($userPosts)) : ?>
             <?php foreach ($userPosts as $userPost) : ?>
                 <?php $postId = $userPost['id'];
@@ -122,27 +122,36 @@
                                     <input type="hidden" name="post_id_edit" id="post_id_edit" value="<?php echo $postId ?>">
                                     <div>
                                         <label for="title"> Title </label>
-                                        <input type="text" name="title" id="title" placeholder="<?php echo $userPost['title']; ?> " required>
                                     </div>
+                                    <input type="text" name="title" id="title" placeholder="<?php echo $userPost['title']; ?> " required>
+
                                     <div>
                                         <label for="description"> Description </label>
-                                        <input type="text" name="description" id="description" placeholder="<?php echo $userPost['description']; ?>" required>
                                     </div>
+                                    <input type="text" name="description" id="description" placeholder="<?php echo $userPost['description']; ?>" required>
+
                                     <div>
                                         <label for="url"> Url to the post </label>
-                                        <input type="url" name="url" id="url" placeholder=" <?php echo $userPost['post_url']; ?>"" required>
                                     </div>
-                            <button type=" submit"> Update post </button>
+                                    <input type="url" name="url" id="url" placeholder=" <?php echo $userPost['post_url']; ?>"" required>
+                                   
+                                   
+                                    <div class=" button-wrapper">
+                                    <div>
+                                        <button type=" submit"> Update post </button>
+                                    </div>
                                 </form>
 
                                 <form class="form-hidden" action="/app/posts/delete.php" method="post">
 
                                     <input type="hidden" name="post_id_delete" id="post_id_delete" value="<?php echo $postId ?>">
 
-
-                                    <button type="submit"> Delete post </button>
-                                </form>
+                                    <div>
+                                        <button type="submit"> Delete post </button>
+                                    </div>
                             </div>
+                            </form>
+                    </div>
                     </div>
                     </div>
                 <?php endif; ?>
