@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="/style/home-page.css">
     <link rel="stylesheet" href="/style/profile.css">
     <link rel="stylesheet" href="/style/settings.css">
+    <link rel="stylesheet" href="/style/comments.css">
     <title>Hacker news</title>
 </head>
 

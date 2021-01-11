@@ -13,13 +13,20 @@
 }
 
 .profile-img-container {
-  width: 8rem;
-  height: 8rem;
+  width: 10rem;
+  height: 10rem;
   border-radius: 50%;
   margin: 1rem;
   background-color: rgb(218, 216, 216);
   box-shadow: 0.1rem 0.1rem 0.2rem 0.1rem rgb(87, 86, 86);
 }
+.profile-img-container img {
+  object-fit: cover;
+  height: 100%; 
+  width: 100%; 
+  border-radius: 50%;
+}
+
 
 .biography {
   margin-top: 6rem;

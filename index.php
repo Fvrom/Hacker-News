@@ -2,7 +2,6 @@
  <?php require __DIR__ . '/header.php'; ?>
 
 
-
  <section>
 
      <article class="home-page">
@@ -41,7 +40,7 @@
 
              <div class="posts-wrapper">
                  <div class="post-item-author">
-                     <p> By: <?php echo $post['user_id']; ?> ,
+                     <p> By: <a href="profile.php?username=<?php echo $post['username']; ?> "> <?php echo $post['username']; ?></a> ,
 
                          <?php echo $post['post_date']; ?> </p>
 

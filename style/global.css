@@ -24,3 +24,8 @@ body {
 button {
   color: var(--color-medium-shade-grey);
 }
+
+
+input {
+  color: black;
+}

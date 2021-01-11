@@ -11,7 +11,7 @@ if (isset($_POST['title'], $_POST['description'], $_POST['url'])) {
     $postUrl = filter_var($_POST['url'], FILTER_SANITIZE_URL);
 
     $userId = $_SESSION['user']['id'];
-    $postDate = date("Y/m/d");
+    $postDate = date("Y-m-d D h:i");
 
     $_SESSION['successful'] = [];
     $_SESSION['errors'] = [];

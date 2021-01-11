@@ -29,7 +29,7 @@ if (isset($_GET['id'])) {
 
     <div class="posts-wrapper">
         <div class="post-item-author">
-            <p> By: <?php echo $post['user_id']; ?> ,
+            <p> By: <a href="profile.php?username=<?php echo $post['username']; ?> "> <?php echo $post['username']; ?> </a> ,
 
                 <?php echo $post['post_date']; ?> </p>
 
@@ -94,41 +94,48 @@ if (isset($_GET['id'])) {
 
 <?php endif; ?>
 
-<article class="home-page">
 
 
-    <?php if (isset($_SESSION['errors'])) {  ?>
-        <p class="error-message"> <?php errorMessage();
-                                    unset($_SESSION['errors']); //delete error message after displayed
-                                } ?> </p>
+<?php if (is_array($userComments)) : ?>
+    <?php foreach ($userComments as $userComment) : ?>
+
+        <article class="comments-page">
+
+
+            <?php if (isset($_SESSION['errors'])) {  ?>
+                <p class="error-message"> <?php errorMessage();
+                                            unset($_SESSION['errors']); //delete error message after displayed
+                                        } ?> </p>
 
 
 
-        <?php if (is_array($userComments)) : ?>
-            <?php foreach ($userComments as $userComment) : ?>
-                <div class="posts-wrapper">
+                <div class="comments-wrapper">
                     <div class="post-item">
-                        <p> By: <?php echo $userComment['username']; ?>,
+                        <p> By: <a href="profile.php?username=<?php echo $userComment['username']; ?> "> <?php echo $userComment['username']; ?></a>,
                             <?php echo $userComment['comment_date']; ?> </p>
-                        <p> <?php echo $userComment['comment']; ?> </p>
-
-
                     </div>
+                    <div class="post-item">
+                        <p> <?php echo $userComment['comment']; ?> </p>
+                    </div>
+
+
+                </div>
                 </div>
                 <div>
                     <?php if ($userComment['user_id'] === $_SESSION['user']['id']) : ?>
 
                         <button> Edit Comment </button>
+                        <div class="post-item">
+                            <form action="/app/posts/update.php" method="post">
+                                <!-- This is to be hidden. Gets visable when user clicks on Edit comment -->
+                                <input type="text" name="comment" id="comment" placeholder=" <?php echo $userComment['comment']; ?>">
 
-                        <form action="/app/posts/update.php" method="post">
-                            <!-- This is to be hidden. Gets visable when user clicks on Edit comment -->
-                            <input type="text" name="comment" id="comment" placeholder=" <?php echo $userComment['comment']; ?>">
+                                <input type="hidden" name="comment_id" id="comment_id" value="<?php echo $userComment['comment_id'] ?>">
 
-                            <input type="hidden" name="comment_id" id="comment_id" value="<?php echo $userComment['comment_id'] ?>">
-
-                            <input type="hidden" name="post_id" id="post_id" value="<?php echo $post['id']; ?>">
-                            <button type="submit"> Update comment </button>
-                            <!-- end of hidden -->
+                                <input type="hidden" name="post_id" id="post_id" value="<?php echo $post['id']; ?>">
+                                <button type="submit"> Update comment </button>
+                                <!-- end of hidden -->
+                        </div>
 
                         </form>
                         <form action="/app/posts/delete.php" method="post">
@@ -141,6 +148,7 @@ if (isset($_GET['id'])) {
                         </form>
                     <?php endif; ?>
                 </div>
-            <?php endforeach; ?>
-        <?php endif;
-        ?>
+        </article>
+    <?php endforeach; ?>
+<?php endif;
+?>

@@ -17,7 +17,7 @@
         $username = filter_var($_GET['username'], FILTER_SANITIZE_STRING);
 
         $userProfile = getUser($pdo, $username);
-
+        $userImage = $userProfile['avatar']; 
         $profileId = $userProfile['id'];
         $userPosts = getUserPosts($pdo, $profileId);
     }
@@ -32,7 +32,7 @@
         <article class="profile-container">
             <div class="profile-page">
                 <div class="profile-img-container">
-                    <!-- <img src="<?php $userProfile['avatar']; ?>" class="profile-img" alt="User profile"> -->
+                   <img src="/users/assets/images/<?php echo $userImage; ?>" alt="User profile"> 
                 </div>
                 <h1 class="profile-title"><?php echo $userProfile['username']; ?> </h1>
                 <p class="biography"> <?php echo $userProfile['biography']; ?> </p>

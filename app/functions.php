@@ -303,8 +303,9 @@ function getAllPosts($pdo, $allPosts)
 
     $_SESSION['errors'] = [];
 
-    $statement = $pdo->prepare("SELECT * FROM Posts
-    ORDER BY Posts.post_date DESC");
+    $statement = $pdo->prepare("SELECT Posts.*, Users.username FROM Users
+    INNER JOIN Posts ON Posts.user_id = Users.id
+    ORDER BY post_date DESC");
 
     $statement->execute();
 
@@ -322,7 +323,11 @@ function getPostbyId($pdo, $postId)
 {
     $_SESSION['errors'] = [];
 
-    $statement = $pdo->prepare("SELECT * FROM Posts WHERE id = :postId");
+    $statement = $pdo->prepare("SELECT Posts.*, Users.username FROM Users
+    INNER JOIN Posts
+    ON Posts.user_id = Users.id
+    WHERE Posts.id = :postId");
+
     $statement->bindParam(':postId', $postId);
     $statement->execute();
 
@@ -337,12 +342,12 @@ function getPostbyId($pdo, $postId)
 
 /*** Upload photo  ***/
 
-function uploadImage($pdo, $avatar, $id)
+function uploadImage($pdo, $avatarName, $userId)
 {
 
-    $statement = $pdo->prepare("UPDATE Users SET avatar = :avatar WHERE id = :id");
-    $statement->BindParam(':avatar', $avatar['name'], PDO::PARAM_STR);
-    $statement->BindParam(':id', $id, PDO::PARAM_INT);
+    $statement = $pdo->prepare("UPDATE Users SET avatar = :avatar WHERE id = :userId");
+    $statement->BindParam(':avatar', $avatarName, PDO::PARAM_STR);
+    $statement->BindParam(':userId', $userId, PDO::PARAM_INT);
     $statement->execute();
 }
 
