@@ -25,3 +25,10 @@ editProfile.addEventListener("click", function () {
 });
 doesnt work with session. 
  */
+
+const likeButton = document.querySelector("like-button");
+
+likeButton.addEventListener("click", function (e) {
+  likeButton.innerHTML = "Unlike";
+  document.getElementByClass("likeButton").style.background = "";
+});

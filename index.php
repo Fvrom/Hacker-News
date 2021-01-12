@@ -75,7 +75,7 @@
 
 
                                  <input type="hidden" name="post-id" id="post-id" value="<?php echo $post['id'] ?>">
-                                 <button type="submit"> Like </button>
+                                 <button class="like-button" type="submit"> Like </button>
                              </p>
                          </form>
                      </div>
