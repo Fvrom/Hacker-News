@@ -27,8 +27,9 @@ doesnt work with session.
  */
 
 const hiddenForm = document.querySelector(".form.hidden");
+const editButton = document.querySelector(".edit-post");
 
-hiddenForm.addEventListener("click", function () {
+editButton.addEventListener("click", function () {
   if (hiddenForm.classList.contains("hidden")) {
     hiddenForm.classList.remove("hidden");
   } else {
