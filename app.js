@@ -26,9 +26,12 @@ editProfile.addEventListener("click", function () {
 doesnt work with session. 
  */
 
-const likeButton = document.querySelector("like-button");
+const hiddenForm = document.querySelector(".form.hidden");
 
-likeButton.addEventListener("click", function (e) {
-  likeButton.innerHTML = "Unlike";
-  document.getElementByClass("likeButton").style.background = "";
+hiddenForm.addEventListener("click", function () {
+  if (hiddenForm.classList.contains("hidden")) {
+    hiddenForm.classList.remove("hidden");
+  } else {
+    hiddenForm.classList.add("hidden");
+  }
 });

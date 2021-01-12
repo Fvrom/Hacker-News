@@ -35,7 +35,11 @@
         <article class="profile-container">
             <div class="profile-page">
                 <div class="profile-img-container">
-                    <img src="/users/assets/images/<?php echo $userImage; ?>" alt="User profile">
+                    <?php if ($userImage === NULL) : ?>
+                        <img src="/users/assets/images/robot-02-icon.webp" alt="User profile">
+                    <?php else : ?>
+                        <img src="/users/assets/images/<?php echo $userImage; ?>" alt="User profile">
+                    <?php endif; ?>
                 </div>
                 <h1 class="profile-title"><?php echo $userProfile['username']; ?> </h1>
                 <p class="biography"> <?php echo $userProfile['biography']; ?> </p>
@@ -52,9 +56,8 @@
         </article>
 
         <!-- TO DO: 
-        Javascript eventlistener for button. Redirect to settings page. 
-        Settings page: upload profle photo
-        Edit bio, username . 
+        Javascript eventlistener for button. Redirect to settings page.
+      
             -->
 
         <h2 class="user-posts-title"> Posts </h2>
@@ -129,7 +132,7 @@
                                 <button class="edit-post">Edit post</button>
 
                                 <!-- This is gonna be hidden until button clicked -->
-                                <form class="form-hidden" action="/app/posts/update.php" method="post">
+                                <form class="form" action="/app/posts/update.php" method="post">
 
                                     <input type="hidden" name="post_id_edit" id="post_id_edit" value="<?php echo $postId ?>">
                                     <div>

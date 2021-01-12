@@ -41,15 +41,13 @@ Deadline: 13th January.
 - [x] Log in
 - [x] Log out
 - [x] Sign up
-- [ ] Dummy posts, ranked latest
+- [x] Dummy posts, ranked latest
 - [x] Create posts, Delete posts, Edit posts
 - [x] Profile page, able to see posts user has posted
-- [ ] Upload profile photo
+- [x] Upload profile photo
 - [x] Edit profile
 - [x] Comments, edit, delete
 - [x] Upvotes
-- [ ]
-- [ ]
 
 ### Extra features
 
