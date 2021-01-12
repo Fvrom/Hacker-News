@@ -6,6 +6,7 @@ if (isset($_GET['id'])) {
     $postId = $_GET['id'];
     $postIdComment = $postId;
 
+    $userId = $_SESSION['user']['id'];
     $post = getPostbyId($pdo, $postId);
 
     $countComments = countComments($pdo, $postId);
@@ -61,10 +62,19 @@ if (isset($_GET['id'])) {
                 <form action="/app/posts/likes.php" method="post">
                     <p> <?php echo $countLikes; ?> Likes
 
+                        <?php $isLikedByUser = isLikedByUser($pdo, $postId, $userId); ?>
+
+                        <?php if (is_array($isLikedByUser)) : ?>
+                            <input type="hidden" name="post-id" id="post-id" value="<?php echo $post['id'] ?>">
+                            <button class="unlike-button" type="submit"> Unlike </button>
+                        <?php else : ?>
+
+                            <input type="hidden" name="post-id" id="post-id" value="<?php echo $post['id'] ?>">
+                            <button class="like-button" type="submit"> Like </button>
+
+                        <?php endif; ?>
 
 
-                        <input type="hidden" name="post-id" id="post-id" value="<?php echo $post['id'] ?>">
-                        <button type="submit"> Like </button>
                     </p>
                 </form>
             </div>
@@ -73,6 +83,15 @@ if (isset($_GET['id'])) {
 
 
 </article>
+
+<?php if (!is_array($userComments)) : ?>
+    <div class="comments-wrapper">
+        <div class="post-item">
+            <p> No Comments yet </p>
+        </div>
+    </div>
+
+<?php endif; ?>
 
 
 <?php if (isset($_SESSION['user'])) : ?>
@@ -88,6 +107,7 @@ if (isset($_GET['id'])) {
 
             <button type="submit" class="submit-button"> Post comment </button>
 
+
         </div>
 
     </form>
@@ -96,58 +116,52 @@ if (isset($_GET['id'])) {
 
 
 
+
+
 <?php if (is_array($userComments)) : ?>
     <?php foreach ($userComments as $userComment) : ?>
 
         <article class="comments-page">
 
-
-            <?php if (isset($_SESSION['errors'])) {  ?>
-                <p class="error-message"> <?php errorMessage();
-                                            unset($_SESSION['errors']); //delete error message after displayed
-                                        } ?> </p>
-
-
-
-                <div class="comments-wrapper">
-                    <div class="post-item">
-                        <p> By: <a href="profile.php?username=<?php echo $userComment['username']; ?> "> <?php echo $userComment['username']; ?></a>,
-                            <?php echo $userComment['comment_date']; ?> </p>
-                    </div>
-                    <div class="post-item">
-                        <p> <?php echo $userComment['comment']; ?> </p>
-                    </div>
-
-
+            <div class="comments-wrapper">
+                <div class="post-item">
+                    <p> By: <a href="profile.php?username=<?php echo $userComment['username']; ?> "> <?php echo $userComment['username']; ?></a>,
+                        <?php echo $userComment['comment_date']; ?> </p>
                 </div>
+                <div class="post-item">
+                    <p> <?php echo $userComment['comment']; ?> </p>
                 </div>
-                <div>
-                    <?php if ($userComment['user_id'] === $_SESSION['user']['id']) : ?>
 
-                        <button> Edit Comment </button>
-                        <div class="post-item">
-                            <form action="/app/posts/update.php" method="post">
-                                <!-- This is to be hidden. Gets visable when user clicks on Edit comment -->
-                                <input type="text" name="comment" id="comment" placeholder=" <?php echo $userComment['comment']; ?>">
 
-                                <input type="hidden" name="comment_id" id="comment_id" value="<?php echo $userComment['comment_id'] ?>">
+            </div>
+            </div>
+            <div>
+                <?php if ($userComment['user_id'] === $_SESSION['user']['id']) : ?>
 
-                                <input type="hidden" name="post_id" id="post_id" value="<?php echo $post['id']; ?>">
-                                <button type="submit"> Update comment </button>
-                                <!-- end of hidden -->
-                        </div>
+                    <button> Edit Comment </button>
+                    <div class="post-item">
+                        <form action="/app/posts/update.php" method="post">
+                            <!-- This is to be hidden. Gets visable when user clicks on Edit comment -->
+                            <input type="text" name="comment" id="comment" placeholder=" <?php echo $userComment['comment']; ?>">
 
-                        </form>
-                        <form action="/app/posts/delete.php" method="post">
-                            <input type="hidden" name="user_id_delete_comment" id="user_id_delete_comment" value="<?php echo $userComment['user_id'] ?>">
                             <input type="hidden" name="comment_id" id="comment_id" value="<?php echo $userComment['comment_id'] ?>">
+
                             <input type="hidden" name="post_id" id="post_id" value="<?php echo $post['id']; ?>">
+                            <button type="submit"> Update comment </button>
+                            <!-- end of hidden -->
+                    </div>
+
+                    </form>
+                    <form action="/app/posts/delete.php" method="post">
+                        <input type="hidden" name="user_id_delete_comment" id="user_id_delete_comment" value="<?php echo $userComment['user_id'] ?>">
+                        <input type="hidden" name="comment_id" id="comment_id" value="<?php echo $userComment['comment_id'] ?>">
+                        <input type="hidden" name="post_id" id="post_id" value="<?php echo $post['id']; ?>">
 
 
-                            <button type="submit"> Delete comment </button>
-                        </form>
-                    <?php endif; ?>
-                </div>
+                        <button type="submit"> Delete comment </button>
+                    </form>
+                <?php endif; ?>
+            </div>
         </article>
     <?php endforeach; ?>
 <?php endif;

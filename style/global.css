@@ -1,10 +1,11 @@
 :root {
   --color-background: #121212;
   --color-light-shade-grey: #929292;
-  --color-header: #2a2a2a;
+  /* --color-header: #2a2a2a; */
   --color-medium-shade-grey: #494949;
   --color-darkermedium-shade-grey: #242424;
   --color-dark-shade-grey: #111110b3;
+  --color-header: #ff6600;
 }
 
 * {
@@ -23,8 +24,8 @@ body {
 
 button {
   color: var(--color-medium-shade-grey);
+  border: none;
 }
-
 
 input {
   color: black;

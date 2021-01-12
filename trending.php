@@ -2,45 +2,72 @@
 <?php require __DIR__ . '/header.php'; ?>
 
 
-<article>
+<?php $userId = $_SESSION['user']['id']; ?>
+<?php $topLikes = topLikes($pdo); ?>
+<?php foreach ($topLikes as $topLike) : ?>
 
-    <?php $topLikes = topLikes($pdo);
-    print_r($topLikes); ?>
-
-    <?php // foreach ($topLikest as $toplike) : 
-    ?>
-
-    <?php $postId = $toplike['post_id'];  ?>
+    <?php $postId = $topLike['id'];  ?>
 
     <?php $countComments = countComments($pdo, $postId); ?>
     <?php $countLikes = countLikes($pdo, $postId); ?>
-    <?php $post = getPostbyId($pdo, $postId); ?>
 
 
 
     <article class="home-page">
 
         <div class="posts-wrapper">
-            <div class="post-item">
-                <h3 class="post-title"> <?php echo $post['title']; ?> </h3>
-            </div>
-            <div class="post-item">
-                <p class="post-description"> <?php echo $post['description']; ?> </p>
-            </div>
-            <div class="post-item">
-                <a href="<?php echo $post['post_url'] ?> "> <?php echo $post['post_url']; ?> </a>
-            </div>
             <div class="post-item-author">
-                <p> Posted by: <?php echo $post['user_id']; ?> </p>
+                <p> By: <a href="profile.php?username=<?php echo $topLike['username']; ?> "> <?php echo $topLike['username']; ?></a> ,
+
+                    <?php echo $post['post_date']; ?> </p>
+
 
             </div>
-            <div class="post-item-date">
-                <p> <?php echo $post['post_date']; ?> </p>
+            <div class="post-item">
+                <h3 class="post-title"> <?php echo $topLike['title']; ?> </h3>
             </div>
-            <div class="post-item-date">
-                <a href="comments.php?id=<?php echo $post['id']; ?> "> Comments </a>
-                <?php echo $countComments; ?>
+            <div class="post-item">
+                <p class="post-description"> <?php echo $topLike['description']; ?> </p>
             </div>
+            <div class="post-item-url">
+                <p> ( <a href="<?php echo $topLike['post_url'] ?> "> <?php echo $topLike['post_url']; ?> </a> )
+                <p>
+            </div>
+
+
+            <div class="info-wrapper">
+
+                <div class="post-item-comment">
+                    <a href="comments.php?id=<?php echo $topLike['id']; ?> "> <?php echo $countComments; ?> Comments </a>
+
+                </div>
+
+
+
+
+                <div class="post-item-like">
+                    <form action="/app/posts/likes.php" method="post">
+                        <p> <?php echo $countLikes; ?> Likes
+
+                            <?php $isLikedByUser = isLikedByUser($pdo, $postId, $userId); ?>
+
+                            <?php if (is_array($isLikedByUser)) : ?>
+                                <input type="hidden" name="post-id" id="post-id" value="<?php echo $topLike['id'] ?>">
+                                <button class="unlike-button" type="submit"> Unlike </button>
+                            <?php else : ?>
+
+                                <input type="hidden" name="post-id" id="post-id" value="<?php echo $topLike['id'] ?>">
+                                <button class="like-button" type="submit"> Like </button>
+
+                            <?php endif; ?>
+
+
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+
 
     </article>
-    <?php// endforeach; ?>
+<?php endforeach; ?>

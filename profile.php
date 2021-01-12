@@ -17,9 +17,12 @@
         $username = filter_var($_GET['username'], FILTER_SANITIZE_STRING);
 
         $userProfile = getUser($pdo, $username);
-        $userImage = $userProfile['avatar']; 
+        $userImage = $userProfile['avatar'];
         $profileId = $userProfile['id'];
         $userPosts = getUserPosts($pdo, $profileId);
+
+
+        $userId = $_SESSION['user']['id'];
     }
 
     ?>
@@ -32,7 +35,7 @@
         <article class="profile-container">
             <div class="profile-page">
                 <div class="profile-img-container">
-                   <img src="/users/assets/images/<?php echo $userImage; ?>" alt="User profile"> 
+                    <img src="/users/assets/images/<?php echo $userImage; ?>" alt="User profile">
                 </div>
                 <h1 class="profile-title"><?php echo $userProfile['username']; ?> </h1>
                 <p class="biography"> <?php echo $userProfile['biography']; ?> </p>
@@ -68,7 +71,7 @@
 
                     <div class="posts-wrapper">
                         <div class="post-item-author">
-                            <p> By: <?php echo $userPost['user_id']; ?> ,
+                            <p> By: <?php echo $userPost['username']; ?> ,
 
                                 <?php echo $userPost['post_date']; ?> </p>
 
@@ -81,7 +84,7 @@
                             <p class="post-description"> <?php echo $userPost['description']; ?> </p>
                         </div>
                         <div class="post-item-url">
-                            <p> ( <a href="<?php echo $post['post_url'] ?> "> <?php echo $userPost['post_url']; ?> </a> )
+                            <p> ( <a href="<?php echo $userPost['post_url'] ?> "> <?php echo $userPost['post_url']; ?> </a> )
                             <p>
                         </div>
 
@@ -89,7 +92,7 @@
                         <div class="info-wrapper">
 
                             <div class="post-item-comment">
-                                <a href="comments.php?id=<?php echo $post['id']; ?> "> <?php echo $countComments; ?> Comments </a>
+                                <a href="comments.php?id=<?php echo $userPost['id']; ?> "> <?php echo $countComments; ?> Comments </a>
 
                             </div>
 
@@ -100,10 +103,19 @@
                                 <form action="/app/posts/likes.php" method="post">
                                     <p> <?php echo $countLikes; ?> Likes
 
+                                        <?php $isLikedByUser = isLikedByUser($pdo, $postId, $userId); ?>
+
+                                        <?php if (is_array($isLikedByUser)) : ?>
+                                            <input type="hidden" name="post-id" id="post-id" value="<?php echo $post['id'] ?>">
+                                            <button class="unlike-button" type="submit"> Unlike </button>
+                                        <?php else : ?>
+
+                                            <input type="hidden" name="post-id" id="post-id" value="<?php echo $post['id'] ?>">
+                                            <button class="like-button" type="submit"> Like </button>
+
+                                        <?php endif; ?>
 
 
-                                        <input type="hidden" name="post-id" id="post-id" value="<?php echo $post['id'] ?>">
-                                        <button type="submit"> Like </button>
                                     </p>
                                 </form>
                             </div>

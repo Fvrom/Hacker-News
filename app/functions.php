@@ -183,11 +183,11 @@ function getUserPosts($pdo, int $profileId)
 {
     $_SESSION['errors'] = [];
 
-    $statement = $pdo->prepare("SELECT Posts.id, title, description, post_url, post_date, user_id FROM Posts
-    INNER JOIN Users
+    $statement = $pdo->prepare("SELECT Posts.*, Users.username FROM Users
+    INNER JOIN Posts
     ON Posts.user_id = Users.id
     WHERE Users.id = :id
-    ORDER BY Posts.id DESC");
+    ORDER BY Posts.post_date DESC");
 
     $statement->BindParam(':id', $profileId, PDO::PARAM_INT);
     $statement->execute();
@@ -222,7 +222,6 @@ function getPostsComments($pdo, $postId)
 
 
     if (!$userComments) {
-        return $_SESSION['errors'][] = "No comments yet.";
     } else {
 
 
@@ -260,10 +259,16 @@ function countLikes($pdo, $postId)
 
 function topLikes($pdo)
 {
-    $statement = $pdo->query('SELECT Posts.*, Likes.post_id FROM Posts
-    INNER JOIN Likes
+    $statement = $pdo->query('SELECT COUNT(Likes.post_id) AS votes, Posts.*, Users.username FROM Likes
+    INNER JOIN Posts
     ON Posts.id = Likes.post_id
-   ORDER BY Posts.id');
+    INNER JOIN Users 
+    ON Posts.user_id = Users.id
+    GROUP BY 
+    Posts.id
+    ORDER BY COUNT(1) DESC
+    LIMIT 10; 
+   ');
 
     $statement->execute();
 

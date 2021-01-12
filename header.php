@@ -20,6 +20,8 @@
 
 <body>
     <header>
-        <h1 class="title">Hacker News</h1>
+        <h1 class="title"> <a href="/index.php">
+                Hacker News
+            </a></h1>
         <?php require __DIR__ . '/navigation.php'; ?>
     </header>

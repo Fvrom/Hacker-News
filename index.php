@@ -1,6 +1,7 @@
  <?php require __DIR__ . '/app/autoload.php'; ?>
  <?php require __DIR__ . '/header.php'; ?>
 
+ <?php $userId = $_SESSION['user']['id']; ?>
 
  <section>
 
@@ -72,10 +73,19 @@
                          <form action="/app/posts/likes.php" method="post">
                              <p> <?php echo $countLikes; ?> Likes
 
+                                 <?php $isLikedByUser = isLikedByUser($pdo, $postId, $userId); ?>
+
+                                 <?php if (is_array($isLikedByUser)) : ?>
+                                     <input type="hidden" name="post-id" id="post-id" value="<?php echo $post['id'] ?>">
+                                     <button class="unlike-button" type="submit"> Unlike </button>
+                                 <?php else : ?>
+
+                                     <input type="hidden" name="post-id" id="post-id" value="<?php echo $post['id'] ?>">
+                                     <button class="like-button" type="submit"> Like </button>
+
+                                 <?php endif; ?>
 
 
-                                 <input type="hidden" name="post-id" id="post-id" value="<?php echo $post['id'] ?>">
-                                 <button class="like-button" type="submit"> Like </button>
                              </p>
                          </form>
                      </div>
