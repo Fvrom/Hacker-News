@@ -87,7 +87,7 @@ function emailExists($pdo, $email)
     // check if user exists 
     $checkEmail = $statement->fetch(PDO::FETCH_ASSOC);
 
-    $_SESSION['checkEmail'] = $checkEmail;
+    $_SESSION['checkEmail'] = $checkEmail['email'];
 
     return $_SESSION['checkEmail'];
 }
@@ -195,10 +195,9 @@ function getUserPosts($pdo, int $profileId)
     $userPosts = $statement->fetchAll(PDO::FETCH_ASSOC);
 
     if (!$userPosts) {
-        return $_SESSION['errors'][] = "No posts yet.";
-    }
+    } else
 
-    return $userPosts;
+        return $userPosts;
 }
 
 

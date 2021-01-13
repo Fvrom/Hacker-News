@@ -61,6 +61,13 @@
             -->
 
         <h2 class="user-posts-title"> Posts </h2>
+        <?php if (!is_array($userPost)) : ?>
+            <div class="comments-wrapper">
+                <div class="post-item">
+                    <p> No posts yet! </p>
+                </div>
+            </div>
+        <?php endif; ?>
         <?php if (is_array($userPosts)) : ?>
             <?php foreach ($userPosts as $userPost) : ?>
                 <?php $postId = $userPost['id'];
@@ -71,6 +78,8 @@
                 ?>
 
                 <article class="home-page">
+
+
 
                     <div class="posts-wrapper">
                         <div class="post-item-author">

@@ -20,11 +20,7 @@
                                     } ?> </p>
 
 
-             <?php if (isset($_SESSION['user'])) : ?>
-                 <p> You are logged in,
-                     <?php echo $_SESSION['user']['username']; ?> ! </p>
 
-             <?php endif; ?>
      </article>
 
 

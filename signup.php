@@ -3,15 +3,16 @@
 
 <section class="log-in-section">
 
-    <div class="error-container">
-        <?php if (isset($_SESSION['errors'])) {  ?>
-            <p class="error-message"> <?php errorMessage();
-                                        unset($_SESSION['errors']); //delete error message after displayed
-                                    } ?> </p>
-    </div>
 
     <div class="sign-up-container">
+
         <h2 class="title-form"> Sign Up </h2>
+        <div class="error-container">
+            <?php if (isset($_SESSION['errors'])) {  ?>
+                <p class="error-message"> <?php errorMessage();
+                                            unset($_SESSION['errors']); //delete error message after displayed
+                                        } ?> </p>
+        </div>
         <form class="login-form" name="sign-up-form" action="users/register.php" method="post" onsubmit="return validateForm()">
 
             <div class="log-in">
@@ -34,7 +35,7 @@
             </div>
 
             <div class="log-in">
-                <label for="username"> Username </label> <span class="username-error"> </span>
+                <label for="username"> Username (Minimum 5 characters) </label> <span class="username-error"> </span>
             </div>
             <div class="submit">
                 <input type="text" name="username" id="username" class="form-validate" placeholder="Username..." required>

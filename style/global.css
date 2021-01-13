@@ -45,3 +45,22 @@ p {
 p a {
   font-size: 1.4rem;
 }
+
+.error-container {
+  display: flex;
+  justify-content: center;
+  margin: 0.2rem;
+}
+.error-message {
+  text-align: center;
+}
+
+.successful-container {
+  display: flex;
+  justify-content: center;
+  margin: 0.2rem;
+}
+.successful-message {
+  font-size: 1.4rem;
+  text-align: center;
+}

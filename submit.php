@@ -2,15 +2,19 @@
 <?php require __DIR__ . '/header.php'; ?>
 
 <?php if (isset($_SESSION['errors'])) {  ?>
-    <p class="error-message"> <?php errorMessage();
-                                unset($_SESSION['errors']); //delete error message after displayed
-                            } ?> </p>
+    <div class="error-container ">
+        <p class="error-message"> <?php errorMessage();
+                                    unset($_SESSION['errors']); //delete error message after displayed
+                                } ?> </p>
+    </div>
 
 
 
     <?php
     if (!isset($_SESSION['user'])) : ?>
-        <p> You need to be logged in to submit posts! </p>
+        <div class="error-container ">
+            <p> You need to be logged in to submit posts! </p>
+        </div>
 
     <?php endif; ?>
 

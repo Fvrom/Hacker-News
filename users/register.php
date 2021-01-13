@@ -29,6 +29,7 @@ if (isset($_POST['submit'])) {
     }
 
     emailExists($pdo, $email);
+
     if ($_SESSION['checkEmail'] === $email) {
         $_SESSION['errors'][] = "Email already in use";
         redirect("../signup.php");
