@@ -22,7 +22,7 @@ if (isset($_GET['id'])) {
         <?php unset($_SESSION['successful']);
     endif; ?> </p>
 </div>
-
+<a name="top"></a>
 <article class="home-page">
     <div class="posts-wrapper">
         <div class="post-item-author">
@@ -142,3 +142,4 @@ if (isset($_GET['id'])) {
     <?php endforeach; ?>
 <?php endif;
 ?>
+<?php require __DIR__ . '/footer.php'; ?>

@@ -23,6 +23,7 @@ endif; ?>
         $userId = $_SESSION['user']['id'];
     }
     ?>
+    <a name="top"></a>
     <section>
         <article class="profile-container">
             <div class="profile-page">
@@ -133,5 +134,4 @@ endif; ?>
         <?php endif; ?>
 
     </section>
-
     <?php require __DIR__ . '/footer.php'; ?>

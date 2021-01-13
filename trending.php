@@ -9,7 +9,7 @@
 
     <?php $countComments = countComments($pdo, $postId); ?>
     <?php $countLikes = countLikes($pdo, $postId); ?>
-
+    <a name="top"></a>
     <article class="home-page">
         <div class="posts-wrapper">
             <div class="post-item-author">
@@ -59,3 +59,4 @@
 
     </article>
 <?php endforeach; ?>
+<?php require __DIR__ . '/footer.php'; ?>
