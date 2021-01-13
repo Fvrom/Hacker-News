@@ -73,7 +73,8 @@ php -S localhost:8000
 
 
 ## Testers:
-1. Linn Josefsson
-2. 
+1. [Linn Josefsson](https://github.com/LinnJosefsson)
+
+2. [Réka Madarász](https://github.com/mreka91)
 
 ## Feedback:
