@@ -43,8 +43,8 @@ if (isset($_GET['id'])) {
             <p class="post-description"> <?php echo $post['description']; ?> </p>
         </div>
         <div class="post-item-url">
-            <p> ( <a href="<?php echo $post['post_url'] ?> "> <?php echo $post['post_url']; ?> </a> )
-            <p>
+            <a href="<?php echo $post['post_url'] ?> "> Get to article here </a>
+
         </div>
 
 

@@ -19,7 +19,7 @@
             <div class="post-item-author">
                 <p> By: <a href="profile.php?username=<?php echo $topLike['username']; ?> "> <?php echo $topLike['username']; ?></a> ,
 
-                    <?php echo $post['post_date']; ?> </p>
+                    <?php echo $topLike['post_date']; ?> </p>
 
 
             </div>
@@ -30,8 +30,8 @@
                 <p class="post-description"> <?php echo $topLike['description']; ?> </p>
             </div>
             <div class="post-item-url">
-                <p> ( <a href="<?php echo $topLike['post_url'] ?> "> <?php echo $topLike['post_url']; ?> </a> )
-                <p>
+                <a href="<?php echo $topLike['post_url'] ?> "> Get to article here </a>
+
             </div>
 
 

@@ -17,25 +17,38 @@
 
     <?php if (isset($_SESSION['user'])) : ?>
 
-        <section class="sign-up-form">
-            <form action="/app/posts/posts.php" method="post">
-                <div class="sign-up">
-                    <label for="title"> Title </label>
-                    <input type="text" name="title" id="title" required>
+        <section class="submit-section">
 
-                    <label for="description"> Description </label>
-                    <input type="text" name="description" id="description" placeholder="Paragraf" required>
+            <article class="submit-container">
+                <h2 class="title-form"> Submit a post</h2>
+                <form class="submit-form" action="/app/posts/posts.php" method="post">
+                    <div class="log-in">
+                        <label for="title"> Title </label>
+                    </div>
+                    <div class="submit">
+                        <input type="text" name="title" id="title" required>
+                    </div>
+                    <div class="log-in">
+                        <label for="description"> Description </label>
+                    </div>
+                    <div class="submit">
+                        <input class="description-input" type="text" name="description" id="description" placeholder="Paragraf" required>
+                    </div>
+                    <div class="log-in">
+                        <label for="url"> Url to the post </label>
+                    </div>
+                    <div class="submit">
+                        <input type="url" name="url" id="url" placeholder="www.hackernews.com" required>
+                    </div>
 
-                    <label for="url"> Url to the post </label>
-                    <input type="url" name="url" id="url" placeholder="www.hackernews.com" required>
+                    <div class="btn-wrapper">
+                        <button class="btn-post-submit" type="submit" class="submit-button"> Create post </button>
+                    </div>
+
+                </form>
 
 
-                    <button type="submit" class="submit-button"> Create post </button>
-
-
-            </form>
-            </div>
-
+            </article>
         </section>
 
     <?php endif; ?>

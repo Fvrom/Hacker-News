@@ -1,0 +1,134 @@
+/* Log in styling */
+
+.log-in-section {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.log-in-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  background: var(--color-medium-shade-grey);
+  width: 90%;
+  height: 60%;
+  margin: 2rem;
+  border-radius: 1rem;
+}
+
+.login-form {
+  width: 90%;
+}
+
+.log-in input {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.login-button {
+  font-size: 1.6rem;
+  margin-top: 1rem;
+  width: 7rem;
+}
+
+.title-login {
+  font-size: 2rem;
+}
+
+.btn-login-submit {
+  margin: 2rem;
+  font-size: 1.6rem;
+  align-self: center;
+}
+
+/* Submit posts styling */
+.submit-section {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.submit-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  background: var(--color-medium-shade-grey);
+  width: 80%;
+  height: 60%;
+  border-radius: 1rem;
+}
+
+.submit-form {
+  width: 90%;
+}
+.submit input {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+.log-in label {
+  font-size: 1.5rem;
+}
+
+.login-button {
+  margin: 2rem;
+  font-size: 1.6rem;
+  align-self: center;
+  height: 3rem;
+  background: #ff6600;
+  border-radius: 1rem;
+  color: black;
+}
+
+.description-input {
+  height: 4rem;
+}
+
+.btn-wrapper {
+  display: flex;
+  justify-content: center;
+  width: calc(100%-4rem);
+}
+.btn-post-submit {
+  margin: 2rem;
+  font-size: 1.6rem;
+  align-self: center;
+  height: 3rem;
+  background: #ff6600;
+  border-radius: 1rem;
+  color: black;
+}
+
+/* Sign-up form styling */
+
+.title-form {
+  font-size: 2rem;
+}
+
+.sign-up-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  background: var(--color-medium-shade-grey);
+  width: 90%;
+  height: 85%;
+  margin: 2rem;
+  border-radius: 1rem;
+}
+
+.btn-sign-up {
+  margin: 2rem;
+  font-size: 1.6rem;
+  align-self: center;
+  height: 3rem;
+  background: #ff6600;
+  border-radius: 1rem;
+  color: black;
+}

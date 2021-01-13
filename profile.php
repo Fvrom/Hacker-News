@@ -87,8 +87,8 @@
                             <p class="post-description"> <?php echo $userPost['description']; ?> </p>
                         </div>
                         <div class="post-item-url">
-                            <p> ( <a href="<?php echo $userPost['post_url'] ?> "> <?php echo $userPost['post_url']; ?> </a> )
-                            <p>
+                            <a href="<?php echo $userPost['post_url'] ?> "> Get to article here </a>
+
                         </div>
 
 

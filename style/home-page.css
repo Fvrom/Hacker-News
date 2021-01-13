@@ -18,11 +18,13 @@
 }
 .post-item-url {
   text-align: center;
+  width: 100%;
 }
 .post-item-url a {
   font-size: 1.3rem;
   text-decoration: none;
   border-bottom: 0.1rem solid white;
+  text-align: center;
 }
 
 .post-title {
