@@ -10,7 +10,6 @@ endif; ?> </p>
             <p class="successful-message"> <?php successfulMessage(); ?>
             <?php unset($_SESSION['successful']); //delete error message after displayed
         endif; ?> </p>
-
     </div>
     <?php
     if (isset($_GET['username'])) {
@@ -23,7 +22,6 @@ endif; ?> </p>
         $userId = $_SESSION['user']['id'];
     }
     ?>
-
     <section>
         <article class="profile-container">
             <div class="profile-page">
@@ -37,16 +35,12 @@ endif; ?> </p>
                 <h1 class="profile-title"><?php echo $userProfile['username']; ?> </h1>
                 <p class="biography"> <?php echo $userProfile['biography']; ?> </p>
             </div>
-
             <?php // Check if user logged in is the owner of this profile page.
             // If it is, show button for settings.
             if ($profileId === $_SESSION['user']['id']) : ?>
-
                 <a href="settings.php?username=<?php echo $_SESSION['user']['username']; ?> "> <button class="edit-profile">Edit profile</button> </a>
-
             <?php endif; ?>
         </article>
-
         <h2 class="user-posts-title"> Posts </h2>
         <?php if (!is_array($userPosts)) : ?>
             <div class="comments-wrapper">
@@ -55,7 +49,6 @@ endif; ?> </p>
                 </div>
             </div>
         <?php endif; ?>
-
         <?php if (is_array($userPosts)) : ?>
             <?php foreach ($userPosts as $userPost) : ?>
                 <?php $postId = $userPost['id'];
@@ -64,7 +57,6 @@ endif; ?> </p>
                 $countComments = countComments($pdo, $postId);
                 $userComments = getPostsComments($pdo, $postId);
                 ?>
-
                 <article class="home-page">
                     <div class="posts-wrapper">
                         <div class="post-item-author">
@@ -79,85 +71,61 @@ endif; ?> </p>
                         </div>
                         <div class="post-item-url">
                             <a href="<?php echo $userPost['post_url'] ?> "> Get to article here </a>
-
                         </div>
-
                         <div class="info-wrapper">
-
                             <div class="post-item-comment">
                                 <a href="comments.php?id=<?php echo $userPost['id']; ?> "> <?php echo $countComments; ?> Comments </a>
-
                             </div>
-
                             <div class="post-item-like">
                                 <form action="/app/posts/likes.php" method="post">
                                     <p> <?php echo $countLikes; ?> Likes
-
                                         <?php $isLikedByUser = isLikedByUser($pdo, $postId, $userId); ?>
-
                                         <?php if (is_array($isLikedByUser)) : ?>
                                             <input type="hidden" name="post-id" id="post-id" value="<?php echo $post['id'] ?>">
                                             <button class="unlike-button" type="submit"> Unlike </button>
                                         <?php else : ?>
                                             <input type="hidden" name="post-id" id="post-id" value="<?php echo $post['id'] ?>">
                                             <button class="like-button" type="submit"> Like </button>
-
                                         <?php endif; ?>
                                     </p>
                                 </form>
                             </div>
                         </div>
-
                         <?php if ($profileId === $_SESSION['user']['id']) : ?>
                             <div class="edit-wrapper">
                                 <button class="edit-post">Edit post</button>
-
                                 <!-- This is gonna be hidden until button clicked -->
                                 <form class="form" action="/app/posts/update.php" method="post">
-
                                     <input type="hidden" name="post_id_edit" id="post_id_edit" value="<?php echo $postId ?>">
                                     <div>
                                         <label for="title"> Title </label>
                                     </div>
                                     <input type="text" name="title" id="title" placeholder="<?php echo $userPost['title']; ?> " required>
-
                                     <div>
                                         <label for="description"> Description </label>
                                     </div>
                                     <input type="text" name="description" id="description" placeholder="<?php echo $userPost['description']; ?>" required>
-
                                     <div>
                                         <label for="url"> Url to the post </label>
                                     </div>
                                     <input type="url" name="url" id="url" placeholder=" <?php echo $userPost['post_url']; ?>"" required>
-
-
                                     <div class=" button-wrapper">
                                     <div>
                                         <button type=" submit"> Update post </button>
                                     </div>
                                 </form>
-
                                 <form class="form" action="/app/posts/delete.php" method="post">
-
                                     <input type="hidden" name="post_id_delete" id="post_id_delete" value="<?php echo $postId ?>">
-
                                     <div>
                                         <button type="submit"> Delete post </button>
                                     </div>
+                                </form>
                             </div>
-                            </form>
                     </div>
-
                 <?php endif; ?>
-
                 </article>
-
-
             <?php endforeach; ?>
         <?php endif; ?>
-
     </section>
-
 
     <?php require __DIR__ . '/footer.php'; ?>

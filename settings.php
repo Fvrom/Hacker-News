@@ -29,7 +29,6 @@ endif; ?> </p>
                         <label for="username"> Change username </label>
                         <input type="text" name="username" id="username" placeholder=" <?php echo $userProfile['username']; ?>">
                         <button type="submit" class="submit-button"> Change username </button>
-
                     </div>
                 </form>
 
@@ -42,14 +41,12 @@ endif; ?> </p>
                     </div>
                 </form>
 
-
                 <form action="/users/avatar.php" method="post" enctype="multipart/form-data">
                     <div class="sign-up">
                         <label for="avatar"> Choose profile image to upload. (Max 2MB) </label>
                         <input type="file" accept="image/jpeg,image/jpg,image/png" name="avatar" id="avatar">
                         <button type="submit" class="submit-button"> Update image </button>
                     </div>
-
                 </form>
 
                 <form action="/users/updateSettings.php" method="post">
@@ -65,10 +62,8 @@ endif; ?> </p>
                     <div class="sign-up">
                         <label for="password"> Current password </label>
                         <input type="password" name="currentPwd" id="currentPwd" required>
-
                         <label for="password"> Change password </label>
                         <input type="password" name="changePwd" id="changePwd">
-
                         <label for="password"> Repeat new password </label>
                         <input type="password" name="repeatPwd" id="repeatPwd">
                         <button type="submit" class="submit-button"> Change password </button>

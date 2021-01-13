@@ -12,22 +12,18 @@
             <li class="nav-item">
                 <a href="submit.php">Submit post</a>
             </li>
-
             <?php if (isset($_SESSION['user'])) : ?>
                 <div class="rightNav">
                     <li class="nav-item">
                         <a href="profile.php?username=<?php echo $_SESSION['user']['username']; ?>"> <?php echo $_SESSION['user']['username']; ?> </a>
                     </li>
-
                     <li class="nav-item">
                         <a href="/users/logout.php">Sign out</a>
                     </li>
-
                 <?php else : ?>
                     <li class="nav-item">
                         <a href="login.php">login</a>
                     </li>
-
                     <li class="nav-item">
                         <a href="signup.php">Sign up</a>
                     </li>

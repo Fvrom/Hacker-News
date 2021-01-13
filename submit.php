@@ -1,20 +1,17 @@
 <?php require __DIR__ . '/app/autoload.php'; ?>
 <?php require __DIR__ . '/header.php'; ?>
-
 <?php if (isset($_SESSION['errors'])) :  ?>
     <div class="error-container ">
         <p class="error-message"> <?php errorMessage(); ?>
         <?php unset($_SESSION['errors']); //delete error message after displayed
     endif; ?> </p>
     </div>
-
     <?php
     if (!isset($_SESSION['user'])) : ?>
         <div class="error-container ">
             <p> You need to be logged in to submit posts! </p>
         </div>
     <?php endif; ?>
-
     <?php if (isset($_SESSION['user'])) : ?>
         <section class="submit-section">
             <article class="submit-container">
@@ -38,7 +35,6 @@
                     <div class="submit">
                         <input type="url" name="url" id="url" placeholder="www.hackernews.com" required>
                     </div>
-
                     <div class="btn-wrapper">
                         <button class="btn-post-submit" type="submit" class="submit-button"> Create post </button>
                     </div>

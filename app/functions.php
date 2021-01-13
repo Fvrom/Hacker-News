@@ -120,10 +120,8 @@ function getUser($pdo, $username)
     $userProfile =  $statement->fetch(PDO::FETCH_ASSOC);
 
     if (!$userProfile) {
-
         return $_SESSION['errors'][] = "Something went wrong with this profile!";
     }
-
     return $userProfile;
 }
 
@@ -136,10 +134,8 @@ function getUserPwd($pdo, $id)
     $userPwd = $statement->fetch(PDO::FETCH_ASSOC);
 
     if (!$userPwd) {
-
         return $_SESSION['errors'][] = "Something went wrong with finding password!";
     }
-
     $_SESSION['pwd'] = $userPwd;
 
     return $_SESSION['pwd'];
@@ -164,7 +160,6 @@ function getUserPosts($pdo, int $profileId)
 
     if (!$userPosts) {
     } else
-
         return $userPosts;
 }
 /** All posts  **/
@@ -181,11 +176,9 @@ function getAllPosts($pdo, $allPosts)
 
     $allPosts = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-
     if (!$allPosts) {
         return  $_SESSION['errors'][] = "Ops, could not find posts";
     }
-
     return $allPosts;
 }
 
@@ -207,7 +200,6 @@ function getPostbyId($pdo, $postId)
     if (!$post) {
         return  $_SESSION['errors'][] = "Ops, could not find any post";
     }
-
     return $post;
 }
 
