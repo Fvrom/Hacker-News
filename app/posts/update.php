@@ -2,14 +2,10 @@
 
 declare(strict_types=1);
 
-
 require __DIR__ . '/../autoload.php';
-
-
 
 $_SESSION['successful'] = [];
 $_SESSION['errors'] = [];
-
 
 /* Update comments */
 
@@ -18,7 +14,6 @@ if (isset($_POST['comment'], $_POST['post_id'], $_POST['comment_id'])) {
     $commentId = (int)$_POST['comment_id'];
     $userId =  (int)$_SESSION['user']['id'];
     $comment = $_POST['comment'];
-
 
     updateComment($pdo, $postId, $userId, $commentId, $comment);
 
@@ -34,7 +29,6 @@ if (isset($_POST['comment'], $_POST['post_id'], $_POST['comment_id'])) {
 /* Update posts */
 
 if (isset($_POST['post_id_edit'], $_POST['user_id'], $_POST['title'], $_POST['description'], $_POST['url'])) {
-
     $postId = (int)$_POST['post_id_edit'];
     $userId = (int)$_POST['user_id'];
     $title = $_POST['title'];

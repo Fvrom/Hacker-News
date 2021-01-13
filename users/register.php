@@ -1,10 +1,10 @@
 <?php
 
 declare(strict_types=1);
+
 require __DIR__ . '/../app/autoload.php';
 
 if (isset($_POST['submit'])) {
-
     $first_name = filter_var($_POST['first_name'], FILTER_SANITIZE_STRING);
     $last_name = filter_var($_POST['last_name'], FILTER_SANITIZE_STRING);
     $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
@@ -25,7 +25,6 @@ if (isset($_POST['submit'])) {
     }
 
     emailExists($pdo, $email);
-
     if ($_SESSION['checkEmail'] === $email) {
         $_SESSION['errors'][] = "Email already in use";
         redirect("../signup.php");

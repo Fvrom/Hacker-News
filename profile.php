@@ -1,15 +1,15 @@
 <?php require __DIR__ . '/app/autoload.php'; ?>
 <?php require __DIR__ . '/header.php'; ?>
 
-<?php if (isset($_SESSION['errors'])) {  ?>
-    <p class="error-message"> <?php errorMessage();
-                                unset($_SESSION['errors']); //delete error message after displayed
-                            } ?> </p>
+<?php if (isset($_SESSION['errors'])) : ?>
+    <p class="error-message"> <?php errorMessage(); ?>
+    <?php unset($_SESSION['errors']); //delete error message after displayed
+endif; ?> </p>
     <div class="successful-container">
-        <?php if (isset($_SESSION['successful'])) {  ?>
-            <p class="successful-message"> <?php successfulMessage();
-                                            unset($_SESSION['successful']); //delete error message after displayed
-                                        } ?> </p>
+        <?php if (isset($_SESSION['successful'])) :  ?>
+            <p class="successful-message"> <?php successfulMessage(); ?>
+            <?php unset($_SESSION['successful']); //delete error message after displayed
+        endif; ?> </p>
 
     </div>
     <?php
@@ -21,14 +21,9 @@
         $profileId = $userProfile['id'];
         $userPosts = getUserPosts($pdo, $profileId);
 
-
         $userId = $_SESSION['user']['id'];
     }
-
     ?>
-
-
-
 
     <section>
 
@@ -47,18 +42,12 @@
 
             <?php // Check if user logged in is the owner of this profile page.
             // If it is, show button for settings.
-
             if ($profileId === $_SESSION['user']['id']) : ?>
 
                 <a href="settings.php?username=<?php echo $_SESSION['user']['username']; ?> "> <button class="edit-profile">Edit profile</button> </a>
 
             <?php endif; ?>
         </article>
-
-        <!-- TO DO:
-        Javascript eventlistener for button. Redirect to settings page.
-
-            -->
 
         <h2 class="user-posts-title"> Posts </h2>
         <?php if (!is_array($userPosts)) : ?>
@@ -79,15 +68,10 @@
                 ?>
 
                 <article class="home-page">
-
-
-
                     <div class="posts-wrapper">
                         <div class="post-item-author">
                             <p> By: <?php echo $userPost['username']; ?> ,
-
                                 <?php echo $userPost['post_date']; ?> </p>
-
 
                         </div>
                         <div class="post-item">
@@ -101,16 +85,12 @@
 
                         </div>
 
-
                         <div class="info-wrapper">
 
                             <div class="post-item-comment">
                                 <a href="comments.php?id=<?php echo $userPost['id']; ?> "> <?php echo $countComments; ?> Comments </a>
 
                             </div>
-
-
-
 
                             <div class="post-item-like">
                                 <form action="/app/posts/likes.php" method="post">
@@ -127,15 +107,10 @@
                                             <button class="like-button" type="submit"> Like </button>
 
                                         <?php endif; ?>
-
-
                                     </p>
                                 </form>
                             </div>
                         </div>
-
-
-
 
                         <?php if ($profileId === $_SESSION['user']['id']) : ?>
                             <div class="edit-wrapper">
@@ -167,7 +142,7 @@
                                     </div>
                                 </form>
 
-                                <form class="form-hidden" action="/app/posts/delete.php" method="post">
+                                <form class="form" action="/app/posts/delete.php" method="post">
 
                                     <input type="hidden" name="post_id_delete" id="post_id_delete" value="<?php echo $postId ?>">
 
@@ -177,8 +152,8 @@
                             </div>
                             </form>
                     </div>
-                    </div>
-                    </div>
+
+
                 <?php endif; ?>
 
                 </article>

@@ -1,13 +1,13 @@
 <?php require __DIR__ . '/app/autoload.php'; ?>
-<?php require __DIR__ . '/header.php'; ?>
 
+<?php require __DIR__ . '/header.php'; ?>
 
 <section class="log-in-section">
     <div class="log-in-container">
-        <?php if (isset($_SESSION['errors'])) {  ?>
-            <p class="error-message"> <?php errorMessage();
-                                        unset($_SESSION['errors']); //delete error message after displayed
-                                    } ?> </p>
+        <?php if (isset($_SESSION['errors'])) : ?>
+            <p class="error-message"> <?php errorMessage(); ?>
+            <?php unset($_SESSION['errors']); //delete error message after displayed
+        endif; ?> </p>
 
             <h2 class="title-form"> Login here </h2>
             <form class="login-form" action="/users/login.php" method="post">

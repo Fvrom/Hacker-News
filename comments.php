@@ -56,7 +56,6 @@ if (isset($_GET['id'])) {
                         <input type="hidden" name="post-id" id="post-id" value="<?php echo $post['id'] ?>">
                         <button class="unlike-button" type="submit"> Unlike </button>
                     <?php else : ?>
-
                         <input type="hidden" name="post-id" id="post-id" value="<?php echo $post['id'] ?>">
                         <button class="like-button" type="submit"> Like </button>
 
@@ -76,7 +75,6 @@ if (isset($_GET['id'])) {
             <p> No Comments yet </p>
         </div>
     </div>
-
 <?php endif; ?>
 
 

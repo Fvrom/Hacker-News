@@ -8,14 +8,12 @@ require __DIR__ . '/../app/autoload.php'; ?>
 // Backend for the settings part.
 
 if (isset($_POST['username'])) {
-
     $changeUsername = filter_var($_POST['username'], FILTER_SANITIZE_STRING);
     $userId = $_SESSION['user']['id'];
     $checkUsernamePattern = preg_match('/^[a-zA-Z0-9]{5,15}$/', $changeUsername);
 
     usernameExists($pdo, $changeUsername);
     if ($_SESSION['checkuser']['username'] === $changeUsername) {
-
         $_SESSION['errors'][] = "The username is already taken, please try again!";
         redirect("../settings.php");
     }
@@ -44,7 +42,6 @@ if (isset($_POST['username'])) {
 }
 
 if (isset($_POST['biography'])) {
-
     $updateBiography = filter_var($_POST['biography'], FILTER_SANITIZE_STRING);
 
     $statement = $pdo->prepare('UPDATE Users SET biography = :updateBiography WHERE id = :id');

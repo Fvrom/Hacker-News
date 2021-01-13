@@ -4,26 +4,21 @@
  <?php $userId = $_SESSION['user']['id']; ?>
 
  <section>
-
      <article class="home-page">
-
-
          <div class="successful-container">
-             <?php if (isset($_SESSION['successful'])) {  ?>
-                 <p class="successful-message"> <?php successfulMessage();
-                                                unset($_SESSION['successful']); //delete error message after displayed
-                                            } ?> </p>
+             <?php if (isset($_SESSION['successful'])) :  ?>
+                 <p class="successful-message"> <?php successfulMessage(); ?>
+                 <?php unset($_SESSION['successful']); //delete error message after displayed
+                endif; ?> </p>
          </div>
-         <?php if (isset($_SESSION['errors'])) {  ?>
-             <p class="error-message"> <?php errorMessage();
-                                        unset($_SESSION['errors']); //delete error message after displayed
-                                    } ?> </p>
+         <?php if (isset($_SESSION['errors'])) :  ?>
+             <p class="error-message"> <?php errorMessage(); ?>
+             <?php unset($_SESSION['errors']); //delete error message after displayed
+            endif; ?> </p>
 
 
 
      </article>
-
-
 
      <?php $allPost = getAllPosts($pdo, $allPosts);
 
@@ -38,9 +33,7 @@
              <div class="posts-wrapper">
                  <div class="post-item-author">
                      <p> By: <a href="profile.php?username=<?php echo $post['username']; ?> "> <?php echo $post['username']; ?></a> ,
-
                          <?php echo $post['post_date']; ?> </p>
-
 
                  </div>
                  <div class="post-item">
@@ -75,7 +68,6 @@
                                      <input type="hidden" name="post-id" id="post-id" value="<?php echo $post['id'] ?>">
                                      <button class="unlike-button" type="submit"> Unlike </button>
                                  <?php else : ?>
-
                                      <input type="hidden" name="post-id" id="post-id" value="<?php echo $post['id'] ?>">
                                      <button class="like-button" type="submit"> Like </button>
 
@@ -88,13 +80,9 @@
                  </div>
              </div>
 
-
          </article>
      <?php endforeach; ?>
 
-
  </section>
-
-
 
  <?php require __DIR__ . '/footer.php'; ?>

@@ -13,7 +13,6 @@ $_SESSION['successful'] = [];
 $_SESSION['errors'] = [];
 
 if (isset($_FILES['avatar'])) {
-
     $avatar = $_FILES['avatar'];
     $avatarName = $_FILES['avatar']['name'];
     $uploadPath = __DIR__ . '/assets/images/' . $avatar['name'];

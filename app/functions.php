@@ -47,7 +47,6 @@ function invalidEmail($email)
 /* Check database for existing username */
 function usernameExists($pdo, $username)
 {
-
     $statement = $pdo->prepare('SELECT username FROM Users WHERE username = :username;');
     $statement->BindParam(':username', $username, PDO::PARAM_STR);
     $statement->execute();
@@ -74,7 +73,6 @@ function usernameExists($pdo, $username)
 /* check database for existing email */
 function emailExists($pdo, $email)
 {
-
     $statement = $pdo->prepare('SELECT email FROM Users WHERE email = :email;');
     $statement->BindParam(':email', $email);
     $statement->execute();
@@ -122,7 +120,6 @@ function createUser($pdo, $username, $first_name, $last_name, $email, $password,
 
 function getUser($pdo, $username)
 {
-
     $_SESSION['errors'] = [];
 
     $statement = $pdo->prepare("SELECT id, username, avatar, biography FROM Users WHERE username = :username");
@@ -141,7 +138,6 @@ function getUser($pdo, $username)
 
 function getUserPwd($pdo, $id)
 {
-
     $statement = $pdo->prepare("SELECT password FROM Users WHERE id = :id");
     $statement->BindParam(':id', $id, PDO::PARAM_STR);
     $statement->execute();
@@ -187,7 +183,6 @@ function getUserPosts($pdo, int $profileId)
 
 function getAllPosts($pdo, $allPosts)
 {
-
     $_SESSION['errors'] = [];
 
     $statement = $pdo->prepare("SELECT Posts.*, Users.username FROM Users
@@ -309,7 +304,6 @@ function topLikes($pdo)
 /* Check if post is like by user */
 function isLikedByUser($pdo, $postId, $userId)
 {
-
     $statement = $pdo->prepare('SELECT * FROM Likes WHERE post_id = :postId
     AND user_id = :userId;');
 
@@ -328,7 +322,6 @@ function isLikedByUser($pdo, $postId, $userId)
 
 function uploadImage($pdo, $avatarName, $userId)
 {
-
     $statement = $pdo->prepare("UPDATE Users SET avatar = :avatar WHERE id = :userId");
     $statement->BindParam(':avatar', $avatarName, PDO::PARAM_STR);
     $statement->BindParam(':userId', $userId, PDO::PARAM_INT);
@@ -343,7 +336,6 @@ function uploadImage($pdo, $avatarName, $userId)
 
 function updateComment($pdo, int $postId, int $userId, int $commentId, string $comment)
 {
-
     $sql = "UPDATE Comments SET comment = :comment WHERE comment_id = :commentId AND post_id = :postId AND user_id = :userId;";
     $statement = $pdo->prepare($sql);
     $statement->bindParam(':comment', $comment);
@@ -359,7 +351,6 @@ function updateComment($pdo, int $postId, int $userId, int $commentId, string $c
 
 function updatePost($pdo, int $postId, int $userId, string $title, string $description, string $url)
 {
-
     $sql = "UPDATE Posts SET title = :title,
     description = :description,
     post_url = :url
@@ -383,18 +374,14 @@ function updatePost($pdo, int $postId, int $userId, string $title, string $descr
 
 function deleteComment($pdo, int $postId, int $userId, int $commentId)
 {
-
     $statement = $pdo->prepare("DELETE FROM Comments WHERE post_id = :postId AND comment_id = :commentId AND user_id = :userId;");
 
     $statement->BindParam(':postId', $postId);
     $statement->bindParam(':commentId', $commentId);
     $statement->BindParam(':userId', $userId);
 
-
-
     $statement->execute();
 }
-
 
 /* Delete post */
 
@@ -407,7 +394,6 @@ function deletePost($pdo, int $postId, int $userId)
 
     $statement->bindParam(':postId', $postId, PDO::PARAM_INT);
     $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
-
 
     $statement->execute();
     if (!$statement) {

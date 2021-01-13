@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 require __DIR__ . '/../autoload.php';
 
 if (isset($_POST['comment'], $_POST['post_id'])) {
@@ -13,6 +12,7 @@ if (isset($_POST['comment'], $_POST['post_id'])) {
     $postId = $_POST['post_id'];
 
     $_SESSION['successful'] = [];
+
     $_SESSION['errors'] = [];
 
     $sql = "INSERT INTO Comments (comment, comment_date, user_id, post_id) VALUES (:comment, :commentDate, :userId, :postId);";
@@ -32,7 +32,6 @@ if (isset($_POST['comment'], $_POST['post_id'])) {
     $statement->execute();
 
     $_SESSION['successful'][] = "Your comment has successfully been posted!";
-
 
     redirect("/../comments.php?id=$postId");
 } else {
