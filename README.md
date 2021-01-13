@@ -1,10 +1,10 @@
 # Jul-Projekt
 
-Assignment in web development. </br>
+Coding assignment in web development at Yrgo. </br>
 
 Create a clone of the site Hacker news.
 
-Deadline: 13th January.
+
 
 ## Features that needs to be included
 
