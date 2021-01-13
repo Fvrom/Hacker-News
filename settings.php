@@ -9,14 +9,12 @@ if (isset($_SESSION['user']['username'])) {
 
     $profileId = $userProfile['id'];
 }
-
 ?>
 
 <?php if (isset($_SESSION['errors'])) :  ?>
     <p class="error-message"> <?php errorMessage(); ?>
     <?php unset($_SESSION['errors']);  //delete error message after displayed
 endif; ?> </p>
-
     <?php if (isset($_SESSION['successful'])) : ?>
         <p class="error-message"> <?php successfulMessage(); ?>
         <?php unset($_SESSION['successful']);
@@ -31,16 +29,13 @@ endif; ?> </p>
                         <button type="submit" class="submit-button"> Change username </button>
                     </div>
                 </form>
-
                 <form action="/users/updateSettings.php" method="post">
                     <div class="sign-up">
                         <label for="biography"> Biography </label>
                         <input type="text" name="biography" id="biography" placeholder=" <?php echo $userProfile['biography']; ?>">
                         <button type="submit"> Update bio </button>
-
                     </div>
                 </form>
-
                 <form action="/users/avatar.php" method="post" enctype="multipart/form-data">
                     <div class="sign-up">
                         <label for="avatar"> Choose profile image to upload. (Max 2MB) </label>
@@ -48,7 +43,6 @@ endif; ?> </p>
                         <button type="submit" class="submit-button"> Update image </button>
                     </div>
                 </form>
-
                 <form action="/users/updateSettings.php" method="post">
                     <div class="sign-up">
                         <label for="email"> Change email </label>
@@ -57,7 +51,6 @@ endif; ?> </p>
                     </div>
                     <div class="sign-up">
                 </form>
-
                 <form action="/users/updateSettings.php" method="post">
                     <div class="sign-up">
                         <label for="password"> Current password </label>
@@ -68,7 +61,6 @@ endif; ?> </p>
                         <input type="password" name="repeatPwd" id="repeatPwd">
                         <button type="submit" class="submit-button"> Change password </button>
                     </div>
-
                 </form>
                 <div class="sign-up">
                     <button> <a href="profile.php?username=<?php echo $_SESSION['user']['username']; ?>"> Back to your profile </a> </button>

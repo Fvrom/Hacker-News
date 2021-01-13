@@ -4,7 +4,8 @@
 <?php if (isset($_SESSION['errors'])) : ?>
     <p class="error-message"> <?php errorMessage(); ?>
     <?php unset($_SESSION['errors']); //delete error message after displayed
-endif; ?> </p>
+endif; ?>
+    </p>
     <div class="successful-container">
         <?php if (isset($_SESSION['successful'])) :  ?>
             <p class="successful-message"> <?php successfulMessage(); ?>
@@ -42,7 +43,9 @@ endif; ?> </p>
             <?php endif; ?>
         </article>
         <h2 class="user-posts-title"> Posts </h2>
+
         <?php if (!is_array($userPosts)) : ?>
+
             <div class="comments-wrapper">
                 <div class="post-item">
                     <p> No posts yet! </p>
@@ -126,6 +129,7 @@ endif; ?> </p>
                 </article>
             <?php endforeach; ?>
         <?php endif; ?>
+
     </section>
 
     <?php require __DIR__ . '/footer.php'; ?>
