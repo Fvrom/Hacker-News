@@ -165,7 +165,7 @@ function getUserPosts($pdo, int $profileId)
 }
 /** All posts  **/
 
-function getAllPosts($pdo, $allPosts)
+function getAllPosts($pdo)
 {
     $_SESSION['errors'] = [];
 

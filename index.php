@@ -19,7 +19,7 @@
              </p>
      </article>
 
-     <?php $allPost = getAllPosts($pdo, $allPosts);
+     <?php $allPost = getAllPosts($pdo);
         foreach ($allPost as $post) : ?>
          <?php $postId = $post['id'];  ?>
 
@@ -50,13 +50,14 @@
                              <p> <?php echo $countLikes; ?> Likes
 
                                  <?php $isLikedByUser = isLikedByUser($pdo, $postId, $userId); ?>
-
-                                 <?php if (is_array($isLikedByUser)) : ?>
-                                     <input type="hidden" name="post-id" id="post-id" value="<?php echo $post['id'] ?>">
-                                     <button class="unlike-button" type="submit"> Unlike </button>
-                                 <?php else : ?>
-                                     <input type="hidden" name="post-id" id="post-id" value="<?php echo $post['id'] ?>">
-                                     <button class="like-button" type="submit"> Like </button>
+                                 <?php if ($_SESSION['user']) : ?>
+                                     <?php if (is_array($isLikedByUser)) : ?>
+                                         <input type="hidden" name="post-id" id="post-id" value="<?php echo $post['id'] ?>">
+                                         <button class="unlike-button" type="submit"> Unlike </button>
+                                     <?php else : ?>
+                                         <input type="hidden" name="post-id" id="post-id" value="<?php echo $post['id'] ?>">
+                                         <button class="like-button" type="submit"> Like </button>
+                                     <?php endif; ?>
                                  <?php endif; ?>
                              </p>
                          </form>

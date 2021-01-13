@@ -10,7 +10,7 @@ if (isset($_POST['title'], $_POST['description'], $_POST['url'])) {
     $postUrl = filter_var($_POST['url'], FILTER_SANITIZE_URL);
 
     $userId = $_SESSION['user']['id'];
-    $postDate = date("Y-m-d D h:i");
+    $postDate = date('Y-m-d H:i:s');
 
     $_SESSION['successful'] = [];
 
@@ -25,11 +25,11 @@ if (isset($_POST['title'], $_POST['description'], $_POST['url'])) {
         redirect("/submit.php");
     }
 
-    $statement->BindParam(':title', $title);
-    $statement->BindParam(':postDescription', $description);
-    $statement->BindParam(':postUrl', $postUrl);
-    $statement->BindParam(':postDate', $postDate);
-    $statement->BindParam(':userId', $userId);
+    $statement->BindParam(':title', $title, PDO::PARAM_STR);
+    $statement->BindParam(':postDescription', $description, PDO::PARAM_STR);
+    $statement->BindParam(':postUrl', $postUrl, PDO::PARAM_STR);
+    $statement->BindParam(':postDate', $postDate, PDO::PARAM_STR);
+    $statement->BindParam(':userId', $userId, PDO::PARAM_INT);
 
     $statement->execute();
 

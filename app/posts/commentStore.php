@@ -8,7 +8,7 @@ if (isset($_POST['comment'], $_POST['post_id'])) {
     $comment = $_POST['comment'];
 
     $userId = $_SESSION['user']['id'];
-    $commentDate = date("Y-m-d D h:i");  //("Y-m-d H:i");
+    $commentDate = date("Y-m-d D H:i:s");  //("Y-m-d H:i");
     $postId = $_POST['post_id'];
 
     $_SESSION['successful'] = [];

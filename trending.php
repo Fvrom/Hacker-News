@@ -41,13 +41,15 @@
                         <p> <?php echo $countLikes; ?> Likes
 
                             <?php $isLikedByUser = isLikedByUser($pdo, $postId, $userId); ?>
+                            <?php if ($_SESSION['user']) : ?>
+                                <?php if (is_array($isLikedByUser)) : ?>
+                                    <input type="hidden" name="post-id" id="post-id" value="<?php echo $topLike['id'] ?>">
+                                    <button class="unlike-button" type="submit"> Unlike </button>
+                                <?php else : ?>
+                                    <input type="hidden" name="post-id" id="post-id" value="<?php echo $topLike['id'] ?>">
+                                    <button class="like-button" type="submit"> Like </button>
 
-                            <?php if (is_array($isLikedByUser)) : ?>
-                                <input type="hidden" name="post-id" id="post-id" value="<?php echo $topLike['id'] ?>">
-                                <button class="unlike-button" type="submit"> Unlike </button>
-                            <?php else : ?>
-                                <input type="hidden" name="post-id" id="post-id" value="<?php echo $topLike['id'] ?>">
-                                <button class="like-button" type="submit"> Like </button>
+                                <?php endif; ?>
 
                             <?php endif; ?>
                         </p>
