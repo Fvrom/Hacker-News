@@ -2,7 +2,7 @@
  <?php require __DIR__ . '/header.php'; ?>
 
  <?php $userId = $_SESSION['user']['id']; ?>
-
+ <a name="top"></a>
  <section>
      <article class="home-page">
          <div class="successful-container">
