@@ -96,21 +96,25 @@ if (isset($_GET['id'])) {
 
 <?php if (isset($_SESSION['user'])) : ?>
 
+
     <form action="/app/posts/commentStore.php" method="post">
 
+        <div class="post-item">
 
-        <div class="posts-wrapper">
-            <input type="hidden" name="post_id" id="post_id" value="<?php echo $postId ?>">
+            <div class="post-item">
+                <input type="hidden" name="post_id" id="post_id" value="<?php echo $postId ?>">
+            </div>
             <label for="comment"> Comment </label>
 
             <input type="text" name="comment" id="comment">
-
-            <button type="submit" class="submit-button"> Post comment </button>
-
-
+            <div class="btn-wrapper">
+                <button class=" comment-btn" type="submit" class="submit-button"> Post comment </button>
+            </div>
         </div>
 
+
     </form>
+
 
 <?php endif; ?>
 
@@ -138,28 +142,33 @@ if (isset($_GET['id'])) {
             <div>
                 <?php if ($userComment['user_id'] === $_SESSION['user']['id']) : ?>
 
-                    <button> Edit Comment </button>
-                    <div class="post-item">
-                        <form action="/app/posts/update.php" method="post">
+                    <button class="comment-btn"> Edit Comment </button>
+                    <div class="comments-container">
+                        <form class="comments-form" action="/app/posts/update.php" method="post">
                             <!-- This is to be hidden. Gets visable when user clicks on Edit comment -->
                             <input type="text" name="comment" id="comment" placeholder=" <?php echo $userComment['comment']; ?>">
 
                             <input type="hidden" name="comment_id" id="comment_id" value="<?php echo $userComment['comment_id'] ?>">
 
                             <input type="hidden" name="post_id" id="post_id" value="<?php echo $post['id']; ?>">
-                            <button type="submit"> Update comment </button>
+                            <div class="btn-wrapper">
+                                <button class="comment-btn" type="submit"> Update comment </button>
+                            </div>
                             <!-- end of hidden -->
                     </div>
 
                     </form>
-                    <form action="/app/posts/delete.php" method="post">
-                        <input type="hidden" name="user_id_delete_comment" id="user_id_delete_comment" value="<?php echo $userComment['user_id'] ?>">
-                        <input type="hidden" name="comment_id" id="comment_id" value="<?php echo $userComment['comment_id'] ?>">
-                        <input type="hidden" name="post_id" id="post_id" value="<?php echo $post['id']; ?>">
+                    <div class="comments-container">
+                        <form action="/app/posts/delete.php" method="post">
+
+                            <input type="hidden" name="user_id_delete_comment" id="user_id_delete_comment" value="<?php echo $userComment['user_id'] ?>">
+                            <input type="hidden" name="comment_id" id="comment_id" value="<?php echo $userComment['comment_id'] ?>">
+                            <input type="hidden" name="post_id" id="post_id" value="<?php echo $post['id']; ?>">
 
 
-                        <button type="submit"> Delete comment </button>
-                    </form>
+                            <button class="comment-btn" type="submit"> Delete comment </button>
+                        </form>
+                    </div>
                 <?php endif; ?>
             </div>
         </article>

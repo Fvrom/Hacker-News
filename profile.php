@@ -61,13 +61,14 @@
             -->
 
         <h2 class="user-posts-title"> Posts </h2>
-        <?php if (!is_array($userPost)) : ?>
+        <?php if (!is_array($userPosts)) : ?>
             <div class="comments-wrapper">
                 <div class="post-item">
                     <p> No posts yet! </p>
                 </div>
             </div>
         <?php endif; ?>
+
         <?php if (is_array($userPosts)) : ?>
             <?php foreach ($userPosts as $userPost) : ?>
                 <?php $postId = $userPost['id'];

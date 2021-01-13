@@ -16,3 +16,26 @@
 .post-item {
   text-align: center;
 }
+
+.comments-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  width: 90%;
+  height: 60%;
+}
+
+.comments-form input {
+  width: 100%;
+}
+
+.comment-btn {
+  margin: 1rem;
+  font-size: 1.3rem;
+  align-self: center;
+  height: 2.2rem;
+  background: #ff6600;
+  border-radius: 1rem;
+  color: black;
+}
