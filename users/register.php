@@ -20,7 +20,7 @@ if (isset($_POST['submit'])) {
 
 
 
-    // if there's anything other than false, then throw error. 
+    // if there's anything other than false, then throw error.
     usernameExists($pdo, $username);
     if ($_SESSION['checkuser']['username'] === $username) {
 
@@ -35,7 +35,7 @@ if (isset($_POST['submit'])) {
         redirect("../signup.php");
     }
 
-    /* search parameter to see if username uses any other characters than approved, 
+    /* search parameter to see if username uses any other characters than approved,
     also checks characters length*/
     if ($checkUsernamePattern === 0) {
         $_SESSION['errors'][] = "Obs! Something when wrong with the username. Either it is too short, too long or you have used characters that are not allowed.
@@ -66,9 +66,4 @@ if (isset($_POST['submit'])) {
 
 
     createUser($pdo, $username, $first_name, $last_name, $email, $createPassword, $message);
-} /*else {
-    header("location: ../signup.php");
-    echo "Did not work, try again";
-    exit(); // stopping the script from running 
 }
-*/

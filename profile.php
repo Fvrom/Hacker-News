@@ -45,8 +45,8 @@
                 <p class="biography"> <?php echo $userProfile['biography']; ?> </p>
             </div>
 
-            <?php // Check if user logged in is the owner of this profile page. 
-            // If it is, show button for settings. 
+            <?php // Check if user logged in is the owner of this profile page.
+            // If it is, show button for settings.
 
             if ($profileId === $_SESSION['user']['id']) : ?>
 
@@ -55,9 +55,9 @@
             <?php endif; ?>
         </article>
 
-        <!-- TO DO: 
+        <!-- TO DO:
         Javascript eventlistener for button. Redirect to settings page.
-      
+
             -->
 
         <h2 class="user-posts-title"> Posts </h2>
@@ -158,8 +158,8 @@
                                         <label for="url"> Url to the post </label>
                                     </div>
                                     <input type="url" name="url" id="url" placeholder=" <?php echo $userPost['post_url']; ?>"" required>
-                                   
-                                   
+
+
                                     <div class=" button-wrapper">
                                     <div>
                                         <button type=" submit"> Update post </button>

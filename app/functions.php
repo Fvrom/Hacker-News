@@ -57,7 +57,7 @@ function usernameExists($pdo, $username)
     $statement->BindParam(':username', $username, PDO::PARAM_STR);
     $statement->execute();
 
-    // check if user exists 
+    // check if user exists
     $checkUser = $statement->fetch(PDO::FETCH_ASSOC);
 
     $_SESSION['checkuser'] = $checkUser;
@@ -71,7 +71,7 @@ function usernameExists($pdo, $username)
     unset($_SESSION['first_name']);
     unset($_SESSION['last_name']);
     unset($_SESSION['avatar']);
-    unset($_SESSION['biography']); */ // don't need? vi plockar bara ut username. 
+    unset($_SESSION['biography']); */ // don't need? vi plockar bara ut username.
 
 
 }
@@ -84,7 +84,7 @@ function emailExists($pdo, $email)
     $statement->BindParam(':email', $email);
     $statement->execute();
 
-    // check if user exists 
+    // check if user exists
     $checkEmail = $statement->fetch(PDO::FETCH_ASSOC);
 
     $_SESSION['checkEmail'] = $checkEmail['email'];
@@ -119,7 +119,7 @@ function createUser($pdo, $username, $first_name, $last_name, $email, $password,
 
     $_SESSION['successful'][] = "Your account has been created! You can now log in.";
     /* $_SESSION['successful'] = $message;
- 
+
     echo $message; */
     redirect("/index.php");
 }
@@ -165,17 +165,7 @@ function getUserPwd($pdo, $id)
     return $_SESSION['pwd'];
 }
 
-/* Delete this?!
-function updateUserSession($pdo, $statement, $updatedUser, $id)
-{
-    $statement = $pdo->prepare("SELECT * FROM users WHERE id = :id");
-    $statement->BindParam(':id', $id);
-    $statement->execute();
 
-    $updatedUser = $statement->fetch(PDO::FETCH_ASSOC);
-    unset($updatedUser['password']);
-    $_SESSION['user'] = $updatedUser;
-} */
 
 /***** Posts  *****/
 
@@ -207,8 +197,8 @@ function getPostsComments($pdo, $postId)
 {
     $_SESSION['errors'] = [];
 
-    $statement = $pdo->prepare("SELECT Comments.*, Users.username FROM Comments 
-    INNER JOIN Users 
+    $statement = $pdo->prepare("SELECT Comments.*, Users.username FROM Comments
+    INNER JOIN Users
     ON Comments.user_id = Users.id
     WHERE post_id = :postId
     ORDER BY Comments.comment_date DESC");
@@ -261,12 +251,12 @@ function topLikes($pdo)
     $statement = $pdo->query('SELECT COUNT(Likes.post_id) AS votes, Posts.*, Users.username FROM Likes
     INNER JOIN Posts
     ON Posts.id = Likes.post_id
-    INNER JOIN Users 
+    INNER JOIN Users
     ON Posts.user_id = Users.id
-    GROUP BY 
+    GROUP BY
     Posts.id
     ORDER BY COUNT(1) DESC
-    LIMIT 10; 
+    LIMIT 10;
    ');
 
     $statement->execute();
@@ -293,12 +283,7 @@ function isLikedByUser($pdo, $postId, $userId)
     return $isLikedByUser;
 }
 
-/*
-SELECT users.id FROM users
-INNER JOIN posts
-ON users.id = posts.author
-WHERE users.id = 1;
-*/
+
 
 /** All posts  **/
 
@@ -381,7 +366,7 @@ function updatePost($pdo, int $postId, int $userId, string $title, string $descr
 {
 
     $sql = "UPDATE Posts SET title = :title,
-    description = :description, 
+    description = :description,
     post_url = :url
     WHERE id = :postId AND user_id = :userId;";
     $statement = $pdo->prepare($sql);
@@ -422,7 +407,7 @@ function deletePost($pdo, int $postId, int $userId)
 {
     $statement = $pdo->prepare("DELETE FROM Posts WHERE id = :postId AND user_id = :userId;
     DELETE FROM Comments WHERE post_id = :postId;
-    DELETE FROM Likes WHERE post_id = :postId; 
+    DELETE FROM Likes WHERE post_id = :postId;
     ");
 
     $statement->bindParam(':postId', $postId, PDO::PARAM_INT);
@@ -433,21 +418,4 @@ function deletePost($pdo, int $postId, int $userId)
     if (!$statement) {
         die(var_dump($pdo->errorInfo()));
     }
-    /* 
-    $statement = $pdo->prepare("DELETE FROM Comments WHERE post_id = :postId;");
-    $statement->BindParam(':postId', $postId, PDO::PARAM_INT);
-
-    $statement->execute();
-    if (!$statement) {
-        die(var_dump($pdo->errorInfo()));
-    }
-
-    $statement = $pdo->prepare("DELETE FROM Likes WHERE post_id = :postId;");
-    $statement->BindParam(':postId', $postId, PDO::PARAM_INT);
-
-    $statement->execute();
-
-    if (!$statement) {
-        die(var_dump($pdo->errorInfo()));
-    } */
 }
