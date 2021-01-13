@@ -52,6 +52,7 @@ Create a clone of the site Hacker news.
 #### To do 
 - [ ] Add unique id for avatar images
 - [ ] Put a max-width.
+- [ ] Accessibility 
 
 ### Extra features
 
