@@ -1,8 +1,9 @@
 <?php require __DIR__ . '/app/autoload.php'; ?>
 <?php require __DIR__ . '/header.php'; ?>
 
-
-<?php $userId = $_SESSION['user']['id']; ?>
+<?php if (isset($_SESSION['user'])) : ?>
+    <?php $userId = $_SESSION['user']['id']; ?>
+<?php endif; ?>
 <?php $topLikes = topLikes($pdo); ?>
 <?php foreach ($topLikes as $topLike) : ?>
     <?php $postId = $topLike['id'];  ?>
@@ -39,9 +40,9 @@
                 <div class="post-item-like">
                     <form action="/app/posts/likes.php" method="post">
                         <p> <?php echo $countLikes; ?> Likes
+                            <?php if (isset($_SESSION['user'])) : ?>
+                                <?php $isLikedByUser = isLikedByUser($pdo, $postId, $userId); ?>
 
-                            <?php $isLikedByUser = isLikedByUser($pdo, $postId, $userId); ?>
-                            <?php if ($_SESSION['user']) : ?>
                                 <?php if (is_array($isLikedByUser)) : ?>
                                     <input type="hidden" name="post-id" id="post-id" value="<?php echo $topLike['id'] ?>">
                                     <button class="unlike-button" type="submit"> Unlike </button>
