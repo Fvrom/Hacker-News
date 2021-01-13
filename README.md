@@ -79,4 +79,26 @@ php -S localhost:8000
 
 2. [Réka Madarász](https://github.com/mreka91)
 
-## Feedback:
+
+## Feedback: - Joakim Sjögren
+
+- index.php: 4 - Causes a warning when you are not logged in. Same with trending.php: 5.
+
+- index.php - I like the use of shorthanded if statements, makes it easy to read. 
+
+- index.php: 22 - Causes a warning. because the file is trying to pass in an undefined variable as an argument "$allPosts".
+
+- comments.php: 7 - Unused variable.
+
+- login.php - I like the feedback given to the user in forms of error messages.
+
+- login.php - I would add an if statement to check if a user is logged in. Currently you can like a post even if you are not logged in.
+
+- commentstore.php: 18 - I like the idea of storing a query in a variable.
+
+- The css files are well structured and easy to understand.
+
+- submit.php: 13 - Instead of telling the user to log in, i would send them directly to the login page.
+
+- I like that there's a lot of comments through out the project explaining what you are doing.
+- Great job!
