@@ -5,9 +5,7 @@ declare(strict_types=1);
 require __DIR__ . '/../app/autoload.php'; ?>
 
 <?php
-// Backend for the settings part. 
-
-
+// Backend for the settings part.
 
 if (isset($_POST['username'])) {
 
@@ -69,14 +67,11 @@ if (isset($_POST['biography'])) {
 if (isset($_POST['changeEmail'])) {
     $changeEmail = $_POST['changeEmail'];
 
-    // $email = $_SESSION['user']['email'];
-
     /* this is just to be extra sure, there is a safety in user input email in the form */
     if (invalidEmail($changeEmail) !== false) {
         $_SESSION['errors'][] = "Invalid Email, please try again.";
         redirect("/../settings.php?id=$username");
     }
-
 
     emailExists($pdo, $changeEmail);
 
@@ -100,10 +95,7 @@ if (isset($_POST['changeEmail'])) {
     redirect("/../settings.php?id=$username");
 }
 
-
 if (isset($_POST['currentPwd'], $_POST['changePwd'], $_POST['repeatPwd'])) {
-
-
     $currentPwd = $_POST['currentPwd'];
     $changePwd = $_POST['changePwd'];
     $repeatPwd = $_POST['repeatPwd'];
@@ -118,7 +110,6 @@ if (isset($_POST['currentPwd'], $_POST['changePwd'], $_POST['repeatPwd'])) {
     getUserPwd($pdo, $id);
 
     if (password_verify($currentPwd, $_SESSION['pwd'])) {
-
         unset($_SESSION['pwd']);
 
         $hashedNewPwd = password_hash($changePwd, PASSWORD_DEFAULT);
@@ -138,5 +129,3 @@ if (isset($_POST['currentPwd'], $_POST['changePwd'], $_POST['repeatPwd'])) {
         redirect("/../settings.php?id=$username");
     }
 }
-
-/* Lägg till ny session för users när de ändrar info */

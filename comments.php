@@ -14,27 +14,21 @@ if (isset($_GET['id'])) {
 
     $userComments = getPostsComments($pdo, $postId);
 }
-
 ?>
 
-
 <div class="successful-container">
-    <?php if (isset($_SESSION['successful'])) {  ?>
-        <p class="successful-message"> <?php successfulMessage();
-                                        unset($_SESSION['successful']); //delete error message after displayed
-                                    } ?> </p>
+    <?php if (isset($_SESSION['successful'])) :  ?>
+        <p class="successful-message"> <?php successfulMessage();  ?>
+        <?php unset($_SESSION['successful']);
+    endif; ?> </p>
 </div>
 
-
 <article class="home-page">
-
     <div class="posts-wrapper">
         <div class="post-item-author">
             <p> By: <a href="profile.php?username=<?php echo $post['username']; ?> "> <?php echo $post['username']; ?> </a> ,
 
                 <?php echo $post['post_date']; ?> </p>
-
-
         </div>
         <div class="post-item">
             <h3 class="post-title"> <?php echo $post['title']; ?> </h3>
@@ -47,38 +41,30 @@ if (isset($_GET['id'])) {
 
         </div>
 
-
         <div class="info-wrapper">
-
             <div class="post-item-comment">
                 <a href="comments.php?id=<?php echo $post['id']; ?> "> <?php echo $countComments; ?> Comments </a>
-
-            </div>
-
-
-
-
-            <div class="post-item-like">
-                <form action="/app/posts/likes.php" method="post">
-                    <p> <?php echo $countLikes; ?> Likes
-
-                        <?php $isLikedByUser = isLikedByUser($pdo, $postId, $userId); ?>
-
-                        <?php if (is_array($isLikedByUser)) : ?>
-                            <input type="hidden" name="post-id" id="post-id" value="<?php echo $post['id'] ?>">
-                            <button class="unlike-button" type="submit"> Unlike </button>
-                        <?php else : ?>
-
-                            <input type="hidden" name="post-id" id="post-id" value="<?php echo $post['id'] ?>">
-                            <button class="like-button" type="submit"> Like </button>
-
-                        <?php endif; ?>
-
-
-                    </p>
-                </form>
             </div>
         </div>
+
+        <div class="post-item-like">
+            <form action="/app/posts/likes.php" method="post">
+                <p> <?php echo $countLikes; ?> Likes
+                    <?php $isLikedByUser = isLikedByUser($pdo, $postId, $userId); ?>
+
+                    <?php if (is_array($isLikedByUser)) : ?>
+                        <input type="hidden" name="post-id" id="post-id" value="<?php echo $post['id'] ?>">
+                        <button class="unlike-button" type="submit"> Unlike </button>
+                    <?php else : ?>
+
+                        <input type="hidden" name="post-id" id="post-id" value="<?php echo $post['id'] ?>">
+                        <button class="like-button" type="submit"> Like </button>
+
+                    <?php endif; ?>
+                </p>
+            </form>
+        </div>
+    </div>
     </div>
 
 
@@ -95,10 +81,7 @@ if (isset($_GET['id'])) {
 
 
 <?php if (isset($_SESSION['user'])) : ?>
-
-
     <form action="/app/posts/commentStore.php" method="post">
-
         <div class="post-item">
 
             <div class="post-item">
@@ -111,22 +94,13 @@ if (isset($_GET['id'])) {
                 <button class=" comment-btn" type="submit" class="submit-button"> Post comment </button>
             </div>
         </div>
-
-
     </form>
-
-
 <?php endif; ?>
-
-
-
 
 
 <?php if (is_array($userComments)) : ?>
     <?php foreach ($userComments as $userComment) : ?>
-
         <article class="comments-page">
-
             <div class="comments-wrapper">
                 <div class="post-item">
                     <p> By: <a href="profile.php?username=<?php echo $userComment['username']; ?> "> <?php echo $userComment['username']; ?></a>,
@@ -135,13 +109,9 @@ if (isset($_GET['id'])) {
                 <div class="post-item">
                     <p> <?php echo $userComment['comment']; ?> </p>
                 </div>
-
-
-            </div>
             </div>
 
             <?php if ($userComment['user_id'] === $_SESSION['user']['id']) : ?>
-
                 <!-- <button class="comment-btn"> Edit Comment </button> -->
                 <!-- Want to implement this with javascript in the future -->
                 <div class="comments-container">
@@ -155,18 +125,14 @@ if (isset($_GET['id'])) {
                         <div class="btn-wrapper">
                             <button class="comment-btn" type="submit"> Update comment </button>
                         </div>
-                        <!-- end of hidden -->
+                    </form>
                 </div>
-
-                </form>
 
                 <div class="comments-container">
                     <form action="/app/posts/delete.php" method="post">
-
                         <input type="hidden" name="user_id_delete_comment" id="user_id_delete_comment" value="<?php echo $userComment['user_id'] ?>">
                         <input type="hidden" name="comment_id" id="comment_id" value="<?php echo $userComment['comment_id'] ?>">
                         <input type="hidden" name="post_id" id="post_id" value="<?php echo $post['id']; ?>">
-
 
                         <button class="comment-btn" type="submit"> Delete comment </button>
                     </form>

@@ -12,13 +12,9 @@ if (isset($_POST['submit'])) {
     $createPassword = $_POST['createPassword'];
     $pwdRepeat = $_POST['pwdrepeat'];
 
-
-
     $checkUsernamePattern = preg_match('/^[a-zA-Z0-9]{5,15}$/', $username);
 
     $_SESSION['errors'] = [];
-
-
 
     // if there's anything other than false, then throw error.
     usernameExists($pdo, $username);
@@ -44,9 +40,6 @@ if (isset($_POST['submit'])) {
     }
 
 
-
-
-
     /* this is just to be extra sure, there is a safety in user input email in the form */
     if (invalidEmail($email) !== false) {
         $_SESSION['errors'][] = "Invalid Email, please try again.";
@@ -55,15 +48,11 @@ if (isset($_POST['submit'])) {
     }
 
 
-
-
-
     if ($createPassword !== $pwdRepeat) {
         $_SESSION['errors'][] = "Paswords did not match";
 
         redirect("../signup.php");
     }
-
 
     createUser($pdo, $username, $first_name, $last_name, $email, $createPassword, $message);
 }

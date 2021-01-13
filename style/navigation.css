@@ -4,7 +4,6 @@ header {
   height: 5rem;
   background: var(--color-header);
 }
-
 .title {
   font-size: 2rem;
 
@@ -18,24 +17,6 @@ header {
   font-size: 3rem;
   text-decoration: none;
 }
-
-/* header nav ul {
-  display: flex;
-  justify-content: center;
-}
-
-li {
-  list-style: none;
-  margin-left: 0.2rem;
-  margin-right: 0.2rem;
-}
-
-li a {
-  font-size: 1.5rem;
-  text-decoration: none;
-  color: #000;
-} */
-
 /* Hide hamburger */
 header input {
   opacity: 0;
@@ -44,7 +25,6 @@ header input {
   right: 0;
   z-index: 0;
 }
-
 header label {
   width: 50px;
   height: 50px;
@@ -52,7 +32,6 @@ header label {
   position: absolute;
   right: 0;
 }
-
 .hamburger {
   width: 50px;
   height: 50px;
@@ -63,7 +42,6 @@ header label {
   right: 0;
   background: var(--color-medium-shade-grey);
 }
-
 .hamburger-nav {
   height: 100vh;
   width: 100vw;
@@ -79,15 +57,12 @@ header label {
   flex-direction: column;
   transition: 0.4s ease;
 }
-
 header input[type="checkbox"]:checked + label .hamburger-nav {
   transform: translateX(0);
 }
-
 header input[type="checkbox"]:checked + label .hamburger {
   background: var(--color-darkermedium-shade-grey);
 }
-
 .nav-list {
   width: 100%;
   height: 80vh;
@@ -97,7 +72,6 @@ header input[type="checkbox"]:checked + label .hamburger {
   padding: 30px;
   background-color: var(--color-dark-shade-grey);
 }
-
 .nav-item {
   font-size: 2rem;
   font-weight: 200;
@@ -106,7 +80,6 @@ header input[type="checkbox"]:checked + label .hamburger {
   margin-top: 1rem;
   border-bottom: 0.1rem solid rgb(80, 80, 80);
 }
-
 .nav-item a {
   font-size: 1.6rem;
   color: rgb(185, 184, 184);
@@ -115,40 +88,9 @@ header input[type="checkbox"]:checked + label .hamburger {
   text-transform: uppercase;
   text-shadow: 1px 1px 1px rgb(68, 68, 68);
 }
-
 .nav-item a:hover {
   background: grey;
 }
-
 .rightNav {
   margin-top: 15rem;
 }
-/*
-@media screen and (max-width: 768px) {
-  .hamburger-nav label {
-    display: flex;
-    color: white;
-    width: 3rem;
-    height: 3rem;
-    background: #1f1e1e;
-    font-style: normal;
-    font-size: 1.2em;
-    padding: 10px;
-  }
-
-  /* Break down menu items into vertical 
-  .nav-items a {
-    display: block;
-    width: 100%;
-    border-top: 1px solid #333;
-  }
-
-  /* Toggle Show/Hide Menu 
-  .nav-items {
-    display: none;
-  }
-  .hamburger-nav input:checked ~ .nav-items {
-    display: block;
-  }
-}
-*/

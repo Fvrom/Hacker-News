@@ -6,12 +6,10 @@
   display: flex;
   justify-content: flex-start;
 }
-
 .profile-title {
   font-size: 2rem;
   margin-top: 2rem;
 }
-
 .profile-img-container {
   width: 10rem;
   height: 10rem;
@@ -22,16 +20,13 @@
 }
 .profile-img-container img {
   object-fit: cover;
-  height: 100%; 
-  width: 100%; 
+  height: 100%;
+  width: 100%;
   border-radius: 50%;
 }
-
-
 .biography {
   margin-top: 6rem;
 }
-
 .edit-profile {
   font-size: 1.2rem;
   height: 2rem;
@@ -40,17 +35,11 @@
   margin: 0.5rem;
   float: right;
 }
-
-/* .profile-img {
-}
-*/
-
 .user-posts-title {
   font-size: 1.6rem;
   margin-left: 3rem;
 }
 /**  EDIT POST **/
-
 .edit-wrapper {
   display: flex;
   flex-direction: column;
@@ -60,45 +49,18 @@
   width: 80%;
   max-width: 50rem;
 }
-
 .button-wrapper {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   width: 22rem;
 }
-
 .button-wrapper button {
   align-self: center;
   margin: 1rem;
   height: 2rem;
   width: 9rem;
 }
-/*
-.info-wrapper {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-}
-
-.post-item-comment {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  position: absolute;
-}
-.post-item-comment a {
-  font-size: 1.3rem;
-  text-decoration: none;
-}
-
-.post-item-like {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-}
-*/
-
 .edit-post {
   font-size: 1.2rem;
   height: 2rem;

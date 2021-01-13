@@ -8,8 +8,6 @@
                                 } ?> </p>
     </div>
 
-
-
     <?php
     if (!isset($_SESSION['user'])) : ?>
         <div class="error-container ">
@@ -18,9 +16,7 @@
 
     <?php endif; ?>
 
-
     <?php if (isset($_SESSION['user'])) : ?>
-
         <section class="submit-section">
 
             <article class="submit-container">
@@ -54,5 +50,4 @@
 
             </article>
         </section>
-
     <?php endif; ?>
