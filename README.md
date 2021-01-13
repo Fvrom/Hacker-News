@@ -58,6 +58,17 @@ Create a clone of the site Hacker news.
 - [ ] Delete user
 - [ ] Reset password with email.
 
+## Installation 
+Clone the repository to your computer 
+
+Open up the project file in your terminal 
+
+Run a live server:
+php -S localhost:8000
+
+Open up with your browser! 
+
+
 
 ## Testers:
 1. Linn Josefsson
