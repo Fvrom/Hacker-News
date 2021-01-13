@@ -2,16 +2,13 @@
 <?php require __DIR__ . '/header.php'; ?>
 
 <section class="log-in-section">
-
-
     <div class="sign-up-container">
-
         <h2 class="title-form"> Sign Up </h2>
         <div class="error-container">
-            <?php if (isset($_SESSION['errors'])) {  ?>
-                <p class="error-message"> <?php errorMessage();
-                                            unset($_SESSION['errors']); //delete error message after displayed
-                                        } ?> </p>
+            <?php if (isset($_SESSION['errors'])) :  ?>
+                <p class="error-message"> <?php errorMessage(); ?>
+                <?php unset($_SESSION['errors']); /* delete error message after displayed */
+            endif; ?> </p>
         </div>
         <form class="login-form" name="sign-up-form" action="users/register.php" method="post">
 
@@ -62,13 +59,4 @@
     </div>
 </section>
 
-<?php
-
-require __DIR__ . '/footer.php'; ?>
-
-
-
-<!-- TO DO
-
-Implement Error messages for if user already exists
--->
+<?php require __DIR__ . '/footer.php'; ?>

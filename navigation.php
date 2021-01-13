@@ -1,7 +1,6 @@
 <input type="checkbox" id="hamburger">
 <label for="hamburger">
     <nav class="hamburger-nav">
-
         <ul class="nav-list">
             <li class="nav-item">
                 <a href="index.php">Home</a>
@@ -27,10 +26,6 @@
                             <a href="/users/logout.php">Sign out</a>
                         </li>
                     <?php endif; ?>
-
-
-
-
                 <?php else : ?>
                     <li class="nav-item">
                         <a href="login.php">login</a>
@@ -39,14 +34,10 @@
                     <li class="nav-item">
                         <a href="signup.php">Sign up</a>
                     </li>
-
                 <?php endif; ?>
                 </div>
-
-
         </ul>
     </nav>
-
     <button aria-label="Open menu" class="hamburger">
         <svg viewBox="0 0 100 80" width="40" height="25">
             <rect y="10" width="80" height="10"></rect>
