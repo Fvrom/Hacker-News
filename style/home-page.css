@@ -6,7 +6,6 @@
   margin: 1rem;
   border-radius: 0.3rem;
 }
-
 .posts-wrapper {
   margin-left: 2rem;
   margin: 1rem;
@@ -26,33 +25,22 @@
   border-bottom: 0.1rem solid white;
   text-align: center;
 }
-
 .post-title {
   font-size: 1.7rem;
   color: #acacac;
 }
-
 .post-description {
   font-size: 1.6rem;
   margin-top: 0.2rem;
 }
-
 .post-item-author {
   height: 2rem;
 }
-/* 
-.post-item-date {
-  height: 1.5rem;
-  margin: 0.5rem;
-  margin-top: 0.2rem;
-}*/
-
 .info-wrapper {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
 }
-
 .post-item-comment {
   display: flex;
   flex-direction: column;
@@ -64,19 +52,16 @@
   text-decoration: none;
   border-bottom: 0.1rem solid white;
 }
-
 .post-item-like {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
 }
-
 .unlike-button {
   background: var(--color-medium-shade-grey);
   color: white;
   height: 2rem;
 }
-
 .like-button {
   background: rgba(136, 157, 253, 0.342);
   color: white;

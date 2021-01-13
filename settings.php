@@ -14,16 +14,16 @@ if (isset($_SESSION['user']['username'])) {
 
 ?>
 
-<?php if (isset($_SESSION['errors'])) {  ?>
-    <p class="error-message"> <?php errorMessage();
-                                unset($_SESSION['errors']); //delete error message after displayed
-                            } ?> </p>
+<?php if (isset($_SESSION['errors'])) :  ?>
+    <p class="error-message"> <?php errorMessage(); ?>
+    <?php unset($_SESSION['errors']);  //delete error message after displayed
+endif; ?> </p>
 
 
-    <?php if (isset($_SESSION['successful'])) {  ?>
-        <p class="error-message"> <?php successfulMessage();
-                                    unset($_SESSION['successful']);
-                                } ?> </p>
+    <?php if (isset($_SESSION['successful'])) : ?>
+        <p class="error-message"> <?php successfulMessage(); ?>
+        <?php unset($_SESSION['successful']);
+    endif; ?> </p>
 
 
         <?php if (isset($_SESSION['user'])) : ?>
