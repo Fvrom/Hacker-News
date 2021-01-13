@@ -49,8 +49,18 @@ Deadline: 13th January.
 - [x] Comments, edit, delete
 - [x] Upvotes
 
+#### To do 
+- [ ] Add unique id for avatar images
+- [ ] Put a max-width.
+
 ### Extra features
 
-- [ ] Report offensive comments
 - [ ] Delete user
 - [ ] Reset password with email.
+
+
+##Testers:
+1. Linn Josefsson
+2. 
+
+## Feedback:
