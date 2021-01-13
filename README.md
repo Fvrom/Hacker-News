@@ -53,6 +53,7 @@ Create a clone of the site Hacker news.
 - [ ] Add unique id for avatar images
 - [ ] Put a max-width.
 - [ ] Accessibility 
+- [ ] PDO needs fixing with PARAM
 
 ### Extra features
 
