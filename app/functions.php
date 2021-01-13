@@ -28,10 +28,7 @@ function successfulMessage()
         }
     }
 }
-
 /*****Functions for signing up *****/
-
-
 /* Validating email */
 function invalidEmail($email)
 {
@@ -42,7 +39,6 @@ function invalidEmail($email)
     }
     return $result;
 }
-
 
 /* Check database for existing username */
 function usernameExists($pdo, $username)
@@ -66,8 +62,6 @@ function usernameExists($pdo, $username)
     unset($_SESSION['last_name']);
     unset($_SESSION['avatar']);
     unset($_SESSION['biography']); */ // don't need? vi plockar bara ut username.
-
-
 }
 
 /* check database for existing email */
@@ -106,15 +100,12 @@ function createUser($pdo, $username, $first_name, $last_name, $email, $password,
     $statement->BindParam(':email', $email);
     $statement->BindParam(':password', $hashedPwd);
 
-
-
     $statement->execute();
 
     $_SESSION['successful'][] = "Your account has been created! You can now log in.";
 
     redirect("/index.php");
 }
-
 
 /** Function for Profile page */
 
@@ -154,8 +145,6 @@ function getUserPwd($pdo, $id)
     return $_SESSION['pwd'];
 }
 
-
-
 /***** Posts  *****/
 
 function getUserPosts($pdo, int $profileId)
@@ -178,7 +167,6 @@ function getUserPosts($pdo, int $profileId)
 
         return $userPosts;
 }
-
 /** All posts  **/
 
 function getAllPosts($pdo, $allPosts)
@@ -202,7 +190,6 @@ function getAllPosts($pdo, $allPosts)
 }
 
 /* Get a specific post */
-
 function getPostbyId($pdo, $postId)
 {
     $_SESSION['errors'] = [];
@@ -225,7 +212,6 @@ function getPostbyId($pdo, $postId)
 }
 
 /** Get comments from Posts  **/
-
 function getPostsComments($pdo, $postId)
 {
     $_SESSION['errors'] = [];
@@ -241,12 +227,8 @@ function getPostsComments($pdo, $postId)
 
     $userComments = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-
-
     if (!$userComments) {
     } else {
-
-
         return $userComments;
     }
 }
@@ -264,7 +246,6 @@ function countComments($pdo, $postId)
 
     return $comments['COUNT(*)'];
 }
-
 
 /** Likes **/
 
@@ -328,8 +309,6 @@ function uploadImage($pdo, $avatarName, $userId)
     $statement->execute();
 }
 
-
-
 /***** Update functions *****/
 
 /* update comments*/
@@ -345,7 +324,6 @@ function updateComment($pdo, int $postId, int $userId, int $commentId, string $c
 
     $statement->execute();
 }
-
 
 /* Update posts */
 
@@ -364,9 +342,6 @@ function updatePost($pdo, int $postId, int $userId, string $title, string $descr
 
     $statement->execute();
 }
-
-
-
 
 /***** Delete functions *****/
 

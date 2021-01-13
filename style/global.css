@@ -7,7 +7,6 @@
   --color-dark-shade-grey: #111110b3;
   --color-header: #ff6600;
 }
-
 * {
   font-family: "IBM Plex Sans", sans-serif;
   box-sizing: border-box;
@@ -15,37 +14,30 @@
   color: whitesmoke;
   letter-spacing: 0.1rem;
 }
-
 body {
   margin: 0;
   padding: 0;
   background: var(--color-background);
 }
-
 button {
   color: var(--color-medium-shade-grey);
   border: none;
 }
-
 input {
   color: black;
   height: 3rem;
   font-size: 1.6rem;
 }
-
 input,
 input::-webkit-input-placeholder {
   font-size: 1.6rem;
 }
-
 p {
   font-size: 1.4rem;
 }
-
 p a {
   font-size: 1.4rem;
 }
-
 .error-container {
   display: flex;
   justify-content: center;
@@ -54,7 +46,6 @@ p a {
 .error-message {
   text-align: center;
 }
-
 .successful-container {
   display: flex;
   justify-content: center;

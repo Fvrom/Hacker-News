@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-
 require __DIR__ . '/../autoload.php';
-
 
 $_SESSION['successful'] = [];
 
@@ -33,5 +31,6 @@ if (isset($_POST['post_id_delete'])) {
     redirect("/index.php");
 } else {
     $_SESSION['errors'][] = "Something went wrong trying to delete your post!";
+
     redirect("/index.php");
 }

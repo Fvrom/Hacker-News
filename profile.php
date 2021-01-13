@@ -15,7 +15,6 @@ endif; ?> </p>
     <?php
     if (isset($_GET['username'])) {
         $username = filter_var($_GET['username'], FILTER_SANITIZE_STRING);
-
         $userProfile = getUser($pdo, $username);
         $userImage = $userProfile['avatar'];
         $profileId = $userProfile['id'];
@@ -26,7 +25,6 @@ endif; ?> </p>
     ?>
 
     <section>
-
         <article class="profile-container">
             <div class="profile-page">
                 <div class="profile-img-container">
@@ -72,7 +70,6 @@ endif; ?> </p>
                         <div class="post-item-author">
                             <p> By: <?php echo $userPost['username']; ?> ,
                                 <?php echo $userPost['post_date']; ?> </p>
-
                         </div>
                         <div class="post-item">
                             <h3 class="post-title"> <?php echo $userPost['title']; ?> </h3>
@@ -102,7 +99,6 @@ endif; ?> </p>
                                             <input type="hidden" name="post-id" id="post-id" value="<?php echo $post['id'] ?>">
                                             <button class="unlike-button" type="submit"> Unlike </button>
                                         <?php else : ?>
-
                                             <input type="hidden" name="post-id" id="post-id" value="<?php echo $post['id'] ?>">
                                             <button class="like-button" type="submit"> Like </button>
 
@@ -153,7 +149,6 @@ endif; ?> </p>
                             </form>
                     </div>
 
-
                 <?php endif; ?>
 
                 </article>
@@ -161,8 +156,6 @@ endif; ?> </p>
 
             <?php endforeach; ?>
         <?php endif; ?>
-
-
 
     </section>
 

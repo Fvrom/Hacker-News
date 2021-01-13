@@ -13,12 +13,10 @@
         <div class="error-container ">
             <p> You need to be logged in to submit posts! </p>
         </div>
-
     <?php endif; ?>
 
     <?php if (isset($_SESSION['user'])) : ?>
         <section class="submit-section">
-
             <article class="submit-container">
                 <h2 class="title-form"> Submit a post</h2>
                 <form class="submit-form" action="/app/posts/posts.php" method="post">
@@ -44,10 +42,7 @@
                     <div class="btn-wrapper">
                         <button class="btn-post-submit" type="submit" class="submit-button"> Create post </button>
                     </div>
-
                 </form>
-
-
             </article>
         </section>
     <?php endif; ?>

@@ -19,7 +19,6 @@ if (isset($_POST['submit'])) {
     // if there's anything other than false, then throw error.
     usernameExists($pdo, $username);
     if ($_SESSION['checkuser']['username'] === $username) {
-
         $_SESSION['errors'][] = "The username is already taken, please try again!";
         redirect("../signup.php");
     }

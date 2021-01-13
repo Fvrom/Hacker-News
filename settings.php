@@ -2,8 +2,6 @@
 <?php require __DIR__ . '/header.php'; ?>
 
 <?php
-
-
 if (isset($_SESSION['user']['username'])) {
     $username = filter_var($_SESSION['user']['username'], FILTER_SANITIZE_STRING);
 
@@ -19,19 +17,13 @@ if (isset($_SESSION['user']['username'])) {
     <?php unset($_SESSION['errors']);  //delete error message after displayed
 endif; ?> </p>
 
-
     <?php if (isset($_SESSION['successful'])) : ?>
         <p class="error-message"> <?php successfulMessage(); ?>
         <?php unset($_SESSION['successful']);
     endif; ?> </p>
 
-
         <?php if (isset($_SESSION['user'])) : ?>
-
-            <!-- check this, do i have to take out everything in the function for the email ? -->
             <section class="sign-up-form">
-
-
                 <form action="/users/updateSettings.php" method="post">
                     <div class="sign-up">
                         <label for="username"> Change username </label>
@@ -52,7 +44,6 @@ endif; ?> </p>
 
 
                 <form action="/users/avatar.php" method="post" enctype="multipart/form-data">
-
                     <div class="sign-up">
                         <label for="avatar"> Choose profile image to upload. (Max 2MB) </label>
                         <input type="file" accept="image/jpeg,image/jpg,image/png" name="avatar" id="avatar">
@@ -82,7 +73,6 @@ endif; ?> </p>
                         <input type="password" name="repeatPwd" id="repeatPwd">
                         <button type="submit" class="submit-button"> Change password </button>
                     </div>
-
 
                 </form>
                 <div class="sign-up">

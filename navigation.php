@@ -14,18 +14,15 @@
             </li>
 
             <?php if (isset($_SESSION['user'])) : ?>
-
                 <div class="rightNav">
                     <li class="nav-item">
                         <a href="profile.php?username=<?php echo $_SESSION['user']['username']; ?>"> <?php echo $_SESSION['user']['username']; ?> </a>
                     </li>
 
-                    <?php if (isset($_SESSION['user'])) : ?>
+                    <li class="nav-item">
+                        <a href="/users/logout.php">Sign out</a>
+                    </li>
 
-                        <li class="nav-item">
-                            <a href="/users/logout.php">Sign out</a>
-                        </li>
-                    <?php endif; ?>
                 <?php else : ?>
                     <li class="nav-item">
                         <a href="login.php">login</a>
