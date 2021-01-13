@@ -4,13 +4,10 @@
 <?php
 if (isset($_SESSION['user']['username'])) {
     $username = filter_var($_SESSION['user']['username'], FILTER_SANITIZE_STRING);
-
     $userProfile = getUser($pdo, $username);
-
     $profileId = $userProfile['id'];
 }
 ?>
-
 <?php if (isset($_SESSION['errors'])) :  ?>
     <p class="error-message"> <?php errorMessage(); ?>
     <?php unset($_SESSION['errors']);  //delete error message after displayed
@@ -19,7 +16,6 @@ endif; ?> </p>
         <p class="error-message"> <?php successfulMessage(); ?>
         <?php unset($_SESSION['successful']);
     endif; ?> </p>
-
         <?php if (isset($_SESSION['user'])) : ?>
             <section class="sign-up-form">
                 <form action="/users/updateSettings.php" method="post">

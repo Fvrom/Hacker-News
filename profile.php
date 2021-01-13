@@ -51,6 +51,7 @@ endif; ?>
                 </div>
             </div>
         <?php endif; ?>
+
         <?php if (is_array($userPosts)) : ?>
             <?php foreach ($userPosts as $userPost) : ?>
                 <?php $postId = $userPost['id'];
@@ -128,6 +129,7 @@ endif; ?>
 
                 </article>
             <?php endforeach; ?>
+
         <?php endif; ?>
 
     </section>
