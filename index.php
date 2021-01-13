@@ -6,16 +6,19 @@
  <section>
      <article class="home-page">
          <div class="successful-container">
-             <?php if (isset($_SESSION['successful'])) :  ?>
+             <?php if (isset($_SESSION['successful'])) : ?>
                  <p class="successful-message"> <?php successfulMessage(); ?>
                  <?php unset($_SESSION['successful']); //delete error message after displayed
-                endif; ?> </p>
+                endif; ?>
+                 </p>
          </div>
          <?php if (isset($_SESSION['errors'])) :  ?>
              <p class="error-message"> <?php errorMessage(); ?>
              <?php unset($_SESSION['errors']); //delete error message after displayed
-            endif; ?> </p>
+            endif; ?>
+             </p>
      </article>
+
      <?php $allPost = getAllPosts($pdo, $allPosts);
         foreach ($allPost as $post) : ?>
          <?php $postId = $post['id'];  ?>
@@ -45,7 +48,9 @@
                      <div class="post-item-like">
                          <form action="/app/posts/likes.php" method="post">
                              <p> <?php echo $countLikes; ?> Likes
+
                                  <?php $isLikedByUser = isLikedByUser($pdo, $postId, $userId); ?>
+
                                  <?php if (is_array($isLikedByUser)) : ?>
                                      <input type="hidden" name="post-id" id="post-id" value="<?php echo $post['id'] ?>">
                                      <button class="unlike-button" type="submit"> Unlike </button>

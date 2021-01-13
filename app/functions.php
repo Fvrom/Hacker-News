@@ -159,8 +159,9 @@ function getUserPosts($pdo, int $profileId)
     $userPosts = $statement->fetchAll(PDO::FETCH_ASSOC);
 
     if (!$userPosts) {
-    } else
+    } else {
         return $userPosts;
+    }
 }
 /** All posts  **/
 

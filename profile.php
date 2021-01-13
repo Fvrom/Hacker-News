@@ -27,7 +27,7 @@ endif; ?>
         <article class="profile-container">
             <div class="profile-page">
                 <div class="profile-img-container">
-                    <?php if ($userImage === NULL) : ?>
+                    <?php if ($userImage === null) : ?>
                         <img src="/users/assets/images/robot-02-icon.webp" alt="User profile">
                     <?php else : ?>
                         <img src="/users/assets/images/<?php echo $userImage; ?>" alt="User profile">
@@ -45,7 +45,6 @@ endif; ?>
         <h2 class="user-posts-title"> Posts </h2>
 
         <?php if (!is_array($userPosts)) : ?>
-
             <div class="comments-wrapper">
                 <div class="post-item">
                     <p> No posts yet! </p>
@@ -126,6 +125,7 @@ endif; ?>
                             </div>
                     </div>
                 <?php endif; ?>
+
                 </article>
             <?php endforeach; ?>
         <?php endif; ?>

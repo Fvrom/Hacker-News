@@ -4,7 +4,8 @@
     <div class="error-container ">
         <p class="error-message"> <?php errorMessage(); ?>
         <?php unset($_SESSION['errors']); //delete error message after displayed
-    endif; ?> </p>
+    endif; ?>
+        </p>
     </div>
     <?php
     if (!isset($_SESSION['user'])) : ?>
