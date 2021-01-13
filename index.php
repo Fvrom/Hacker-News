@@ -2,6 +2,7 @@
  <?php require __DIR__ . '/header.php'; ?>
 
  <?php $userId = $_SESSION['user']['id']; ?>
+
  <a name="top"></a>
  <section>
      <article class="home-page">
@@ -12,6 +13,7 @@
                 endif; ?>
                  </p>
          </div>
+
          <?php if (isset($_SESSION['errors'])) :  ?>
              <p class="error-message"> <?php errorMessage(); ?>
              <?php unset($_SESSION['errors']); //delete error message after displayed
@@ -50,6 +52,7 @@
                              <p> <?php echo $countLikes; ?> Likes
 
                                  <?php $isLikedByUser = isLikedByUser($pdo, $postId, $userId); ?>
+
                                  <?php if ($_SESSION['user']) : ?>
                                      <?php if (is_array($isLikedByUser)) : ?>
                                          <input type="hidden" name="post-id" id="post-id" value="<?php echo $post['id'] ?>">

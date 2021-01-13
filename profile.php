@@ -21,8 +21,8 @@ endif; ?>
         $userPosts = getUserPosts($pdo, $profileId);
 
         $userId = $_SESSION['user']['id'];
-    }
-    ?>
+    } ?>
+
     <a name="top"></a>
     <section>
         <article class="profile-container">
@@ -113,7 +113,8 @@ endif; ?>
                                         <label for="url"> Url to the post </label>
                                     </div>
                                     <input type="url" name="url" id="url" placeholder=" <?php echo $userPost['post_url']; ?>"" required>
-                                    <div class=" button-wrapper">
+
+                                <div class=" button-wrapper">
                                     <div>
                                         <button type=" submit"> Update post </button>
                                     </div>
@@ -123,6 +124,7 @@ endif; ?>
                                     <div>
                                         <button type="submit"> Delete post </button>
                                     </div>
+
                                 </form>
                             </div>
                     </div>

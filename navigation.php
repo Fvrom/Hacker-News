@@ -26,6 +26,7 @@
                     <li class="nav-item">
                         <a href="signup.php">Sign up</a>
                     </li>
+
                 <?php endif; ?>
                 </div>
         </ul>
