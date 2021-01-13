@@ -59,15 +59,17 @@ Create a clone of the site Hacker news.
 - [ ] Reset password with email.
 
 ## Installation 
-Clone the repository to your computer 
+1. Clone the repository to your computer.
 
-Open up the project file in your terminal 
+2. Go to the repository folder in your terminal. 
 
-Run a live server:
+3. Start a local server in the command line 
+
+```
 php -S localhost:8000
+```
 
-Open up with your browser! 
-
+4. open up localhost:8000/index.php in your browser
 
 
 ## Testers:
