@@ -9,9 +9,7 @@
             <li class="nav-item">
                 <a href="trending.php">Trending</a>
             </li>
-            <li class="nav-item">
-                <a href="newestcomments.php">Comments</a>
-            </li>
+
             <li class="nav-item">
                 <a href="submit.php">Submit post</a>
             </li>

@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="/style/global.css">
     <link rel="stylesheet" href="/style/navigation.css">
     <link rel="stylesheet" href="/style/forms.css">
-
     <link rel="stylesheet" href="/style/home-page.css">
     <link rel="stylesheet" href="/style/profile.css">
     <link rel="stylesheet" href="/style/settings.css">

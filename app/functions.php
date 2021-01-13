@@ -29,15 +29,10 @@ function successfulMessage()
     }
 }
 
-/* Functions for signing up */
-
-
-
-
+/*****Functions for signing up *****/
 
 
 /* Validating email */
-/* TO DO  Go further and see if email aldready exists */
 function invalidEmail($email)
 {
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -118,9 +113,7 @@ function createUser($pdo, $username, $first_name, $last_name, $email, $password,
     $statement->execute();
 
     $_SESSION['successful'][] = "Your account has been created! You can now log in.";
-    /* $_SESSION['successful'] = $message;
 
-    echo $message; */
     redirect("/index.php");
 }
 
@@ -190,6 +183,51 @@ function getUserPosts($pdo, int $profileId)
         return $userPosts;
 }
 
+/** All posts  **/
+
+function getAllPosts($pdo, $allPosts)
+{
+
+    $_SESSION['errors'] = [];
+
+    $statement = $pdo->prepare("SELECT Posts.*, Users.username FROM Users
+    INNER JOIN Posts ON Posts.user_id = Users.id
+    ORDER BY post_date DESC");
+
+    $statement->execute();
+
+    $allPosts = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+
+    if (!$allPosts) {
+        return  $_SESSION['errors'][] = "Ops, could not find posts";
+    }
+
+    return $allPosts;
+}
+
+/* Get a specific post */
+
+function getPostbyId($pdo, $postId)
+{
+    $_SESSION['errors'] = [];
+
+    $statement = $pdo->prepare("SELECT Posts.*, Users.username FROM Users
+    INNER JOIN Posts
+    ON Posts.user_id = Users.id
+    WHERE Posts.id = :postId");
+
+    $statement->bindParam(':postId', $postId);
+    $statement->execute();
+
+    $post = $statement->fetch(PDO::FETCH_ASSOC);
+
+    if (!$post) {
+        return  $_SESSION['errors'][] = "Ops, could not find any post";
+    }
+
+    return $post;
+}
 
 /** Get comments from Posts  **/
 
@@ -246,6 +284,8 @@ function countLikes($pdo, $postId)
     return $likes['COUNT(*)'];
 }
 
+/** Get trending posts **/
+
 function topLikes($pdo)
 {
     $statement = $pdo->query('SELECT COUNT(Likes.post_id) AS votes, Posts.*, Users.username FROM Likes
@@ -266,7 +306,7 @@ function topLikes($pdo)
     return $topLikes;
 }
 
-
+/* Check if post is like by user */
 function isLikedByUser($pdo, $postId, $userId)
 {
 
@@ -283,51 +323,6 @@ function isLikedByUser($pdo, $postId, $userId)
     return $isLikedByUser;
 }
 
-
-
-/** All posts  **/
-
-function getAllPosts($pdo, $allPosts)
-{
-
-    $_SESSION['errors'] = [];
-
-    $statement = $pdo->prepare("SELECT Posts.*, Users.username FROM Users
-    INNER JOIN Posts ON Posts.user_id = Users.id
-    ORDER BY post_date DESC");
-
-    $statement->execute();
-
-    $allPosts = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-
-    if (!$allPosts) {
-        return  $_SESSION['errors'][] = "Ops, could not find posts";
-    }
-
-    return $allPosts;
-}
-
-function getPostbyId($pdo, $postId)
-{
-    $_SESSION['errors'] = [];
-
-    $statement = $pdo->prepare("SELECT Posts.*, Users.username FROM Users
-    INNER JOIN Posts
-    ON Posts.user_id = Users.id
-    WHERE Posts.id = :postId");
-
-    $statement->bindParam(':postId', $postId);
-    $statement->execute();
-
-    $post = $statement->fetch(PDO::FETCH_ASSOC);
-
-    if (!$post) {
-        return  $_SESSION['errors'][] = "Ops, could not find any post";
-    }
-
-    return $post;
-}
 
 /*** Upload photo  ***/
 

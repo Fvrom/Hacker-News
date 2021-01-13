@@ -13,7 +13,7 @@
                                             unset($_SESSION['errors']); //delete error message after displayed
                                         } ?> </p>
         </div>
-        <form class="login-form" name="sign-up-form" action="users/register.php" method="post" onsubmit="return validateForm()">
+        <form class="login-form" name="sign-up-form" action="users/register.php" method="post">
 
             <div class="log-in">
                 <label for="first_name"> First name </label>
@@ -70,5 +70,5 @@ require __DIR__ . '/footer.php'; ?>
 
 <!-- TO DO
 
-Implement Error messages for if user already exists 
+Implement Error messages for if user already exists
 -->
