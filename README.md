@@ -49,11 +49,12 @@ Create a clone of the site Hacker news.
 - [x] Comments, edit, delete
 - [x] Upvotes
 
-#### To do 
+#### To keep working on
 - [ ] Add unique id for avatar images
 - [ ] Put a max-width.
 - [ ] Accessibility 
 - [ ] PDO needs fixing with PARAM
+- [ ] add fetch() to like and edit buttons
 
 ### Extra features
 
