@@ -9,13 +9,12 @@ $_SESSION['errors'] = [];
 
 /* Update posts */
 
-if (isset($_POST['post_username'], $_POST['post_id_edit'], $_POST['user_id'], $_POST['title'], $_POST['description'], $_POST['url'])) {
-    $postId = (int)$_POST['post_id_edit'];
-    $userId = (int)$_POST['user_id'];
+if (isset($_POST['post_id'], $_POST['title'], $_POST['description'], $_POST['url'])) {
+    $postId = (int)$_POST['post_id'];
+    $userId = (int)$_SESSION['user']['id'];
     $title = $_POST['title'];
     $description = $_POST['description'];
     $url = $_POST['url'];
-    $username = $_POST['post_username'];
 
     updatePost($pdo, $postId, $userId, $title, $description, $url);
 

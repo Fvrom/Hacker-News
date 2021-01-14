@@ -89,10 +89,10 @@ endif; ?>
                                         <?php if (isset($_SESSION['user'])) : ?>
                                             <?php $isLikedByUser = isLikedByUser($pdo, $postId, $userId); ?>
                                             <?php if (is_array($isLikedByUser)) : ?>
-                                                <input type="hidden" name="post-id" id="post-id" value="<?php echo $post['id'] ?>">
+                                                <input type="hidden" name="post-id" id="post-id" value="<?php echo $userPost['id'] ?>">
                                                 <button class="unlike-button" type="submit"> Unlike </button>
                                             <?php else : ?>
-                                                <input type="hidden" name="post-id" id="post-id" value="<?php echo $post['id'] ?>">
+                                                <input type="hidden" name="post-id" id="post-id" value="<?php echo $userPost['id'] ?>">
                                                 <button class="like-button" type="submit"> Like </button>
                                             <?php endif; ?>
                                         <?php endif; ?>
@@ -106,8 +106,7 @@ endif; ?>
                                     <button class="edit-post">Edit post</button>
                                     <!-- This is gonna be hidden until button clicked -->
                                     <form class="form" action="/app/posts/updatepost.php" method="post">
-                                        <input type="hidden" name="post_id_edit" id="post_id_edit" value="<?php echo $postId ?>">
-                                        <input type="hidden" name="post_username" id="post_username" value="<?php echo $userProfile['username'] ?>">
+                                        <input type="hidden" name="post_id" id="post_id" value="<?php echo $userPost['id']; ?>">
                                         <div>
                                             <label for="title"> Title </label>
                                         </div>
