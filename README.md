@@ -56,7 +56,6 @@ Create a clone of the site Hacker news.
 - [ ] PDO needs fixing with PARAM
 - [ ] add fetch() to like and edit buttons
 
-### Extra features
 
 - [ ] Delete user
 - [ ] Reset password with email.
