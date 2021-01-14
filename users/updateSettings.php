@@ -5,9 +5,11 @@ declare(strict_types=1);
 require __DIR__ . '/../app/autoload.php'; ?>
 
 <?php
+$userId = $_SESSION['user']['id'];
 // Backend for the settings part.
 
 if (isset($_POST['username'])) {
+    $username = $_POST['username'];
     $changeUsername = filter_var($_POST['username'], FILTER_SANITIZE_STRING);
     $userId = $_SESSION['user']['id'];
     $checkUsernamePattern = preg_match('/^[a-zA-Z0-9]{5,15}$/', $changeUsername);
@@ -38,14 +40,14 @@ if (isset($_POST['username'])) {
     $_SESSION['user']['username'] = $changeUsername;
 
 
-    redirect("/../settings.php?id=$username");
+    redirect("/../settings.php?username=$username");
 }
 
 if (isset($_POST['biography'])) {
     $updateBiography = filter_var($_POST['biography'], FILTER_SANITIZE_STRING);
 
     $statement = $pdo->prepare('UPDATE Users SET biography = :updateBiography WHERE id = :id');
-    $statement->BindParam(':id', $id, PDO::PARAM_INT);
+    $statement->BindParam(':id', $userId, PDO::PARAM_INT);
     $statement->BindParam(':updateBiography', $updateBiography, PDO::PARAM_STR);
     $statement->execute();
 
@@ -57,7 +59,7 @@ if (isset($_POST['biography'])) {
 
     $_SESSION['user']['biography'] = $updateBiography;
 
-    redirect("/../settings.php?id=$username");
+    redirect("/../settings.php?username=$username");
 }
 
 
@@ -67,18 +69,18 @@ if (isset($_POST['changeEmail'])) {
     /* this is just to be extra sure, there is a safety in user input email in the form */
     if (invalidEmail($changeEmail) !== false) {
         $_SESSION['errors'][] = "Invalid Email, please try again.";
-        redirect("/../settings.php?id=$username");
+        redirect("/../settings.php?username=$username");
     }
 
     emailExists($pdo, $changeEmail);
 
     if ($_SESSION['checkEmail'] === $changeEmail) {
         return $_SESSION['errors'][] = "Email already in use";
-        redirect("/../settings.php?id=$username");
+        redirect("/../settings.php?username=$username");
     }
 
     $statement = $pdo->prepare('UPDATE Users SET email = :changeEmail WHERE id = :id;');
-    $statement->BindParam(':id', $id, PDO::PARAM_INT);
+    $statement->BindParam(':id', $userId, PDO::PARAM_INT);
     $statement->BindParam(':changeEmail', $changeEmail, PDO::PARAM_STR);
     $statement->execute();
 
@@ -89,7 +91,7 @@ if (isset($_POST['changeEmail'])) {
     $_SESSION['successful'][] = "Email updated!";
     $_SESSION['user']['email'] = $changeEmail;
 
-    redirect("/../settings.php?id=$username");
+    redirect("/../settings.php?username=$username");
 }
 
 if (isset($_POST['currentPwd'], $_POST['changePwd'], $_POST['repeatPwd'])) {
@@ -101,19 +103,19 @@ if (isset($_POST['currentPwd'], $_POST['changePwd'], $_POST['repeatPwd'])) {
     if ($changePwd !== $repeatPwd) {
         $_SESSION['errors'][] = "Paswords did not match";
 
-        redirect("/../settings.php?id=$username");
+        redirect("/../settings.php?username=$username");
     }
 
-    getUserPwd($pdo, $id);
+    getUserPwd($pdo, $userId);
 
-    if (password_verify($currentPwd, $_SESSION['pwd'])) {
-        unset($_SESSION['pwd']);
+    if (password_verify($currentPwd, $_SESSION['user']['password'])) {
+        unset($_SESSION['user']['password']);
 
         $hashedNewPwd = password_hash($changePwd, PASSWORD_DEFAULT);
 
         $statement = $pdo->prepare('UPDATE Users SET password = :hashedNewPwd WHERE id = :id;');
-        $statement->BindParam(':id', $id, PDO::PARAM_INT);
-        $statement->BindParam(':hashedNewPwd', $hashedNedPwd, PDO::PARAM_STR);
+        $statement->BindParam(':id', $userId, PDO::PARAM_INT);
+        $statement->BindParam(':hashedNewPwd', $hashedNewPwd, PDO::PARAM_STR);
         $statement->execute();
 
         if (!$statement) {
@@ -123,6 +125,6 @@ if (isset($_POST['currentPwd'], $_POST['changePwd'], $_POST['repeatPwd'])) {
         $_SESSION['successful'][] = "Password updated!";
 
 
-        redirect("/../settings.php?id=$username");
+        redirect("/../settings.php?username=$username");
     }
 }

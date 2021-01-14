@@ -125,20 +125,20 @@ function getUser($pdo, $username)
     return $userProfile;
 }
 
-function getUserPwd($pdo, $id)
+function getUserPwd($pdo, $userId)
 {
-    $statement = $pdo->prepare("SELECT password FROM Users WHERE id = :id");
-    $statement->BindParam(':id', $id, PDO::PARAM_STR);
+    $statement = $pdo->prepare("SELECT * FROM Users WHERE id = :id");
+    $statement->BindParam(':id', $userId, PDO::PARAM_STR);
     $statement->execute();
 
-    $userPwd = $statement->fetch(PDO::FETCH_ASSOC);
+    $user = $statement->fetch(PDO::FETCH_ASSOC);
 
-    if (!$userPwd) {
+    if (!$user) {
         return $_SESSION['errors'][] = "Something went wrong with finding password!";
     }
-    $_SESSION['pwd'] = $userPwd;
+    $_SESSION['user']['password'] = $user['password'];
 
-    return $_SESSION['pwd'];
+    return $_SESSION['user']['password'];
 }
 
 /***** Posts  *****/
