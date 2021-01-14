@@ -1,6 +1,5 @@
 <?php require __DIR__ . '/app/autoload.php'; ?>
 <?php require __DIR__ . '/header.php'; ?>
-
 <?php if (isset($_SESSION['user'])) : ?>
     <?php $userId = $_SESSION['user']['id']; ?>
 <?php endif; ?>

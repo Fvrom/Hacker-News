@@ -8,7 +8,6 @@ $_SESSION['successful'] = [];
 $_SESSION['errors'] = [];
 
 /* Update comments */
-
 if (isset($_POST['comment'], $_POST['post_id'], $_POST['comment_id'])) {
     $postId = (int)$_POST['post_id'];
     $commentId = (int)$_POST['comment_id'];

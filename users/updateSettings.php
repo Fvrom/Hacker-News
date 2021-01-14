@@ -6,6 +6,7 @@ require __DIR__ . '/../app/autoload.php'; ?>
 
 <?php
 $userId = $_SESSION['user']['id'];
+$username = $_SESSION['user']['username'];
 // Backend for the settings part.
 
 if (isset($_POST['username'])) {
@@ -17,13 +18,13 @@ if (isset($_POST['username'])) {
     usernameExists($pdo, $changeUsername);
     if ($_SESSION['checkuser']['username'] === $changeUsername) {
         $_SESSION['errors'][] = "The username is already taken, please try again!";
-        redirect("../settings.php");
+        redirect("/../settings.php?username=$username");
     }
 
     if ($checkUsernamePattern === 0) {
         $_SESSION['errors'][] = "Obs! Something when wrong with the username. Either it is too short, too long or you have used characters that are not allowed.
         Username can only contain characters from a-z and numbers. The username should be at least 5 characters long and max 15 characters long.";
-        redirect("../signup.php");
+        redirect("/../settings.php?username=$username");
     }
 
     $statement = $pdo->prepare('UPDATE Users SET username = :changeUsername WHERE id = :userId');

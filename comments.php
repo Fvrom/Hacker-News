@@ -1,8 +1,7 @@
 <?php require __DIR__ . '/app/autoload.php'; ?>
 <?php require __DIR__ . '/header.php'; ?>
-<?php
 
-if (isset($_GET['id'])) {
+<?php if (isset($_GET['id'])) {
     $postId = $_GET['id'];
     $postIdComment = $postId;
 
@@ -113,7 +112,6 @@ if (isset($_GET['id'])) {
 
             <?php if (isset($_SESSION['user'])) : ?>
                 <?php if ($userComment['user_id'] === $_SESSION['user']['id']) : ?>
-
                     <!-- <button class="comment-btn"> Edit Comment </button> -->
                     <!-- Want to implement this with javascript in the future -->
                     <div class="comments-container">
