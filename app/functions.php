@@ -368,3 +368,22 @@ function deletePost($pdo, int $postId, int $userId)
         die(var_dump($pdo->errorInfo()));
     }
 }
+
+function deleteUser(PDO $pdo, string $userId): void
+{
+    $statement = $pdo->prepare('DELETE FROM posts WHERE user_id = :userId');
+    $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
+    $statement->execute();
+
+    $statement = $pdo->prepare('DELETE FROM likes WHERE user_id = :userId');
+    $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
+    $statement->execute();
+
+    $statement = $pdo->prepare('DELETE FROM comments WHERE user_id = :userId');
+    $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
+    $statement->execute();
+
+    $statement = $pdo->prepare('DELETE FROM users WHERE id = :userId');
+    $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
+    $statement->execute();
+}
