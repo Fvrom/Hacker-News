@@ -24,23 +24,3 @@ if (isset($_POST['comment'], $_POST['post_id'], $_POST['comment_id'])) {
     $_SESSION['errors'][] = "Something went wrong trying to update your comment!";
     redirect("/../comments.php?id=$postId");
 }
-
-
-/* Update posts */
-
-if (isset($_POST['post_id_edit'], $_POST['user_id'], $_POST['title'], $_POST['description'], $_POST['url'])) {
-    $postId = (int)$_POST['post_id_edit'];
-    $userId = (int)$_POST['user_id'];
-    $title = $_POST['title'];
-    $description = $_POST['description'];
-    $url = $_POST['url'];
-
-    updatePost($pdo, $postId, $userId, $title, $description, $url);
-
-    $_SESSION['successful'][] = "Your post has been updated";
-
-    redirect("/../comments.php?id=$postId");
-} else {
-    $_SESSION['errors'][] = "Something went wrong trying to update your post!";
-    redirect("/../comments.php?id=$postId");
-}

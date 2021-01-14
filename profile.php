@@ -19,9 +19,10 @@ endif; ?>
         $userImage = $userProfile['avatar'];
         $profileId = $userProfile['id'];
         $userPosts = getUserPosts($pdo, $profileId);
-
-        $userId = $_SESSION['user']['id'];
     } ?>
+    <?php if (isset($_SESSION['user'])) : ?>
+    <?php $userId = $_SESSION['user']['id'];
+    endif; ?>
 
     <a name="top"></a>
     <section>
@@ -39,8 +40,10 @@ endif; ?>
             </div>
             <?php // Check if user logged in is the owner of this profile page.
             // If it is, show button for settings.
-            if ($profileId === $_SESSION['user']['id']) : ?>
-                <a href="settings.php?username=<?php echo $_SESSION['user']['username']; ?> "> <button class="edit-profile">Edit profile</button> </a>
+            if (isset($_SESSION['user'])) : ?>
+                <?php if ($profileId === $_SESSION['user']['id']) : ?>
+                    <a href="settings.php?username=<?php echo $_SESSION['user']['username']; ?> "> <button class="edit-profile">Edit profile</button> </a>
+                <?php endif; ?>
             <?php endif; ?>
         </article>
         <h2 class="user-posts-title"> Posts </h2>
@@ -83,53 +86,57 @@ endif; ?>
                             <div class="post-item-like">
                                 <form action="/app/posts/likes.php" method="post">
                                     <p> <?php echo $countLikes; ?> Likes
-                                        <?php $isLikedByUser = isLikedByUser($pdo, $postId, $userId); ?>
-                                        <?php if (is_array($isLikedByUser)) : ?>
-                                            <input type="hidden" name="post-id" id="post-id" value="<?php echo $post['id'] ?>">
-                                            <button class="unlike-button" type="submit"> Unlike </button>
-                                        <?php else : ?>
-                                            <input type="hidden" name="post-id" id="post-id" value="<?php echo $post['id'] ?>">
-                                            <button class="like-button" type="submit"> Like </button>
+                                        <?php if (isset($_SESSION['user'])) : ?>
+                                            <?php $isLikedByUser = isLikedByUser($pdo, $postId, $userId); ?>
+                                            <?php if (is_array($isLikedByUser)) : ?>
+                                                <input type="hidden" name="post-id" id="post-id" value="<?php echo $post['id'] ?>">
+                                                <button class="unlike-button" type="submit"> Unlike </button>
+                                            <?php else : ?>
+                                                <input type="hidden" name="post-id" id="post-id" value="<?php echo $post['id'] ?>">
+                                                <button class="like-button" type="submit"> Like </button>
+                                            <?php endif; ?>
                                         <?php endif; ?>
                                     </p>
                                 </form>
                             </div>
                         </div>
-                        <?php if ($profileId === $_SESSION['user']['id']) : ?>
-                            <div class="edit-wrapper">
-                                <button class="edit-post">Edit post</button>
-                                <!-- This is gonna be hidden until button clicked -->
-                                <form class="form" action="/app/posts/update.php" method="post">
-                                    <input type="hidden" name="post_id_edit" id="post_id_edit" value="<?php echo $postId ?>">
-                                    <div>
-                                        <label for="title"> Title </label>
-                                    </div>
-                                    <input type="text" name="title" id="title" placeholder="<?php echo $userPost['title']; ?> " required>
-                                    <div>
-                                        <label for="description"> Description </label>
-                                    </div>
-                                    <input type="text" name="description" id="description" placeholder="<?php echo $userPost['description']; ?>" required>
-                                    <div>
-                                        <label for="url"> Url to the post </label>
-                                    </div>
-                                    <input type="url" name="url" id="url" placeholder=" <?php echo $userPost['post_url']; ?>"" required>
+                        <?php if (isset($_SESSION['user'])) : ?>
+                            <?php if ($profileId === $_SESSION['user']['id']) : ?>
+                                <div class="edit-wrapper">
+                                    <button class="edit-post">Edit post</button>
+                                    <!-- This is gonna be hidden until button clicked -->
+                                    <form class="form" action="/app/posts/updatepost.php" method="post">
+                                        <input type="hidden" name="post_id_edit" id="post_id_edit" value="<?php echo $postId ?>">
+                                        <input type="hidden" name="post_username" id="post_username" value="<?php echo $userProfile['username'] ?>">
+                                        <div>
+                                            <label for="title"> Title </label>
+                                        </div>
+                                        <input type="text" name="title" id="title" placeholder="<?php echo $userPost['title']; ?> " required>
+                                        <div>
+                                            <label for="description"> Description </label>
+                                        </div>
+                                        <input type="text" name="description" id="description" placeholder="<?php echo $userPost['description']; ?>" required>
+                                        <div>
+                                            <label for="url"> Url to the post </label>
+                                        </div>
+                                        <input type="url" name="url" id="url" placeholder=" <?php echo $userPost['post_url']; ?>"" required>
 
                                 <div class=" button-wrapper">
-                                    <div>
-                                        <button type=" submit"> Update post </button>
-                                    </div>
-                                </form>
-                                <form class="form" action="/app/posts/delete.php" method="post">
-                                    <input type="hidden" name="post_id_delete" id="post_id_delete" value="<?php echo $postId ?>">
-                                    <div>
-                                        <button type="submit"> Delete post </button>
-                                    </div>
+                                        <div>
+                                            <button type=" submit"> Update post </button>
+                                        </div>
+                                    </form>
+                                    <form class="form" action="/app/posts/delete.php" method="post">
+                                        <input type="hidden" name="post_id_delete" id="post_id_delete" value="<?php echo $postId ?>">
+                                        <div>
+                                            <button type="submit"> Delete post </button>
+                                        </div>
 
-                                </form>
-                            </div>
+                                    </form>
+                                </div>
                     </div>
                 <?php endif; ?>
-
+            <?php endif; ?>
                 </article>
             <?php endforeach; ?>
 
