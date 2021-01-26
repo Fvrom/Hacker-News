@@ -9,7 +9,6 @@
 
     $countComments = countComments($pdo, $postId);
     $countLikes = countLikes($pdo, $postId);
-
     $userComments = getPostsComments($pdo, $postId);
 }
 ?>
@@ -98,7 +97,9 @@
 
 
 <?php if (is_array($userComments)) : ?>
-    <?php foreach ($userComments as $userComment) : ?>
+    <?php foreach ($userComments as $userComment) :
+        $countCommentLikes = countCommentLikes($pdo, $userComment['comment_id']);
+    ?>
         <article class="comments-page">
             <div class="comments-wrapper">
                 <div class="post-item">
@@ -107,6 +108,23 @@
                 </div>
                 <div class="post-item">
                     <p> <?php echo $userComment['comment']; ?> </p>
+                </div>
+                <div class="comment-footer">
+                    <form action="/app/posts/commentLikes.php?id=<?= $postId ?>" method="post">
+                        <p class="like-comment-counter">
+                            <?php echo $countCommentLikes; ?> Likes
+                            <?php if (isset($_SESSION['user'])) : ?>
+                                <?php $isCommentLikedByUser = isCommentLikedByUser($pdo, $userComment['comment_id'], $userId); ?>
+                                <?php if ($isCommentLikedByUser) : ?>
+                                    <input type="hidden" name="comment-id" id="comment-id<?= $userComment['comment_id'] ?>" value="<?= $userComment['comment_id'] ?>">
+                                    <button class="unlike-button" type="submit"> Unlike </button>
+                                <?php else : ?>
+                                    <input type="hidden" name="comment-id" id="comment-id<?= $userComment['comment_id'] ?>" value="<?= $userComment['comment_id'] ?>">
+                                    <button class="like-button" type="submit"> Like </button>
+                                <?php endif; ?>
+                            <?php endif; ?>
+                        </p>
+                    </form>
                 </div>
             </div>
 

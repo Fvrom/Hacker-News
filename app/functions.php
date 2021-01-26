@@ -253,6 +253,17 @@ function countLikes($pdo, $postId)
     return $likes['COUNT(*)'];
 }
 
+function countCommentLikes($pdo, $commentId)
+{
+    $statement = $pdo->prepare('SELECT COUNT(*) FROM Comment_likes WHERE comment_id = :commentId');
+    $statement->bindParam(':commentId', $commentId, PDO::PARAM_INT);
+    $statement->execute();
+
+    $likes = $statement->fetch(PDO::FETCH_ASSOC);
+
+    return $likes['COUNT(*)'];
+}
+
 /** Get trending posts **/
 
 function topLikes($pdo)
@@ -289,6 +300,21 @@ function isLikedByUser($pdo, $postId, $userId)
     $isLikedByUser = $statement->fetch(PDO::FETCH_ASSOC);
 
     return $isLikedByUser;
+}
+
+function isCommentLikedByUser($pdo, $commentId, $userId): bool
+{
+    $statement = $pdo->prepare('SELECT * FROM Comment_likes WHERE comment_id = :commentId
+    AND user_id = :userId;');
+
+    $statement->bindParam(':commentId', $commentId);
+    $statement->bindParam(':userId', $userId);
+
+    $statement->execute();
+
+    $isCommentLikedByUser = $statement->fetch(PDO::FETCH_ASSOC);
+
+    return is_array($isCommentLikedByUser);
 }
 
 
