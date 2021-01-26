@@ -69,6 +69,15 @@ endif; ?> </p>
                             </div>
                         </div>
                     </form>
+                    <form action="/users/deleteUser.php?id=<?= $profileId ?>" method="post" id="delete-account-form">
+                        <div class="settings">
+                            <label for="delete-account" class="form-hidden">delete account</label>
+                            <input type="hidden" name="delete-account" value="true">
+                            <div class="btn-wrapper">
+                                <button type="submit" name="delete-account-btn" id="delete-account-btn" class="btn-settings"> Delete account </button>
+                            </div>
+                        </div>
+                    </form>
                     <div class="settings">
                         <div class="btn-wrapper">
                             <button class="btn-settings"> <a href="profile.php?username=<?php echo $_SESSION['user']['username']; ?>"> Back to your profile </a> </button>
@@ -78,3 +87,4 @@ endif; ?> </p>
                 </div>
             </section>
         <?php endif; ?>
+        <?php require __DIR__ . '/footer.php'; ?>

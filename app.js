@@ -12,3 +12,13 @@ editButton.addEventListener("click", function () {
   }
 });
 */
+const deleteAccountBtn = document.querySelector("#delete-account-btn");
+if (deleteAccountBtn) {
+  deleteAccountBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    const confirm = window.confirm("You are now deleting your account");
+    if (confirm) {
+      document.querySelector("#delete-account-form").submit();
+    }
+  });
+}
