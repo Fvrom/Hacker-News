@@ -409,6 +409,10 @@ function deleteUser(PDO $pdo, string $userId): void
     $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
     $statement->execute();
 
+    $statement = $pdo->prepare('DELETE FROM Comment_likes WHERE user_id = :userId');
+    $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
+    $statement->execute();
+
     $statement = $pdo->prepare('DELETE FROM users WHERE id = :userId');
     $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
     $statement->execute();
