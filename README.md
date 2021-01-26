@@ -4,6 +4,8 @@ Coding assignment in web development at Yrgo. </br>
 
 Create a clone of the site Hacker news.
 
+
+
 ## Features that needs to be included
 
 - As a user I should be able to create an account.
@@ -46,26 +48,24 @@ Create a clone of the site Hacker news.
 - [x] Edit profile
 - [x] Comments, edit, delete
 - [x] Upvotes
-- [x] Upvotes on comments
-- [x] Delete user
 
 #### To keep working on
-
 - [ ] Add unique id for avatar images
 - [ ] Put a max-width.
-- [ ] Accessibility
+- [ ] Accessibility 
 - [ ] PDO needs fixing with PARAM
 - [ ] add fetch() to like and edit buttons
 
+
+- [ ] Delete user
 - [ ] Reset password with email.
 
-## Installation
-
+## Installation 
 1. Clone the repository to your computer.
 
-2. Go to the repository folder in your terminal.
+2. Go to the repository folder in your terminal. 
 
-3. Start a local server in the command line
+3. Start a local server in the command line 
 
 ```
 php -S localhost:8000
@@ -73,17 +73,18 @@ php -S localhost:8000
 
 4. open up localhost:8000/index.php in your browser
 
-## Testers:
 
+## Testers:
 1. [Linn Josefsson](https://github.com/LinnJosefsson)
 
 2. [Réka Madarász](https://github.com/mreka91)
+
 
 ## Feedback: - Joakim Sjögren
 
 - index.php: 4 - Causes a warning when you are not logged in. Same with trending.php: 5.
 
-- index.php - I like the use of shorthanded if statements, makes it easy to read.
+- index.php - I like the use of shorthanded if statements, makes it easy to read. 
 
 - index.php: 22 - Causes a warning. because the file is trying to pass in an undefined variable as an argument "$allPosts".
 
