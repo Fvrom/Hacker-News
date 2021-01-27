@@ -37,9 +37,13 @@ Create a clone of the site Hacker news.
 - As a user I'm able to edit my comments.
 
 ## Extra features
+Added by [Carolina Hagman](https://github.com/carolinahagman)
+
 - As a user I'm able to upvote and remove upvote on comments.
 
 - As a user I'm able to delete my account along with all posts, upvotes and comments.
+
+[link to pull request](https://github.com/Fvrom/Hacker-News/pull/2)
 
 ## Checklist
 
